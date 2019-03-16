@@ -6,7 +6,6 @@
   "npm": "6.4.1",
   "node": "10.15.1"
 },
-  //"proxy": "https://cs160bankingapp-api.herokuapp.com/",
   "homepage": "https://cs160bankingapp.herokuapp.com/",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
