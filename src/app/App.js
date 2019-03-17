@@ -8,7 +8,7 @@ import AccountRecoveryPage from '../pages/AccountRecoveryPage';
 import CustomerCreationPage from '../pages/CustomerCreationPage';
 import ManagerCreationPage from '../pages/ManagerCreationPage';
 import AccountDashboardPage from '../pages/AccountDashboardPage';
-
+import ManagerDashboardPage from '../pages/ManagerDashboardPage';
 
 class App extends Component {
   render()  {
@@ -23,6 +23,7 @@ class App extends Component {
             <Route exact path="/managercreation" render={ props => <ManagerCreationPage {...props} />} />
             <Route exact path="/accountrecovery" render={ props => <AccountRecoveryPage {...props} />} />
             <Route exact path="/accountdashboard" render={ props => <AccountDashboardPage {...props} />} />
+            <Route exact path="/managerdashboard" render={ props => <ManagerDashboardPage {...props} />} />
           </React.Fragment>
          </BrowserRouter>
       </div>
