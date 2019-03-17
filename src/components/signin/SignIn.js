@@ -100,7 +100,7 @@ validateLogin = async e =>
           </form>
           <FormLabel></FormLabel>
           <a href=
-            "/accountrecovery">Forgot your password?
+            "https://cs160bankingapp.herokuapp.com/accountrecovery">Forgot your password?
           </a>
          </Card.Body>
         </Card>
