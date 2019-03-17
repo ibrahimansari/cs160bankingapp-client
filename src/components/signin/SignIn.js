@@ -41,7 +41,7 @@ validateLogin = async e =>
   e.preventDefault();
   this.setState({request : JSON.stringify({email : this.state.email.toLowerCase(), password : this.state.password})});
 
-  const response = await fetch('https://cs160bankingapp-api.heroku.com/api/validateLogin', {
+  const response = await fetch('https://cs160bankingapp-api.herokuapp.com/validateLogin', {
   method: 'POST',
   headers: {'Content-type': 'application/json',},
   body: JSON.stringify({ email: this.state.email.toLowerCase(), password : this.state.password }),
@@ -54,10 +54,10 @@ validateLogin = async e =>
   {
    // browserHistory.push('/nextpage');
 
-    window.location = '/accountdashboard';      //navigate to customer page
+    window.location = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
   }else{
     if(this.state.response ==='Valid Login0'){    //0 represents manager
-      window.location = '/managerdashboard';      //navigate to customer page
+      window.location = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
     }
   }
 }
