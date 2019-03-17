@@ -41,7 +41,9 @@ validateLogin = async e =>
   e.preventDefault();
   this.setState({request : JSON.stringify({email : this.state.email.toLowerCase(), password : this.state.password})});
 
-  const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/validateLogin', {
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  const apiurl = "https://cs160bankingapp-api.herokuapp.com/api/validateLogin"
+  const response = await fetch(proxyurl + apiurl, {
   method: 'POST',
   headers: {'Content-type': 'application/json',},
   body: JSON.stringify({ email: this.state.email.toLowerCase(), password : this.state.password }),
