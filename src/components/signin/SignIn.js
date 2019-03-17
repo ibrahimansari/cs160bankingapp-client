@@ -52,10 +52,10 @@ validateLogin = async e =>
   this.setState({response : body});
   if(this.state.response === 'Valid Login1')    //1 represents customer
   {
-    window.location = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
+    window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
   }else{
     if(this.state.response ==='Valid Login0'){    //0 represents manager
-      window.location = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
+      window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
     }
   }
 }
