@@ -2,6 +2,7 @@
   "name": "onlinebanking",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://cs160bankingapp-api.herokuapp.com/",
   "engines": {
   "npm": "6.4.1",
   "node": "10.15.1"
