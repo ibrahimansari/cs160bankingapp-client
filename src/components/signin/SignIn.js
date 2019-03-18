@@ -40,9 +40,10 @@ validateLogin = async e =>
 {
   e.preventDefault();
   this.setState({request : JSON.stringify({email : this.state.email.toLowerCase(), password : this.state.password})});
-  
+
   const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/validateLogin', {
   method: 'POST',
+  mode: "cors",
   headers: {'Content-type': 'application/json',},
   body: JSON.stringify({ email: this.state.email.toLowerCase(), password : this.state.password }),
   });
