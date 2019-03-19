@@ -45,7 +45,7 @@ class AccountCreation extends Component {
   this.setState({response : body});
 
   if(this.state.response ==='Ok'){    //If registration sucessful, go to login page
-      window.location = '/signin';      //navigate to customer page
+      window.location = 'https://cs160bankingapp.herokuapp.com/signin';      //navigate to customer page
   }
 }
 
