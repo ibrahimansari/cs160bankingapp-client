@@ -66,7 +66,7 @@ class SignIn extends Component {
   e.preventDefault();
   this.setState({request : JSON.stringify({email : this.state.email.toLowerCase(), password : this.state.password})});
 
-  const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/', {
+  const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/validateUser', {
   method: 'POST',
   mode: "cors",
   headers: {'Content-type': 'application/json',},
