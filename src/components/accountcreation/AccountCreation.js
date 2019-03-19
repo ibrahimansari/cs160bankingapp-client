@@ -34,7 +34,7 @@ class AccountCreation extends Component {
   e.preventDefault();
   this.setState({request : JSON.stringify({email : this.state.email, password : this.state.password, first_name:this.state.first_name, last_name:this.state.last_name, customer:this.state.customer})});
 
-  const response = await fetch('https://cs160bankingapp-api.herokuapp.com/registerUser', {
+  const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/registerUser', {
   method: 'POST',
   headers: {'Content-type': 'application/json',},
   body: JSON.stringify({ email: this.state.email, password : this.state.password, first_name:this.state.first_name, last_name:this.state.last_name, customer:this.state.customer}),
