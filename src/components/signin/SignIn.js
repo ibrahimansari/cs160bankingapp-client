@@ -67,7 +67,7 @@ class SignIn extends Component {
   this.setState({request : JSON.stringify({email : this.state.email.toLowerCase(), password : this.state.password})});
 
   const response = await fetch('https://cs160bankingapp-api.herokuapp.com/', {
-  method: 'POST',
+  method: 'GET',
   mode: "cors",
   headers: {'Content-type': 'application/json',},
   body: JSON.stringify({ email: this.state.email.toLowerCase(), password : this.state.password }),
@@ -76,11 +76,10 @@ class SignIn extends Component {
   const body = await response.text();
 
   this.setState({response : body});
-  if(this.state.response)    //1 represents customer
-  {
+
     
     window.location.href = 'https://cs160bankingapp.herokuapp.com/';      //navigate to customer page
-  }
+  
 }
 
 
