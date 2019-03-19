@@ -61,7 +61,7 @@ class SignIn extends Component {
 //   }
 // }
   
-  v = async e =>
+  validateLogin = async e =>
 {
   e.preventDefault();
   this.setState({request : JSON.stringify({email : this.state.email.toLowerCase(), password : this.state.password})});
