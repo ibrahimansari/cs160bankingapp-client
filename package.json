@@ -4,9 +4,9 @@
   "private": true,
   "proxy": "http://cs160bankingapp-api.herokuapp.com/",
   "engines": {
-  "npm": "6.4.1",
-  "node": "10.15.1"
-},
+    "npm": "6.4.1",
+    "node": "10.15.1"
+  },
   "homepage": "https://cs160bankingapp.herokuapp.com/",
   "dependencies": {
     "@material-ui/core": "^3.9.2",
@@ -22,10 +22,10 @@
     "react-mdl": "^1.11.0",
     "react-router-dom": "^4.3.1",
     "react-router-link": "^2.0.2",
-    "react-scripts": "2.1.5",
+    "react-scripts": "^2.1.8",
     "recharts": "^1.5.0"
   },
-"scripts": {
+  "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
