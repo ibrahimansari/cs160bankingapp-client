@@ -50,7 +50,9 @@ class SignIn extends Component {
   });
 
   const body = await response.text();
-
+   
+  console.log(body);
+   
   this.setState({response : body});
         
     if(this.state.response === 'Valid Login1')    //1 represents customer
