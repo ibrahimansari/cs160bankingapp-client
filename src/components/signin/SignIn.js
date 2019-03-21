@@ -52,9 +52,9 @@ class SignIn extends Component {
   const body = await response.text();
     var h = JSON.parse(JSON.stringify(body));
     console.log(h.value);
-    console.log(" hello);
+    console.log(" hello");
            console.log(h);
-    console.log(" ok);
+    console.log(" ok");
    
   //console.log(body);
     
