@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Button, Card, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import './SignIn.css'
-import frontPageBackground from '../images/frontPageBackground.jpg';
-import { throws } from "assert";
 
 class SignIn extends Component {
   constructor(props) {
@@ -36,7 +34,7 @@ class SignIn extends Component {
     event.preventDefault();
   }
 
-  
+
   validateLogin = async e =>
 {
   e.preventDefault();
@@ -51,11 +49,11 @@ class SignIn extends Component {
 
   const body = await response.text();
 
-   
+
   this.setState({response : body});
     console.log(this.state.response.arr);
 
-    
+
     if(this.state.response === 'Valid Login1')    //1 represents customer
   {
     window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
@@ -64,7 +62,7 @@ class SignIn extends Component {
       window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
     }
   }
-  
+
 }
 
 

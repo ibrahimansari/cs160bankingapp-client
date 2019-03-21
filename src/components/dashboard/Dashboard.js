@@ -18,7 +18,6 @@ import { mainListItems, secondaryListItems } from './listItems';
 import SimpleLineChart from './SimpleLineChart';
 import SimpleTable from './SimpleTable';
 import BalanceDisplay from './BalanceDisplay';
-import {Navbar} from 'react-bootstrap';
 import Button from '@material-ui/core/Button';
 
 const drawerWidth = 240;

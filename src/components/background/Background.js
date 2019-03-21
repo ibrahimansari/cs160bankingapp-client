@@ -5,7 +5,9 @@ class Background extends Component {
   render()  {
     return (
       <div>
-        <img src={frontPageBackground} alt ="missing Image"  />
+        {/*
+          <img src={frontPageBackground} alt ="missing Image"  />
+        }*/
       </div>
     );
   }
