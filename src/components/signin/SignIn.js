@@ -47,7 +47,7 @@ class SignIn extends Component {
   body: JSON.stringify({ email: this.state.email.toLowerCase(), password : this.state.password }),
   });
 
-  const body = await response.text();
+  const body = await response.json();
 
 
   this.setState({response : body});
