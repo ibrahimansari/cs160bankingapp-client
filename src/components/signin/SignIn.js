@@ -49,19 +49,27 @@ class SignIn extends Component {
   body: JSON.stringify({ email: this.state.email.toLowerCase(), password : this.state.password }),
   });
 
-  const body = await response;
+  const body = await response.text();
     console.log(body["value"]);
     console.log(body.value);
     console.log(body);
    
     console.log(" hello");
+    
+   var  a = JSON.stringify(body);
+    console.log(a["value"]);
+    console.log(a.value);
+    console.log("hellohh");
+
    
   //console.log(body);
     
   //  console.log(this.state.respone);
    
   this.setState({response : body});
-        
+    console.log(JSON.stringify(state));
+
+    
     if(this.state.response === 'Valid Login1')    //1 represents customer
   {
     window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
