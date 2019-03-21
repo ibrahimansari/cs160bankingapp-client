@@ -7,7 +7,7 @@ class Background extends Component {
       <div>
         {/*
           <img src={frontPageBackground} alt ="missing Image"  />
-        }*/
+         */}
       </div>
     );
   }
