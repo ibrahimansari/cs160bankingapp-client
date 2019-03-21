@@ -53,6 +53,13 @@ class SignIn extends Component {
   this.setState({response : body});
     console.log(this.state.response.value);
     console.log("hello");
+    console.log(this.state.response);
+    console.log("hh");
+    console.log(body);
+    console.log("OP");
+    console.log(body.value);
+   
+    
 
 
     if(this.state.response === 'Valid Login1')    //1 represents customer
