@@ -50,11 +50,16 @@ class SignIn extends Component {
   });
 
   const body = await response.text();
+    var h = JSON.parse(JSON.stringify(body));
+    console.log(h.value);
+    console.log(" hello);
+           console.log(h);
+    console.log(" ok);
    
   //console.log(body);
     
    //console.log("hello ");
-    console.log(this.state.respone);
+  //  console.log(this.state.respone);
    
   this.setState({response : body});
         
