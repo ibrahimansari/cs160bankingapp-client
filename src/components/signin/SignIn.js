@@ -55,7 +55,7 @@ class SignIn extends Component {
    
   this.setState({response : body});
         
-    if(this.state.response === 'Valid Login1')    //1 represents customer
+    if(this.state.response.value === 'Valid Login1')    //1 represents customer
   {
     window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
   }else{
