@@ -72,11 +72,13 @@ validateLogin = async e => {
       this.props.context.updateBalance(transactions[0].balance); // isn't displaying
 
       console.log(transactions[0].balance);     //user current balance
-      window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
+      //window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
+      window.location = '/accountdashboard';
     }else{
       if(this.state.response ==='Valid Login0'){    //0 represents manager
 
-        window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
+        //window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
+        window.location = '/managerdashboard'; 
       }
     }
   }
