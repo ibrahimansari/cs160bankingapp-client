@@ -54,12 +54,9 @@ class SignIn extends Component {
     
   }else{
     var arr = body["arr"];            //get account transactions
+    console.log(arr);
 
     this.setState({response : body["value"]});
-
-    
-   //<p><b> {this.state.response}</b> </p> removed this from render method below div className = "SignIn
-
 
       if(success === 'Valid Login1')    //1 represents customer
     {
