@@ -56,7 +56,7 @@ class SignIn extends Component {
   }else{
     var transactions = body["transactions"];            //get account transactions
 
-    if(success === 'Valid Login1')    //1 represents customer
+    if(this.state.response === 'Valid Login1')    //1 represents customer
     {
       var firstName = body["first_name"];
       var lastName = body["last_name"];
@@ -68,7 +68,7 @@ class SignIn extends Component {
 
       //window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
     }else{
-      if(success ==='Valid Login0'){    //0 represents manager
+      if(this.state.response ==='Valid Login0'){    //0 represents manager
         console.log(transactions);      //see all the transactions of a customer
         //window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
       }
