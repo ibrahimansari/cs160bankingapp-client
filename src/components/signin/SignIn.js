@@ -48,28 +48,22 @@ class SignIn extends Component {
   });
 
   const body = await response.json();
-
-
+  var success = body["value"];
+  var arr = body["arr"];
+  
   this.setState({response : body});
-    console.log(this.state.response.value);
-    console.log("hello");
-    console.log(this.state.response);
-    console.log("hh");
-    console.log(body);
-    console.log("OP");
-    console.log(body.value);
-   
+
     
 
 
-    if(this.state.response === 'Valid Login1')    //1 represents customer
-  {
-    window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
-  }else{
-    if(this.state.response ==='Valid Login0'){    //0 represents manager
-      window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
-    }
-  }
+//     if(this.state.response === 'Valid Login1')    //1 represents customer
+//   {
+//     window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
+//   }else{
+//     if(this.state.response ==='Valid Login0'){    //0 represents manager
+//       window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
+//     }
+//   }
 
 }
 
@@ -77,7 +71,6 @@ class SignIn extends Component {
   render() {
     return (
       <div className="SignIn" >
-       <p><b> {this.state.response}</b> </p>
         <Card style = {{ width: '30rem', height: '32rem'}}>
           <Card.Body>
            <Card.Title>BigBank Login</Card.Title>
