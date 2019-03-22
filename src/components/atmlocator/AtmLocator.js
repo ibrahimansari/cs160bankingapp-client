@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import MainNavbar from '../components/navbar/MainNavbar';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
