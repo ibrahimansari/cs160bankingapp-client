@@ -58,11 +58,6 @@ validateLogin = async e => {
     var lastName = body["last_name"];
     var email  = body["email"];
 
-    this.props.context.updateFirstName(firstName);
-    this.props.context.updateLastName(lastName);
-    this.props.context.updateEmail(email);
-    this.props.context.updateBalance(transactions[0].balance);
-
     console.log(transactions);
     console.log(firstName);
     console.log(lastName);
@@ -70,6 +65,12 @@ validateLogin = async e => {
 
     if(this.state.response === 'Valid Login1')    //1 represents customer
     {
+      // setting context variables
+      this.props.context.updateFirstName(firstName);
+      this.props.context.updateLastName(lastName);
+      this.props.context.updateEmail(email);
+      this.props.context.updateBalance(transactions[0].balance); // isn't displaying
+
       console.log(transactions[0].balance);     //user current balance
       window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
     }else{

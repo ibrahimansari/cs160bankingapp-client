@@ -5,48 +5,48 @@ const AppContext = React.createContext();
 class MyProvider extends Component {
 
   state = {
-    email: sessionStorage.getItem("email"),
     updateEmail : email =>this.updateEmail(email),
-    first_name: sessionStorage.getItem("first_name"),
+    email: sessionStorage.getItem("email"),
     updateFirstName: firstName => this.updateFirstName(firstName),
-    last_name: sessionStorage.getItem("last_name"),
+    first_name: sessionStorage.getItem("first_name"),
     updateLastName: lastName => this.updateLastName(lastName),
+    last_name: sessionStorage.getItem("last_name"),
+    updateBalance: balance => this.updateBalance(balance),
     balance: sessionStorage.getItem("balance"),
-    updateBalance: amt => this.updateBalance(amt),
-    customer: sessionStorage.getItem("customer"),
     updateCustomerStatus: cust => this.updateCustomerStatus(cust),
+    customer: sessionStorage.getItem("customer"),
     transactions: []
   };
 
   updateEmail (em) {
-    this.setState({email : em});
     sessionStorage.setItem("email", em);
+    this.setState({email : em});
   }
 
   updateFirstName (firstName) {
-      this.setState({first_name: firstName});
       sessionStorage.setItem("first_name", firstName);
+      this.setState({first_name: firstName});
  }
 
  updateLastName (lastName) {
-   this.setState({last_name: lastName});
    sessionStorage.setItem("last_name", lastName);
+   this.setState({last_name: lastName});
  }
 
  updateCustomerStatus(cust){
    if (cust === 0) {
-     this.setState({customer: cust});
      sessionStorage.setItem("customer", cust)
+     this.setState({customer: cust});
    }
    else if (cust === 1) {
-     this.setState({customer: cust});
      sessionStorage.setItem("customer", cust)
+     this.setState({customer: cust});
    }
  }
 
   updateBalance (amt) {
-      this.setState({balance: amt});
       sessionStorage.setItem("balance", amt);
+      this.setState({balance: amt});
    }
 
   render() {
