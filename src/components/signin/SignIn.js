@@ -57,6 +57,10 @@ validateLogin = async e => {
     var firstName = body["first_name"];
     var lastName = body["last_name"];
     var email  = body["email"];
+
+    this.props.context.updateFirstName(firstName);
+    this.props.context.updateLastName(lastName);
+    this.props.context.updateEmail(email);
     console.log(transactions);
     console.log(firstName);
     console.log(lastName);

@@ -117,6 +117,7 @@ class Dashboard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { first_name, last_name, email} = this.props.context;
 
     return (
       <div className={classes.root}>
@@ -174,6 +175,9 @@ class Dashboard extends React.Component {
           <div className={classes.appBarSpacer} />
           <Typography variant="h4" gutterBottom component="h2">
             Balance: 1050
+            Email: {email};
+            First Name: {first_name};
+            Last Name: {last_name};
           </Typography>
           <Typography component="div" className={classes.chartContainer}>
             <BalanceDisplay />
