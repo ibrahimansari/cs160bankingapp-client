@@ -174,10 +174,10 @@ class Dashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Typography variant="h4" gutterBottom component="h2">
-            Balance:
-            Email: {email};
-            First Name: {first_name};
-            Last Name: {last_name};
+            Balance: {balance}
+            Email: {email}
+            First Name: {first_name}
+            Last Name: {last_name}
           </Typography>
           <Typography component="div" className={classes.chartContainer}>
             <BalanceDisplay />
