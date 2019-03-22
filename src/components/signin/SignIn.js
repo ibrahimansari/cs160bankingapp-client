@@ -60,7 +60,7 @@ class SignIn extends Component {
     var transactions = body["transactions"];            //get account transactions
     var firstName = body["first_name"];
     var lastName = body["last_name"];
-    var email  = body["emai"];
+    var email  = body["email"];
     console.log(transactions);
     console.log(firstName);
     console.log(lastName);
