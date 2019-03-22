@@ -55,7 +55,7 @@ class SignIn extends Component {
   }else{
     var arr = body["arr"];            //get account transactions
     console.log(arr);
-    console.log(body["arr"];
+    console.log(body["arr"]);
          console.log(body["value"]);
 
     this.setState({response : body["value"]});
