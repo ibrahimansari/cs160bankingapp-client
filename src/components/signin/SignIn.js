@@ -49,7 +49,7 @@ class SignIn extends Component {
 
   const body = await response.json();
   var success = body["value"];          //returns either 'False', 'Valid Login1' or 'Valid Login0', 
-  if(success === 'False'){              //If login was unsuccessful
+  if(success === 'Invalid Username and/or Password'){              //If login was unsuccessful
     this.setState({response : body["value"]});
     
   }else{
