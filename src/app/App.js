@@ -6,7 +6,6 @@ import SignInPage from '../pages/SignInPage';
 import AtmLocator from '../pages/AtmLocatorPage';
 import AccountRecoveryPage from '../pages/AccountRecoveryPage';
 import CustomerCreationPage from '../pages/CustomerCreationPage';
-import ManagerCreationPage from '../pages/ManagerCreationPage';
 import AccountDashboardPage from '../pages/AccountDashboardPage';
 import ManagerDashboardPage from '../pages/ManagerDashboardPage';
 import {MyProvider, AppContext} from './context/context';
