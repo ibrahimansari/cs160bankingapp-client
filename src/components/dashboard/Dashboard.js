@@ -118,6 +118,13 @@ class Dashboard extends React.Component {
   render() {
     const { classes } = this.props;
     const { balance, first_name, last_name, email} = this.props.context;
+    console.log("----Begin Context Check----")
+    console.log(balance);
+    console.log(first_name);
+    console.log(last_name);
+    console.log(email);
+    console.log("----End Context Check----")
+    con
     this.forceUpdate();
     return (
       <div className={classes.root}>
