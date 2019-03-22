@@ -6,7 +6,7 @@ class MyProvider extends Component {
 
   state = {
     email: sessionStorage.getItem("email"),
-    updateEmail : email =>this.updateEmail(),
+    updateEmail : email =>this.updateEmail(email),
     first_name: sessionStorage.getItem("first_name"),
     updateFirstName: firstName => this.updateFirstName(firstName),
     last_name: sessionStorage.getItem("last_name"),
