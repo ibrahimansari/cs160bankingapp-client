@@ -49,34 +49,30 @@ class SignIn extends Component {
 
   const body = await response.json();
     
-  this.setState({response : body["value"]});
+  this.setState({response : body["value"]});    //stores either Invalid Username and/or Password, Login Valid1, or Login Valid0
  
-    
-  //var success = body["value"];          //returns either 'False', 'Valid Login1' or 'Valid Login0', 
   if(this.state.response === 'Invalid Username and/or Password'){              //If login was unsuccessful
-    //this.setState({response : body["value"]});
     
   }else{
     var transactions = body["transactions"];            //get account transactions
-    var firstName = body["first_name"];
-    var lastName = body["last_name"];
-    var email  = body["email"];
-    console.log(transactions);
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
 
-    
- //   this.setState({response : body["value"]});
+    if(success === 'Valid Login1')    //1 represents customer
+    {
+      var firstName = body["first_name"];
+      var lastName = body["last_name"];
+      var email  = body["email"];
+      console.log(transactions);
+      console.log(firstName);
+      console.log(lastName);
+      console.log(email);
 
-//       if(success === 'Valid Login1')    //1 represents customer
-//     {
-//       window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
-//     }else{
-//       if(success ==='Valid Login0'){    //0 represents manager
-//         window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
-//       }
-//     }
+      //window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
+    }else{
+      if(success ==='Valid Login0'){    //0 represents manager
+        console.log(transactions);      //see all the transactions of a customer
+        //window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
+      }
+    }
   }
 
 }
