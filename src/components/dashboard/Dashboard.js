@@ -124,7 +124,6 @@ class Dashboard extends React.Component {
     console.log(last_name);
     console.log(email);
     console.log("----End Context Check----");
-    con
     this.forceUpdate();
     return (
       <div className={classes.root}>
