@@ -32,17 +32,17 @@ class MyProvider extends Component {
 
  updateCustomerStatus(cust){
    if (cust === 0) {
-     this.setState(customer: cust);
+     this.setState({customer: cust});
    }
    else if (cust === 1) {
-     this.setState(customer: cust);
+     this.setState({customer: cust});
    }
  }
 
   updateBalance (amt) {
       this.setState({balance: amt});
    }
-   
+
   render() {
     return (
     <AppContext.Provider value={{context: this.state}}>
