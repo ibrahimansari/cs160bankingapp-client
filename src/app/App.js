@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter, Route} from 'react-router-dom';
 import FrontPage from '../pages/FrontPage';
 import SignInPage from '../pages/SignInPage';
-import AtmLocator from '../pages/AtmLocatorPage';
+import AtmLocatorPage from '../pages/AtmLocatorPage';
 import AccountRecoveryPage from '../pages/AccountRecoveryPage';
 import CustomerCreationPage from '../pages/CustomerCreationPage';
 import AccountDashboardPage from '../pages/AccountDashboardPage';
