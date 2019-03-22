@@ -48,21 +48,26 @@ class SignIn extends Component {
   });
 
   const body = await response.json();
-  var success = body["value"];
-  var arr = body["arr"];
-  
-  this.setState({response : body});
+  var success = body["value"];          //returns either 'False', 'Valid Login1' or 'Valid Login0', 
+  if(success === 'False'){              //If login was unsuccessful
+    this.setState({response : body["value"]});
+    
+  }else{
+    var arr = body["arr"];            //get account transactions
+
+    this.setState({response : body["value"]});
 
     
    //<p><b> {this.state.response}</b> </p> removed this from render method below div className = "SignIn
 
 
-    if(success === 'Valid Login1')    //1 represents customer
-  {
-    window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
-  }else{
-    if(success ==='Valid Login0'){    //0 represents manager
-      window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
+      if(success === 'Valid Login1')    //1 represents customer
+    {
+      window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
+    }else{
+      if(success ==='Valid Login0'){    //0 represents manager
+        window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
+      }
     }
   }
 
