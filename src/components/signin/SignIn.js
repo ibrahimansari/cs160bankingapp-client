@@ -58,14 +58,14 @@ class SignIn extends Component {
 
     this.setState({response : body["value"]});
 
-      if(success === 'Valid Login1')    //1 represents customer
-    {
-      window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
-    }else{
-      if(success ==='Valid Login0'){    //0 represents manager
-        window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
-      }
-    }
+//       if(success === 'Valid Login1')    //1 represents customer
+//     {
+//       window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
+//     }else{
+//       if(success ==='Valid Login0'){    //0 represents manager
+//         window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
+//       }
+//     }
   }
 
 }
