@@ -118,7 +118,7 @@ class Dashboard extends React.Component {
   render() {
     const { classes } = this.props;
     const { balance, first_name, last_name, email} = this.props.context;
-
+    this.forceUpdate();
     return (
       <div className={classes.root}>
         <CssBaseline />

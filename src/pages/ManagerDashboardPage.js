@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import MainNavbar from '../components/navbar/MainNavbar';
 
-class ManagerDashboardPage extends Component {
+class ManagerDashboardPage extends Component
+
   render() {
     const { context } = this.props;
     return (
