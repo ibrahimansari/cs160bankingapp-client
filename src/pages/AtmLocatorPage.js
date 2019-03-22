@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
-import SignIn from '../components/signin/SignIn';
+import React, { Component } from "react";
 import MainNavbar from '../components/navbar/MainNavbar';
+import AtmLocator from '../components/atmlocator/AtmLocator';
 
-class SignInPage extends Component {
+class AtmLocatorPage extends Component {
   render()  {
     const { context } = this.props;
     return (
-      <div>
+      <div class = "FrontPage">
         <MainNavbar
           context = {context}
         />
-        <SignIn
+        <AtmLocator
           context = {context}
         />
       </div>
@@ -18,4 +18,4 @@ class SignInPage extends Component {
   }
 }
 
-export default SignInPage;
+export default AtmLocatorPage;

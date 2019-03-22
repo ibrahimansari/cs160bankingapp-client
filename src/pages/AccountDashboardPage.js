@@ -3,9 +3,12 @@ import Dashboard from '../components/dashboard/Dashboard';
 
 class CustomerDashboardPage extends Component {
   render() {
+    const { context } = this.props;
     return (
       <div>
-          <Dashboard />
+        <Dashboard
+          context = {context}
+        />
       </div>
     );
   }

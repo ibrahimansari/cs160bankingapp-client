@@ -11,9 +11,8 @@ class MainNavbar extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <NavDropdown title="Open an Account" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="/customercreation">Customer Account</NavDropdown.Item>
+              <NavDropdown.Item href="/customercreation">Create An Account</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="/managercreation">Manager Account</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>

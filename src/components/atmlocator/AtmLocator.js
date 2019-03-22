@@ -13,6 +13,7 @@ class AtmLocator extends Component {
     zoom: 16
   };
   render() {
+    const { context } = this.props;
     return (
       <div>
         <MainNavbar />

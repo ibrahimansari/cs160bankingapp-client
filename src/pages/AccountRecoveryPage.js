@@ -4,10 +4,15 @@ import AccountRecovery from '../components/accountrecovery/AccountRecovery';
 
 class AccountRecoveryPage extends Component {
   render() {
+    const { context } = this.props;
     return (
       <div>
-        <MainNavbar />
-        <AccountRecovery />
+        <MainNavbar
+          context = {context}
+        />
+        <AccountRecovery
+          context = {context}
+        />
       </div>
     );
   }

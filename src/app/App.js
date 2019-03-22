@@ -3,28 +3,36 @@ import './App.css';
 import {BrowserRouter, Route} from 'react-router-dom';
 import FrontPage from '../pages/FrontPage';
 import SignInPage from '../pages/SignInPage';
-import AtmLocator from '../pages/AtmLocator';
+import AtmLocator from '../pages/AtmLocatorPage';
 import AccountRecoveryPage from '../pages/AccountRecoveryPage';
 import CustomerCreationPage from '../pages/CustomerCreationPage';
 import ManagerCreationPage from '../pages/ManagerCreationPage';
 import AccountDashboardPage from '../pages/AccountDashboardPage';
 import ManagerDashboardPage from '../pages/ManagerDashboardPage';
+import {MyProvider, AppContext} from './context/context';
 
 class App extends Component {
   render()  {
     return (
       <div className = "App">
         <BrowserRouter>
-          <React.Fragment>
-            <Route exact path="/" render={ props => <FrontPage {...props} />} />
-            <Route exact path="/signin" render={ props => <SignInPage {...props} />} />
-            <Route exact path="/atmlocator" render={ props => <AtmLocator {...props} />} />
-            <Route exact path="/customercreation" render={ props => <CustomerCreationPage {...props} />} />
-            <Route exact path="/managercreation" render={ props => <ManagerCreationPage {...props} />} />
-            <Route exact path="/accountrecovery" render={ props => <AccountRecoveryPage {...props} />} />
-            <Route exact path="/accountdashboard" render={ props => <AccountDashboardPage {...props} />} />
-            <Route exact path="/managerdashboard" render={ props => <ManagerDashboardPage {...props} />} />
-          </React.Fragment>
+          <MyProvider>
+            <AppContext.Consumer>
+              {(context) => {
+                return (
+                  <React.Fragment>
+                    <Route exact path="/" render={ props => <FrontPage {...props} {...context} />} />
+                    <Route exact path="/signin" render={ props => <SignInPage {...props} {...context} />} />
+                    <Route exact path="/atmlocator" render={ props => <AtmLocatorPage {...props} />} />
+                    <Route exact path="/customercreation" render={ props => <CustomerCreationPage {...props} {...context} />} />
+                    <Route exact path="/accountrecovery" render={ props => <AccountRecoveryPage {...props} {...context} />} />
+                    <Route exact path="/accountdashboard" render={ props => <AccountDashboardPage {...props} {...context} />} />
+                    <Route exact path="/managerdashboard" render={ props => <ManagerDashboardPage {...props} {...context} />} />
+                  </React.Fragment>
+                );
+              }}
+          </AppContext.Consumer>
+          </MyProvider>
          </BrowserRouter>
       </div>
     );

@@ -5,10 +5,15 @@ import './styles/FrontPage.css';
 
 class FrontPage extends Component {
   render()  {
+    const { context } = this.props;
     return (
       <div class = "FrontPage">
-        <MainNavbar />
-        <Background />
+        <MainNavbar
+          context = {context}
+        />
+        <Background
+          context = {context}
+        />
       </div>
     );
   }

@@ -4,10 +4,15 @@ import AccountCreation from '../components/accountcreation/AccountCreation';
 
 class CustomerCreationPage extends Component {
   render() {
+    const { context } = this.props;
     return (
       <div>
-        <MainNavbar />
-        <AccountCreation />
+        <MainNavbar
+          context = {context}
+        />
+        <AccountCreation
+          context = {context}
+          />
       </div>
     );
   }
