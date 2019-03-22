@@ -77,6 +77,7 @@ class SignIn extends Component {
   render() {
     return (
       <div className="SignIn" >
+      <p><b> {this.state.response}</b> </p>
         <Card style = {{ width: '30rem', height: '32rem'}}>
           <Card.Body>
            <Card.Title>BigBank Login</Card.Title>
