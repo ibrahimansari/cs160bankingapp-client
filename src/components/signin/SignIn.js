@@ -61,6 +61,8 @@ validateLogin = async e => {
     this.props.context.updateFirstName(firstName);
     this.props.context.updateLastName(lastName);
     this.props.context.updateEmail(email);
+    this.props.context.updateBalance(transactions[0].balance);
+
     console.log(transactions);
     console.log(firstName);
     console.log(lastName);
