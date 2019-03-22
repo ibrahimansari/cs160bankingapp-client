@@ -35,8 +35,7 @@ class SignIn extends Component {
   }
 
 
-  validateLogin = async e =>
-{
+validateLogin = async e => {
   e.preventDefault();
   this.setState({request : JSON.stringify({email : this.state.email.toLowerCase(), password : this.state.password})});
 
@@ -48,11 +47,11 @@ class SignIn extends Component {
   });
 
   const body = await response.json();
-    
+
   this.setState({response : body["value"]});    //stores either Invalid Username and/or Password, Login Valid1, or Login Valid0
- 
+
   if(this.state.response === 'Invalid Username and/or Password'){              //If login was unsuccessful
-    
+
   }else{
     var transactions = body["transactions"];            //get account transactions
     var firstName = body["first_name"];
@@ -69,12 +68,11 @@ class SignIn extends Component {
       window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
     }else{
       if(this.state.response ==='Valid Login0'){    //0 represents manager
-        
+
         window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
       }
     }
   }
-
 }
 
 

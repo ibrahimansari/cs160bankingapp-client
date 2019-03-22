@@ -15,7 +15,6 @@ class AtmLocator extends Component {
     const { context } = this.props;
     return (
       <div>
-        <MainNavbar />
         <h1> Needs additional API calls </h1>
         <div style={{ height: '100vh', width: '75%', paddingTop: "80px"}}>
           <GoogleMapReact
