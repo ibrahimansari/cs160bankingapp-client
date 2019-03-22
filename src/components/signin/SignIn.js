@@ -48,17 +48,26 @@ class SignIn extends Component {
   });
 
   const body = await response.json();
-  var success = body["value"];          //returns either 'False', 'Valid Login1' or 'Valid Login0', 
-  if(success === 'Invalid Username and/or Password'){              //If login was unsuccessful
-    this.setState({response : body["value"]});
+    
+  this.setState({response : body["value"]});
+ 
+    
+  //var success = body["value"];          //returns either 'False', 'Valid Login1' or 'Valid Login0', 
+  if(this.state.response === 'Invalid Username and/or Password'){              //If login was unsuccessful
+    //this.setState({response : body["value"]});
     
   }else{
-    var arr = body["arr"];            //get account transactions
-    console.log(arr);
-    console.log(body["arr"]);
-         console.log(body["value"]);
+    var transactions = body["transactions"];            //get account transactions
+    var firstName = body["first_name"];
+    var lastName = body["last_name"];
+    var email  = body["emai"];
+    console.log(transactions);
+    console.log(firstName);
+    console.log(lastName);
+    console.log(email);
 
-    this.setState({response : body["value"]});
+    
+ //   this.setState({response : body["value"]});
 
 //       if(success === 'Valid Login1')    //1 represents customer
 //     {
