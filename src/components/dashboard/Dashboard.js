@@ -15,9 +15,9 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
-import SimpleLineChart from './SimpleLineChart';
-import SimpleTable from './SimpleTable';
-import BalanceDisplay from './BalanceDisplay';
+import SimpleLineChart from './defaultdisplay/SimpleLineChart';
+import SimpleTable from './defaultdisplay/SimpleTable';
+import BalanceDisplay from './defaultdisplay/BalanceDisplay';
 import Button from '@material-ui/core/Button';
 
 const drawerWidth = 240;
@@ -118,12 +118,6 @@ class Dashboard extends React.Component {
   render() {
     const { classes } = this.props;
     const { balance, first_name, last_name, email} = this.props.context;
-    console.log("----Begin Context Check----");
-    console.log(balance);
-    console.log(first_name);
-    console.log(last_name);
-    console.log(email);
-    console.log("----End Context Check----");
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -179,10 +173,10 @@ class Dashboard extends React.Component {
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
           <Typography variant="h4" gutterBottom component="h2">
-            Balance: {balance}
-            Email: {email}
-            First Name: {first_name}
-            Last Name: {last_name}
+            <h1>Email: {email}</h1>
+            <h1>Balance: {balance}</h1>
+            <h1>First Name: {first_name}</h1>
+            <h1>Last Name: {last_name}</h1>
           </Typography>
           <Typography component="div" className={classes.chartContainer}>
             <BalanceDisplay />

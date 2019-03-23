@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 class BalanceDisplay  extends Component {
+
+    //
+    // Make something fancy appear here
+    //
     render() {
         return (
             <div style={{marginTop: 50, textAlign: 'center'}}>

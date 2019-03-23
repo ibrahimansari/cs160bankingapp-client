@@ -69,16 +69,13 @@ validateLogin = async e => {
       this.props.context.updateFirstName(firstName);
       this.props.context.updateLastName(lastName);
       this.props.context.updateEmail(email);
-      this.props.context.updateBalance(transactions[0].balance); // isn't displaying
+      this.props.context.updateBalance(transactions[0].balance); // is displaying
 
       console.log(transactions[0].balance);     //user current balance
-      //window.location.href = 'https://cs160bankingapp.herokuapp.com/accountdashboard';      //navigate to customer page
-      window.location = '/accountdashboard';
+      window.location = '/accountdashboard'; // link using this or else context breaks
     }else{
       if(this.state.response ==='Valid Login0'){    //0 represents manager
-
-        //window.location.href = 'https://cs160bankingapp.herokuapp.com/managerdashboard';      //navigate to customer page
-        window.location = '/managerdashboard'; 
+        window.location = '/managerdashboard';
       }
     }
   }
@@ -88,9 +85,9 @@ validateLogin = async e => {
   render() {
     return (
       <div className="SignIn" >
-      <p><b> {this.state.response}</b> </p>
         <Card style = {{ width: '30rem', height: '32rem'}}>
           <Card.Body>
+            <p><b> {this.state.response}</b> </p>
            <Card.Title>BigBank Login</Card.Title>
           <form onSubmit={this.validateLogin}>
             <FormGroup controlId="email" bsSize="small">
