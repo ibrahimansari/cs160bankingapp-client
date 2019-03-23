@@ -6,13 +6,12 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import AssignmentIcon from '@material-ui/icons/Assignment';
-/*
-Icons to be used later
-
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-*/
+import CompareArrowsIcon from '@material-ui/icons/CompareArrows';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import TodayIcon from '@material-ui/icons/Today';
+import AssessmentIcon from '@material-ui/icons/Assessment';
 
 
 export const mainListItems = (
@@ -25,27 +24,27 @@ export const mainListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <AccountBoxIcon />
       </ListItemIcon>
       <ListItemText primary="Accounts" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <CompareArrowsIcon />
       </ListItemIcon>
       <ListItemText primary="Transfers" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <CreditCardIcon />
       </ListItemIcon>
       <ListItemText primary="Cards" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <AccountCircleIcon />
       </ListItemIcon>
-      <ListItemText primary="Account Management" />
+      <ListItemText primary="User Summary" />
     </ListItem>
   </div>
 );
@@ -55,7 +54,7 @@ export const secondaryListItems = (
     <ListSubheader inset>Transaction reports</ListSubheader>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <TodayIcon />
       </ListItemIcon>
       <ListItemText primary="This Week" />
     </ListItem>
@@ -67,7 +66,7 @@ export const secondaryListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <AssignmentIcon />
+        <AssessmentIcon />
       </ListItemIcon>
       <ListItemText primary="This Year" />
     </ListItem>
