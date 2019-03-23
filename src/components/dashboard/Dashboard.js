@@ -19,6 +19,7 @@ import SimpleLineChart from './defaultdisplay/SimpleLineChart';
 import SimpleTable from './defaultdisplay/SimpleTable';
 import BalanceDisplay from './defaultdisplay/BalanceDisplay';
 import Button from '@material-ui/core/Button';
+import {Navbar} from 'react-bootstrap';
 
 const drawerWidth = 240;
 
@@ -124,6 +125,7 @@ class Dashboard extends React.Component {
         <AppBar
           position="absolute"
           className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+          style = {{ backgroundColor: '#007bff' }}
         >
           <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
             <IconButton
@@ -144,7 +146,12 @@ class Dashboard extends React.Component {
               noWrap
               className={classes.title}
             >
-          <Button color="inherit" size ="large" href= "/">BigBank</Button>
+            <Navbar.Brand
+              href="/"
+              style= {{color: 'white'}}
+            >
+              BigBank
+            </Navbar.Brand>
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={0} color="secondary">

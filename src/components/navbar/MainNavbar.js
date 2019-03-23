@@ -5,7 +5,7 @@ import "./MainNavbar.css"
 class MainNavbar extends Component {
   render()  {
     return (
-      <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+      <Navbar collapseOnSelect expand="xl" bg="primary" variant="dark">
         <Navbar.Brand href="/">BigBank</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
