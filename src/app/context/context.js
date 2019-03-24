@@ -5,6 +5,7 @@ const AppContext = React.createContext();
 class MyProvider extends Component {
 
   state = {
+    // Customer data
     updateEmail : email =>this.updateEmail(email),
     email: sessionStorage.getItem("email"),
     updateFirstName: firstName => this.updateFirstName(firstName),
@@ -15,39 +16,68 @@ class MyProvider extends Component {
     balance: sessionStorage.getItem("balance"),
     updateCustomerStatus: cust => this.updateCustomerStatus(cust),
     customer: sessionStorage.getItem("customer"),
-    transactions: []
+    updateTransactions : transactions => this.updateTransactions(transactions),
+    transactions: sessionStorage.getItem("transactions"),
+
+    // global boolean checks
+    updateIsSignedIn: isSignedIn => this.updateIsSignedIn(isSignedIn),
+    isSignedIn : sessionStorage.getItem("isSignedIn"),
+
+    // check for conditional account dashboard rendering
+    DEFAULT_DISPLAY: "DEFAULT",
+    ACCOUNTS_DISPLAY: "ACCOUNTS",
+    CARDS_DISPLAY: "CARDS",
+    TRANSFERS_DISPLAY: "TRANSFERS",
+    USER_SUMMARY_DISPLAY: "USERSUMMARY",
+    updateDashboardDisplay : dashboardDisplay => this.updateDashboardDisplay(dashboardDisplay),
+    dashboardDisplay : sessionStorage.getItem("dashboardDisplay")
   };
 
-  updateEmail (em) {
-    sessionStorage.setItem("email", em);
-    this.setState({email : em});
+  updateEmail (email) {
+    sessionStorage.setItem("email", email);
+    this.setState({email});
   }
 
-  updateFirstName (firstName) {
-      sessionStorage.setItem("first_name", firstName);
-      this.setState({first_name: firstName});
+  updateFirstName (first_name) {
+      sessionStorage.setItem("first_name", first_name);
+      this.setState({first_name});
+  }
+
+ updateLastName (last_name) {
+   sessionStorage.setItem("last_name", last_name);
+   this.setState({last_name});
+  }
+
+ updateCustomerStatus(customer){
+   if (customer === 0) {
+     sessionStorage.setItem("customer", customer)
+     this.setState({customer});
+   }
+   else if (customer === 1) {
+     sessionStorage.setItem("customer", customer)
+     this.setState({customer});
+   }
  }
 
- updateLastName (lastName) {
-   sessionStorage.setItem("last_name", lastName);
-   this.setState({last_name: lastName});
- }
+updateBalance (balance) {
+      sessionStorage.setItem("balance", balance);
+      this.setState({balance});
+  }
 
- updateCustomerStatus(cust){
-   if (cust === 0) {
-     sessionStorage.setItem("customer", cust)
-     this.setState({customer: cust});
-   }
-   else if (cust === 1) {
-     sessionStorage.setItem("customer", cust)
-     this.setState({customer: cust});
-   }
- }
+updateTransactions (transactions) {
+    sessionStorage.setItem("transactions", transactions);
+    this.setState({transactions});
+  }
 
-  updateBalance (amt) {
-      sessionStorage.setItem("balance", amt);
-      this.setState({balance: amt});
-   }
+updateIsSignedIn (isSignedIn) {
+  sessionStorage.setItem("isSignedIn", isSignedIn);
+  this.setState({isSignedIn});
+}
+
+updateDashboardDisplay (dashboardDisplay) {
+  sessionStorage.setItem("defaultDisplay", dashboardDisplay);
+  this.setState({dashboardDisplay});
+}
 
   render() {
     return (
