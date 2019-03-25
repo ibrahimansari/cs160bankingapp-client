@@ -243,27 +243,7 @@ class Dashboard extends React.Component {
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          <Typography variant="h4" gutterBottom component="h2">
-            <h1>Email: {email}</h1>
-            <h1>Balance: {balance}</h1>
-            <h1>First Name: {first_name}</h1>
-            <h1>Last Name: {last_name}</h1>
-          </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-            <BalanceDisplay />
-          </Typography>
-          <Typography variant="h4" gutterBottom component="h2">
-            Weekly Account Transactions
-          </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-            <SimpleLineChart />
-          </Typography>
-          <Typography variant="h4" gutterBottom component="h2">
-            Transactions
-          </Typography>
-          <div className={classes.tableContainer}>
-            <SimpleTable />
-          </div>
+          {this.condDisplay()}
         </main>
       </div>
     );
