@@ -112,7 +112,6 @@ class Dashboard extends React.Component {
   condDisplay() {
     const { classes } = this.props;
     const { balance, first_name, last_name, email} = this.props.context;
-    const
     switch(this.props.context.dashboardDisplay) {
       case this.props.context.DEFAULT_DISPLAY:
         return ( <div>
