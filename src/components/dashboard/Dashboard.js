@@ -14,7 +14,7 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import ListItems from './ListItems';
 import SimpleLineChart from './defaultdisplay/SimpleLineChart';
 import SimpleTable from './defaultdisplay/SimpleTable';
 import BalanceDisplay from './defaultdisplay/BalanceDisplay';
@@ -117,7 +117,7 @@ class Dashboard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, context } = this.props;
     const { balance, first_name, last_name, email} = this.props.context;
     return (
       <div className={classes.root}>
@@ -173,9 +173,7 @@ class Dashboard extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List>{mainListItems}</List>
-          <Divider />
-          <List>{secondaryListItems}</List>
+          <ListItems context = {context}/>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />

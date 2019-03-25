@@ -27,8 +27,9 @@ class MyProvider extends Component {
     DEFAULT_DISPLAY: "DEFAULT",
     ACCOUNTS_DISPLAY: "ACCOUNTS",
     CARDS_DISPLAY: "CARDS",
-    TRANSFERS_DISPLAY: "TRANSFERS",
-    USER_SUMMARY_DISPLAY: "USERSUMMARY",
+    MAKE_TRANSACTIONS_DISPLAY: "MAKE_TRANSACTIONS",
+    SETUP_BILL_AUTO_PAYMENTS_DISPLAY: "BILL AUTOPAYMENTS",
+    USER_SUMMARY_DISPLAY: "USER_SUMMARY",
     updateDashboardDisplay : dashboardDisplay => this.updateDashboardDisplay(dashboardDisplay),
     dashboardDisplay : sessionStorage.getItem("dashboardDisplay")
   };
