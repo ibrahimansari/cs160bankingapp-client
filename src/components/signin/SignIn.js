@@ -71,6 +71,7 @@ validateLogin = async e => {
       this.props.context.updateEmail(email);
       this.props.context.updateBalance(transactions[0].balance);
       this.props.context.updateIsSignedIn(true);
+      this.props.context.updateDashboardDisplay(this.props.context.DEFAULT_DISPLAY);
 
       console.log(transactions[0].balance);     //user current balance
       window.location = '/accountdashboard'; // link using this or else context breaks

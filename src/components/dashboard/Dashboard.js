@@ -20,6 +20,7 @@ import SimpleTable from './defaultdisplay/SimpleTable';
 import BalanceDisplay from './defaultdisplay/BalanceDisplay';
 import Button from '@material-ui/core/Button';
 import {Navbar} from 'react-bootstrap';
+import MakeTransactions from './maketransactions/MakeTransactions';
 
 const drawerWidth = 240;
 
@@ -107,6 +108,70 @@ class Dashboard extends React.Component {
   state = {
     open: true,
   };
+
+  condDisplay() {
+    const { classes } = this.props;
+    switch(this.props.context.dashboardDisplay) {
+      case this.props.context.DEFAULT_DISPLAY:
+        return ( <div>
+          <Typography variant="h4" gutterBottom component="h2">
+            <h1>Email: {email}</h1>
+            <h1>Balance: {balance}</h1>
+            <h1>First Name: {first_name}</h1>
+            <h1>Last Name: {last_name}</h1>
+          </Typography>
+          <Typography component="div" className={classes.chartContainer}>
+            <BalanceDisplay />
+          </Typography>
+          <Typography variant="h4" gutterBottom component="h2">
+            Weekly Account Transactions
+          </Typography>
+          <Typography component="div" className={classes.chartContainer}>
+            <SimpleLineChart />
+          </Typography>
+          <Typography variant="h4" gutterBottom component="h2">
+            Transactions
+          </Typography>
+          <div className={classes.tableContainer}>
+            <SimpleTable />
+          </div>
+        </div>);
+      case this.props.context.ACCOUNTS_DISPLAY:
+        return <div> Accounts </div>;
+      case this.props.context.CARDS_DISPLAY:
+        return <div> Cards</div>;
+      case this.props.context.MAKE_TRANSACTIONS_DISPLAY:
+        return <div> <MakeTransactions/> </div>;
+      case this.props.context.SETUP_BILL_AUTO_PAYMENTS_DISPLAY:
+        return <div> SETUP_BILL_AUTO_PAYMENTS_DISPLAY </div>;
+      case this.props.context.USER_SUMMARY_DISPLAY:
+        return <div> User Summary </div>
+      default :
+      return ( <div>
+        <Typography variant="h4" gutterBottom component="h2">
+          <h1>Email: {email}</h1>
+          <h1>Balance: {balance}</h1>
+          <h1>First Name: {first_name}</h1>
+          <h1>Last Name: {last_name}</h1>
+        </Typography>
+        <Typography component="div" className={classes.chartContainer}>
+          <BalanceDisplay />
+        </Typography>
+        <Typography variant="h4" gutterBottom component="h2">
+          Weekly Account Transactions
+        </Typography>
+        <Typography component="div" className={classes.chartContainer}>
+          <SimpleLineChart />
+        </Typography>
+        <Typography variant="h4" gutterBottom component="h2">
+          Transactions
+        </Typography>
+        <div className={classes.tableContainer}>
+          <SimpleTable />
+        </div>
+      </div>);
+    }
+  }
 
   handleDrawerOpen = () => {
     this.setState({ open: true });

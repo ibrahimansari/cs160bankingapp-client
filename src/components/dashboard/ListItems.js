@@ -18,10 +18,6 @@ import List from '@material-ui/core/List';
 
 class ListItems extends Component {
 
-handleDashboardClick() {
-    console.log(this.props.context.dashboardDisplay);
-}
-
   mainListItems() {
     return (
     <div>
