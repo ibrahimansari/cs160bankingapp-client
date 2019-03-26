@@ -110,7 +110,7 @@ class Dashboard extends React.Component {
   };
 
   condDisplay() {
-    const { classes } = this.props;
+    const { classes, context } = this.props;
     const { balance, first_name, last_name, email} = this.props.context;
     switch(this.props.context.dashboardDisplay) {
       case this.props.context.DEFAULT_DISPLAY:
@@ -142,7 +142,7 @@ class Dashboard extends React.Component {
       case this.props.context.CARDS_DISPLAY:
         return <div> Cards</div>;
       case this.props.context.MAKE_TRANSACTIONS_DISPLAY:
-        return <div> <MakeTransactions/> </div>;
+        return <div> <MakeTransactions context = {context}/> </div>;
       case this.props.context.SETUP_BILL_AUTO_PAYMENTS_DISPLAY:
         return <div> SETUP_BILL_AUTO_PAYMENTS_DISPLAY </div>;
       case this.props.context.USER_SUMMARY_DISPLAY:
