@@ -13,13 +13,13 @@ class MakeTransactions  extends Component {
       e.preventDefault();
 
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
-      this.props.context.updateBalance(yes);
+      this.props.context.updateBalance(result);
     }
 
     handleWithdraw = e => {
       e.preventDefault();
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
-      this.props.context.updateBalance(yes);
+      this.props.context.updateBalance(result);
     }
 
 
