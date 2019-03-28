@@ -57,15 +57,21 @@ validateLogin = async e => {
     var firstName = body["first_name"];
     var lastName = body["last_name"];
     var email  = body["email"];
+    var address = body["address"];
+    var zipcode = body["zipcode"];
 
     console.log(transactions);
     console.log(firstName);
     console.log(lastName);
     console.log(email);
+    console.log(address);
+    console.log(zipcode);
 
     if(this.state.response === 'Valid Login1')    //1 represents customer
     {
       // setting context variables
+      this.props.context.updateAddress(address);
+      this.props.context.updateZipcode(zipcode);
       this.props.context.updateFirstName(firstName);
       this.props.context.updateLastName(lastName);
       this.props.context.updateEmail(email);
