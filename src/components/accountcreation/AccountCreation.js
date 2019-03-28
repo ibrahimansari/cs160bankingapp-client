@@ -10,13 +10,15 @@ class AccountCreation extends Component {
     confirmPassword: "",
     first_name: "",
     last_name: "",
-    customer: 1
+    customer: 1,
+    address: "",
+    zipcode: 95126
   };
 
   validateForm() {
     return (this.state.email.length > 0 && this.state.password.length > 0 &&
       this.state.confirmPassword.length && this.state.first_name.length > 0 &&
-      this.state.last_name.length > 0);
+      this.state.last_name.length > 0 &&  this.state.address.length > 0 && this.state.zipcode.length === 5);
   }
 
   handleChange = event => {
@@ -32,12 +34,12 @@ class AccountCreation extends Component {
   registerUser = async e =>
 {
   e.preventDefault();
-  this.setState({request : JSON.stringify({email : this.state.email, password : this.state.password, confirmPassword : this.state.confirmPassword, first_name:this.state.first_name, last_name:this.state.last_name, customer:this.state.customer})});
+  this.setState({request : JSON.stringify({email : this.state.email, password : this.state.password, confirmPassword : this.state.confirmPassword, first_name:this.state.first_name, last_name:this.state.last_name, customer:this.state.customer, address:this.state.address, zipcode:this.state.zipcode})});
 
   const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/registerUser', {
   method: 'POST',
   headers: {'Content-type': 'application/json',},
-  body: JSON.stringify({ email: this.state.email, password : this.state.password, confirmPassword : this.state.confirmPassword, first_name:this.state.first_name, last_name:this.state.last_name, customer:this.state.customer}),
+  body: JSON.stringify({ email: this.state.email, password : this.state.password, confirmPassword : this.state.confirmPassword, first_name:this.state.first_name, last_name:this.state.last_name, customer:this.state.customer, address:this.state.address, zipcode:this.state.zipcode }),
   });
 
   const body = await response.text();
@@ -105,6 +107,24 @@ class AccountCreation extends Component {
                 onChange={this.handleChange}
                 placeholder="Confirm Password"
                 type="password"
+              />
+            </FormGroup>
+            <FormGroup controlId="address" bsSize="small">
+              <FormLabel>Address</FormLabel>
+              <FormControl
+                value={this.state.address}
+                onChange={this.handleChange}
+                placeholder="Enter address"
+                type="address"
+              />
+            </FormGroup>
+            <FormGroup controlId="zipcode" bsSize="small">
+              <FormLabel>Password</FormLabel>
+              <FormControl
+                value={this.state.zipcode}
+                onChange={this.handleChange}
+                placeholder="Enter zipcode"
+                type="zipcode"
               />
             </FormGroup>
             <FormLabel controlId="space"></FormLabel>
