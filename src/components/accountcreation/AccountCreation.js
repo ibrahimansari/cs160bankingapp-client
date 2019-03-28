@@ -12,7 +12,7 @@ class AccountCreation extends Component {
     last_name: "",
     customer: 1,
     address: "",
-    zipcode: 95126
+    zipcode: ""
   };
 
   validateForm() {
@@ -119,7 +119,7 @@ class AccountCreation extends Component {
               />
             </FormGroup>
             <FormGroup controlId="zipcode" bsSize="small">
-              <FormLabel>Password</FormLabel>
+              <FormLabel>Zipcode</FormLabel>
               <FormControl
                 value={this.state.zipcode}
                 onChange={this.handleChange}
