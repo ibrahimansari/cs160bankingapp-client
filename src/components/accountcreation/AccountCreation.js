@@ -57,7 +57,7 @@ class AccountCreation extends Component {
     return (
       <div className="AccountCreation" >
              <p><b> {this.state.response}</b> </p>
-        <Card style = {{ width: '30rem', height: '40rem'}}>
+        <Card style = {{ width: '30rem', height: '50rem'}}>
           <Card.Body>
            <Card.Title>BigBank Customer</Card.Title>
           <form onSubmit={this.registerUser}>
