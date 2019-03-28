@@ -6,6 +6,10 @@ class MyProvider extends Component {
 
   state = {
     // Customer data
+    updateAddress : address =>this.updateAddress(address),
+    address: sessionStorage.getItem("address"),
+    updateZipcode : zipcode =>this.updateZipcode(zipcode),
+    zipcode: sessionStorage.getItem("zipcode"),
     updateEmail : email =>this.updateEmail(email),
     email: sessionStorage.getItem("email"),
     updateFirstName: firstName => this.updateFirstName(firstName),
@@ -33,6 +37,16 @@ class MyProvider extends Component {
     updateDashboardDisplay : dashboardDisplay => this.updateDashboardDisplay(dashboardDisplay),
     dashboardDisplay : sessionStorage.getItem("dashboardDisplay")
   };
+
+  updateAddress (address) {
+    sessionStorage.setItem("address", address);
+    this.setState({address});
+  }
+
+  updateZipcode (zipcode) {
+    sessionStorage.setItem("zipcode", zipcode);
+    this.setState({zipcode});
+  }
 
   updateEmail (email) {
     sessionStorage.setItem("email", email);
