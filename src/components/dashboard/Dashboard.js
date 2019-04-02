@@ -155,7 +155,7 @@ class Dashboard extends React.Component {
       case this.props.context.USER_SUMMARY_DISPLAY:
         return <div> User Summary </div>
       default :
-      return this.defaultDisplayer();
+        return this.defaultDisplayer();
     }
   }
 
