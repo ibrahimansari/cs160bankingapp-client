@@ -32,7 +32,7 @@ class MyProvider extends Component {
     ACCOUNTS_DISPLAY: "ACCOUNTS",
     CARDS_DISPLAY: "CARDS",
     MAKE_TRANSACTIONS_DISPLAY: "MAKE_TRANSACTIONS",
-    SETUP_BILL_AUTO_PAYMENTS_DISPLAY: "BILL AUTOPAYMENTS",
+    SETUP_BILL_AUTO_PAYMENTS_DISPLAY: "BILL_AUTOPAYMENTS",
     USER_SUMMARY_DISPLAY: "USER_SUMMARY",
     updateDashboardDisplay : dashboardDisplay => this.updateDashboardDisplay(dashboardDisplay),
     dashboardDisplay : sessionStorage.getItem("dashboardDisplay")

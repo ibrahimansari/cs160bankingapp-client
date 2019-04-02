@@ -111,7 +111,7 @@ class Dashboard extends React.Component {
 
   condDisplay() {
     const { classes, context } = this.props;
-    const { balance, first_name, last_name, email} = this.props.context;
+    const { balance, first_name, last_name, email, address, zipcode } = this.props.context;
     switch(this.props.context.dashboardDisplay) {
       case this.props.context.DEFAULT_DISPLAY:
         return ( <div>
@@ -120,6 +120,8 @@ class Dashboard extends React.Component {
             <h1>Balance: {balance}</h1>
             <h1>First Name: {first_name}</h1>
             <h1>Last Name: {last_name}</h1>
+            <h1>Address: {address}</h1>
+            <h1>Zip Code: {zipcode}</h1>
           </Typography>
           <Typography component="div" className={classes.chartContainer}>
             <BalanceDisplay />
