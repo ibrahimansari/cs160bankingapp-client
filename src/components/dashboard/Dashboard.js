@@ -109,36 +109,40 @@ class Dashboard extends React.Component {
     open: true,
   };
 
+  defaultDisplayer () {
+    return ( <div>
+      <Typography variant="h4" gutterBottom component="h2">
+        <h1>Email: {email}</h1>
+        <h1>Balance: {balance}</h1>
+        <h1>First Name: {first_name}</h1>
+        <h1>Last Name: {last_name}</h1>
+        <h1>Address: {address}</h1>
+        <h1>Zip Code: {zipcode}</h1>
+      </Typography>
+      <Typography component="div" className={classes.chartContainer}>
+        <BalanceDisplay />
+      </Typography>
+      <Typography variant="h4" gutterBottom component="h2">
+        Weekly Account Transactions
+      </Typography>
+      <Typography component="div" className={classes.chartContainer}>
+        <SimpleLineChart />
+      </Typography>
+      <Typography variant="h4" gutterBottom component="h2">
+        Transactions
+      </Typography>
+      <div className={classes.tableContainer}>
+        <SimpleTable />
+      </div>
+    </div>);
+  }
+
   condDisplay() {
     const { classes, context } = this.props;
     const { balance, first_name, last_name, email, address, zipcode } = this.props.context;
     switch(this.props.context.dashboardDisplay) {
       case this.props.context.DEFAULT_DISPLAY:
-        return ( <div>
-          <Typography variant="h4" gutterBottom component="h2">
-            <h1>Email: {email}</h1>
-            <h1>Balance: {balance}</h1>
-            <h1>First Name: {first_name}</h1>
-            <h1>Last Name: {last_name}</h1>
-            <h1>Address: {address}</h1>
-            <h1>Zip Code: {zipcode}</h1>
-          </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-            <BalanceDisplay />
-          </Typography>
-          <Typography variant="h4" gutterBottom component="h2">
-            Weekly Account Transactions
-          </Typography>
-          <Typography component="div" className={classes.chartContainer}>
-            <SimpleLineChart />
-          </Typography>
-          <Typography variant="h4" gutterBottom component="h2">
-            Transactions
-          </Typography>
-          <div className={classes.tableContainer}>
-            <SimpleTable />
-          </div>
-        </div>);
+        return this.defaultDisplayer();
       case this.props.context.ACCOUNTS_DISPLAY:
         return <div> Accounts </div>;
       case this.props.context.CARDS_DISPLAY:
@@ -150,29 +154,7 @@ class Dashboard extends React.Component {
       case this.props.context.USER_SUMMARY_DISPLAY:
         return <div> User Summary </div>
       default :
-      return ( <div>
-        <Typography variant="h4" gutterBottom component="h2">
-          <h1>Email: {email}</h1>
-          <h1>Balance: {balance}</h1>
-          <h1>First Name: {first_name}</h1>
-          <h1>Last Name: {last_name}</h1>
-        </Typography>
-        <Typography component="div" className={classes.chartContainer}>
-          <BalanceDisplay />
-        </Typography>
-        <Typography variant="h4" gutterBottom component="h2">
-          Weekly Account Transactions
-        </Typography>
-        <Typography component="div" className={classes.chartContainer}>
-          <SimpleLineChart />
-        </Typography>
-        <Typography variant="h4" gutterBottom component="h2">
-          Transactions
-        </Typography>
-        <div className={classes.tableContainer}>
-          <SimpleTable />
-        </div>
-      </div>);
+      return this.defaultDisplayer();
     }
   }
 
