@@ -110,6 +110,8 @@ class Dashboard extends React.Component {
   };
 
   defaultDisplayer () {
+    const { classes, context } = this.props;
+    const { balance, first_name, last_name, email, address, zipcode } = this.props.context;
     return ( <div>
       <Typography variant="h4" gutterBottom component="h2">
         <h1>Email: {email}</h1>
