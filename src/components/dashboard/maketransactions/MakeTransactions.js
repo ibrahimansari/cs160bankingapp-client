@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import { Button, Card, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import Popup from "reactjs-popup";
 
 class MakeTransactions  extends Component {
 
@@ -19,6 +20,7 @@ class MakeTransactions  extends Component {
     handleWithdraw = e => {
       e.preventDefault();
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
+
       this.props.context.updateBalance(result);
     }
 

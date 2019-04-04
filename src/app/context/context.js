@@ -90,7 +90,7 @@ updateIsSignedIn (isSignedIn) {
 }
 
 updateDashboardDisplay (dashboardDisplay) {
-  sessionStorage.setItem("defaultDisplay", dashboardDisplay);
+  sessionStorage.setItem("dashboardDisplay", dashboardDisplay);
   this.setState({dashboardDisplay});
 }
 
