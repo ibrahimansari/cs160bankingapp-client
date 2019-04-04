@@ -6,6 +6,10 @@ class MyProvider extends Component {
 
   state = {
     // Customer data
+    updateAddress : address =>this.updateAddress(address),
+    address: sessionStorage.getItem("address"),
+    updateZipcode : zipcode =>this.updateZipcode(zipcode),
+    zipcode: sessionStorage.getItem("zipcode"),
     updateEmail : email =>this.updateEmail(email),
     email: sessionStorage.getItem("email"),
     updateFirstName: firstName => this.updateFirstName(firstName),
@@ -19,7 +23,7 @@ class MyProvider extends Component {
     updateTransactions : transactions => this.updateTransactions(transactions),
     transactions: sessionStorage.getItem("transactions"),
     // data in customers dashboard
-    // 2 accounts savings vs checking account
+   // 2 accounts savings vs checking account
     updateAccounts : accounts=>this.updateAccounts(accounts),
     accounts: sessionStorage.getItem("accounts"),
     updateCards: cards=>this.updateCards(cards),
@@ -34,11 +38,21 @@ class MyProvider extends Component {
     ACCOUNTS_DISPLAY: "ACCOUNTS",
     CARDS_DISPLAY: "CARDS",
     MAKE_TRANSACTIONS_DISPLAY: "MAKE_TRANSACTIONS",
-    SETUP_BILL_AUTO_PAYMENTS_DISPLAY: "BILL AUTOPAYMENTS",
+    SETUP_BILL_AUTO_PAYMENTS_DISPLAY: "BILL_AUTOPAYMENTS",
     USER_SUMMARY_DISPLAY: "USER_SUMMARY",
     updateDashboardDisplay : dashboardDisplay => this.updateDashboardDisplay(dashboardDisplay),
     dashboardDisplay : sessionStorage.getItem("dashboardDisplay")
   };
+
+  updateAddress (address) {
+    sessionStorage.setItem("address", address);
+    this.setState({address});
+  }
+
+  updateZipcode (zipcode) {
+    sessionStorage.setItem("zipcode", zipcode);
+    this.setState({zipcode});
+  }
 
   updateEmail (email) {
     sessionStorage.setItem("email", email);
@@ -85,6 +99,7 @@ updateCards (cards) {
   sessionStorage.setItem("cards", cards);
   this.setState({cards});
 }
+
 
 updateIsSignedIn (isSignedIn) {
   sessionStorage.setItem("isSignedIn", isSignedIn);
