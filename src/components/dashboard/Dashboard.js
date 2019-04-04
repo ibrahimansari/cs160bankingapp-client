@@ -20,7 +20,9 @@ import SimpleTable from './defaultdisplay/SimpleTable';
 import BalanceDisplay from './defaultdisplay/BalanceDisplay';
 import Button from '@material-ui/core/Button';
 import {Navbar} from 'react-bootstrap';
+import Accounts from './accounts/Accounts';
 import MakeTransactions from './maketransactions/MakeTransactions';
+import Cards from './cards/Cards';
 
 const drawerWidth = 240;
 
@@ -145,17 +147,17 @@ class Dashboard extends React.Component {
       case this.props.context.DEFAULT_DISPLAY:
         return this.defaultDisplayer();
       case this.props.context.ACCOUNTS_DISPLAY:
-        return <div> Accounts </div>;
+        return <div> <Accounts context = {context}/> </div>;
       case this.props.context.CARDS_DISPLAY:
-        return <div> Cards</div>;
+        return <Cards context = {context} />;
       case this.props.context.MAKE_TRANSACTIONS_DISPLAY:
-        return <div> <MakeTransactions context = {context}/> </div>;
+        return <MakeTransactions context = {context}/>;
       case this.props.context.SETUP_BILL_AUTO_PAYMENTS_DISPLAY:
         return <div> SETUP_BILL_AUTO_PAYMENTS_DISPLAY </div>;
       case this.props.context.USER_SUMMARY_DISPLAY:
         return <div> User Summary </div>
       default :
-        return this.defaultDisplayer();
+       return this.defaultDisplayer();
     }
   }
 

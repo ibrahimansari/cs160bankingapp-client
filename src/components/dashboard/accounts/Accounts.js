@@ -7,28 +7,28 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 // Place holder database should update
 // return an object that is something like this
-const CardsObj = {
+const AccountsObj = {
   1 : {
-    number: 4888222233331111,
-    type : "Credit Card",
+    id: 1000,
+    type : "Checking",
     balance : 500
   },
 
   2 : {
-    number : 9999888877774444,
-    type : "Debit Card",
+    id : 5000,
+    type : "Savings",
     balance : 1000
   }
 }
 
-class Cards extends Component {
+class Accounts extends Component {
 
   state = {
-    localCards : {}
+    localAccounts : {}
   }
 
   _renderObject(){
-		return Object.entries(CardsObj).map(([key, value], i) => {
+		return Object.entries(AccountsObj).map(([key, value], i) => {
 			return (
 				<div key={key} style = {{ backgroundColor: '#007bff',  color: 'white'}}>
           <ExpansionPanel
@@ -41,7 +41,7 @@ class Cards extends Component {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
              <Typography   style = {{backgroundColor: '#002bff', color: 'white'}}>
-             <li>Account id: {value.number} </li>
+             <li>Account id: {value.id} </li>
               <li>
                  Balance: {value.balance}
               </li>
@@ -63,4 +63,4 @@ class Cards extends Component {
   }
 }
 
-export default Cards;
+export default Accounts;
