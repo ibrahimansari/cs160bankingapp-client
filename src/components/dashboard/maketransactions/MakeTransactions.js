@@ -13,7 +13,7 @@ class MakeTransactions  extends Component {
       internalTransfer : "Checking To Savings"
     }
 
-    handleDeposit =  e => {
+    handleDeposit = async e => {
       if(isNaN(this.state.despositNum) || this.state.depositNum < 0) {
         this.setState({depositNum : 0})
         return;
@@ -34,7 +34,7 @@ class MakeTransactions  extends Component {
       this.props.context.updateBalance(result);
     }
 
-    handleWithdraw = e => {
+    handleWithdraw = async e => {
 
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0) {
         this.setState({withdrawNum : 0})
