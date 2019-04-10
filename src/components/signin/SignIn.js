@@ -85,7 +85,7 @@ validateLogin = async e => {
       console.log(accountInfo[0]);
       console.log(accountInfo[1]);
       
-      //window.location = '/accountdashboard'; // link using this or else context breaks
+      window.location = '/accountdashboard'; // link using this or else context breaks
     }else{
       if(this.state.response ==='Valid Login0'){    //0 represents manager
         window.location = '/managerdashboard';
