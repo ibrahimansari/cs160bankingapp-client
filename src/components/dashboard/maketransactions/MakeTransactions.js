@@ -22,20 +22,6 @@ class MakeTransactions  extends Component {
       this.togglePopup();
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
         
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
-        method: 'POST',
-        headers: {'Content-type': 'application/json',},
-        body: JSON.stringify({ 
-            first_name: this.props.context.first_name,
-            last_name: this.props.context.last_name,
-            email: this.state.email.toLowerCase(), 
-            amount: this.state.depositNum,
-            balance: this.props.context.balance,
-        }),
-      });
-      const body = await response.json();
-      this.props.context.updateTransactions(body["transactions"]);
-        
       this.props.context.updateBalance(result);
     }
 
