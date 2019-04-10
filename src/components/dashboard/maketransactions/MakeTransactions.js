@@ -20,6 +20,7 @@ class MakeTransactions  extends Component {
       }
       this.togglePopup();
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
+        
       const response = await fetch('/api/depositChecking', {
         method: 'POST',
         headers: {'Content-type': 'application/json',},
@@ -31,6 +32,9 @@ class MakeTransactions  extends Component {
             balance: this.props.context.balance,
         }),
       });
+      const body = await response.json();
+      this.props.context.updateTransactions(body["transactions"]);
+        
       this.props.context.updateBalance(result);
     }
 
