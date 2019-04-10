@@ -13,7 +13,7 @@ class MakeTransactions  extends Component {
       internalTransfer : "Checking To Savings"
     }
 
-    handleDeposit = async e => {
+    handleDeposit = e => {
       console.log('depositing');
       if(isNaN(this.state.despositNum) || this.state.depositNum < 0) {
         this.setState({depositNum : 0})
