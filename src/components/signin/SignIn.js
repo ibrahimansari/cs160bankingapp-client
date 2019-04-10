@@ -53,7 +53,7 @@ validateLogin = async e => {
   if(this.state.response === 'Invalid Username and/or Password'){              //If login was unsuccessful
 
   }else{
-    var transactions = body["transactions"];            //get account transactions
+    var transactions = body["transactions"].reverse();            //get account transactions
     var firstName = body["first_name"];
     var lastName = body["last_name"];
     var email  = body["email"];
