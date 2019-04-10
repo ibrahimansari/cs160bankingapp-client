@@ -14,6 +14,7 @@ class MakeTransactions  extends Component {
     }
 
    handleDeposit = async e => {
+       console.log('depositing');
       if(isNaN(this.state.depositNum) || this.state.depositNum < 0) {
         this.setState({depositNum : 0})
         return;
@@ -25,11 +26,12 @@ class MakeTransactions  extends Component {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: this.props.context.first_name, last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
+      body: JSON.stringify({first_name: "sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
       });
        
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
       this.props.context.updateBalance(result);
+       console.log('finised deposit');
     }
 
 
@@ -60,6 +62,7 @@ class MakeTransactions  extends Component {
 
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
       this.props.context.updateBalance(result);
+       console.log('finished withdrawing');
     }
 
 
