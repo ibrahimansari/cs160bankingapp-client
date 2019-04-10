@@ -21,7 +21,7 @@ class MakeTransactions  extends Component {
       this.togglePopup();
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
         
-      const response = await fetch('/api/depositChecking', {
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
         method: 'POST',
         headers: {'Content-type': 'application/json',},
         body: JSON.stringify({ 
@@ -47,7 +47,7 @@ class MakeTransactions  extends Component {
 
       this.togglePopup();
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
-      const response = await fetch('/api/withdrawChecking', {
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
       method: 'POST',
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({ 
