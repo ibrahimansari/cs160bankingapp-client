@@ -27,13 +27,27 @@ class MakeTransactions  extends Component {
 
 
     handleWithdraw = async e => {
-        console.log('withdrawing');
+       e.preventDefault();
+      
+      console.log('withdrawing');
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0) {
         this.setState({withdrawNum : 0})
         return;
       }
+      
+
+      //const {first_name, last_name, email, amount, balance} = req.body
+      //this.setState({request : JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: , balance: })});
 
       this.togglePopup();
+        
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
+      });
+
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
       this.props.context.updateBalance(result);
     }
