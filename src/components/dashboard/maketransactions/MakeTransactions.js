@@ -13,13 +13,22 @@ class MakeTransactions  extends Component {
       internalTransfer : "Checking To Savings"
     }
 
-   handleDeposit =  e => {
+   handleDeposit = async e => {
       if(isNaN(this.state.despositNum) || this.state.depositNum < 0) {
         this.setState({depositNum : 0})
         return;
       }
 
       this.togglePopup();
+       
+     //	const {first_name, last_name, email, amount, balance} = req.body
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.props.context.depositNum) , balance: Number(this.props.context.balance)}),
+      });
+       
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
       this.props.context.updateBalance(result);
     }
@@ -39,7 +48,6 @@ class MakeTransactions  extends Component {
       //const {first_name, last_name, email, amount, balance} = req.body
       //this.setState({request : JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: , balance: })});
 
-      this.togglePopup();
         
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
       method: 'POST',
@@ -47,6 +55,8 @@ class MakeTransactions  extends Component {
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
       });
+        
+      this.togglePopup();
 
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
       this.props.context.updateBalance(result);
