@@ -75,7 +75,7 @@ validateLogin = async e => {
       this.props.context.updateFirstName(firstName);
       this.props.context.updateLastName(lastName);
       this.props.context.updateEmail(email);
-//       this.props.context.updateBalance(transactions[0].balance);
+      this.props.context.updateBalance(transactions[0].balance);
       this.props.context.updateIsSignedIn(true);
       this.props.context.updateDashboardDisplay(this.props.context.DEFAULT_DISPLAY);
 
