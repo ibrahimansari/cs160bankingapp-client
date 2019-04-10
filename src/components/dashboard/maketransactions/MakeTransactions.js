@@ -14,7 +14,7 @@ class MakeTransactions  extends Component {
     }
 
    handleDeposit = async e => {
-      if(isNaN(this.state.despositNum) || this.state.depositNum < 0) {
+      if(isNaN(this.state.depositNum) || this.state.depositNum < 0) {
         this.setState({depositNum : 0})
         return;
       }
