@@ -53,29 +53,29 @@ validateLogin = async e => {
   if(this.state.response === 'Invalid Username and/or Password'){              //If login was unsuccessful
 
   }else{
-//     var transactions = body["transactions"];            //get account transactions
-//     var firstName = body["first_name"];
-//     var lastName = body["last_name"];
-//     var email  = body["email"];
-//     var address = body["address"];
-//     var zipcode = body["zipcode"];
+    var transactions = body["transactions"];            //get account transactions
+    var firstName = body["first_name"];
+    var lastName = body["last_name"];
+    var email  = body["email"];
+    var address = body["address"];
+    var zipcode = body["zipcode"];
 
-//     console.log(transactions);
-//     console.log(firstName);
-//     console.log(lastName);
-//     console.log(email);
-//     console.log(address);
-//     console.log(zipcode);
+    console.log(transactions);
+    console.log(firstName);
+    console.log(lastName);
+    console.log(email);
+    console.log(address);
+    console.log(zipcode);
 
     if(this.state.response === 'Valid Login1')    //1 represents customer
     {
       // setting context variables
-//       this.props.context.updateAddress(address);
-//       this.props.context.updateZipcode(zipcode);
-//       this.props.context.updateFirstName(firstName);
-//       this.props.context.updateLastName(lastName);
-//       this.props.context.updateEmail(email);
-//       this.props.context.updateBalance(transactions[0].balance);
+      this.props.context.updateAddress(address);
+      this.props.context.updateZipcode(zipcode);
+      this.props.context.updateFirstName(firstName);
+      this.props.context.updateLastName(lastName);
+      this.props.context.updateEmail(email);
+      this.props.context.updateBalance(transactions[0].balance);
       this.props.context.updateIsSignedIn(true);
       this.props.context.updateDashboardDisplay(this.props.context.DEFAULT_DISPLAY);
 
