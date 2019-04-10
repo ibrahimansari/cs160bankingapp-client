@@ -26,7 +26,7 @@ class MakeTransactions  extends Component {
 
 
 
-    handleWithdraw = e => {
+    handleWithdraw = async e => {
         console.log('withdrawing');
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0) {
         this.setState({withdrawNum : 0})
