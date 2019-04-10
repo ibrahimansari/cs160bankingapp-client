@@ -13,20 +13,20 @@ class MakeTransactions  extends Component {
       internalTransfer : "Checking To Savings"
     }
 
-    handleDeposit = e => {
-      console.log('depositing');
+   handleDeposit =  e => {
       if(isNaN(this.state.despositNum) || this.state.depositNum < 0) {
         this.setState({depositNum : 0})
         return;
       }
+
       this.togglePopup();
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
-        
       this.props.context.updateBalance(result);
     }
 
-    handleWithdraw = async e => {
 
+
+    handleWithdraw = e => {
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0) {
         this.setState({withdrawNum : 0})
         return;
@@ -34,17 +34,6 @@ class MakeTransactions  extends Component {
 
       this.togglePopup();
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
-      method: 'POST',
-      headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({ 
-          first_name: this.props.context.first_name,
-          last_name: this.props.context.last_name,
-          email: this.state.email.toLowerCase(), 
-          amount: this.state.withdrawNum,
-          balance: this.props.context.balance,
-        }),
-      });
       this.props.context.updateBalance(result);
     }
 
