@@ -20,7 +20,7 @@ class MakeTransactions  extends Component {
       }
       this.togglePopup();
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
-      const response = await fetch('/api/validateLogin', {
+      const response = await fetch('/api/depositChecking', {
         method: 'POST',
         headers: {'Content-type': 'application/json',},
         body: JSON.stringify({ 
@@ -43,7 +43,7 @@ class MakeTransactions  extends Component {
 
       this.togglePopup();
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
-      const response = await fetch('/api/validateLogin', {
+      const response = await fetch('/api/withdrawChecking', {
       method: 'POST',
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({ 
