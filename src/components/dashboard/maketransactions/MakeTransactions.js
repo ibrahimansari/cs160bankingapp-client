@@ -26,7 +26,7 @@ class MakeTransactions  extends Component {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.props.context.depositNum) , balance: Number(this.props.context.balance)}),
+      body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
       });
        
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
@@ -45,6 +45,8 @@ class MakeTransactions  extends Component {
       }
       
 
+      this.togglePopup();
+
       //const {first_name, last_name, email, amount, balance} = req.body
       //this.setState({request : JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: , balance: })});
 
@@ -56,7 +58,6 @@ class MakeTransactions  extends Component {
       body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
       });
         
-      this.togglePopup();
 
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
       this.props.context.updateBalance(result);
