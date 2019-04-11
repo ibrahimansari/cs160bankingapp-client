@@ -57,6 +57,32 @@ class MyProvider extends Component {
     dashboardDisplay : sessionStorage.getItem("dashboardDisplay")
   };
 
+  updateCheckingStatus (checkingStatus) {
+    sessionStorage.setItem("checkingStatus", checkingStatus);
+    this.setState({checkingStatus});
+  }
+  updateSavingsStatus (savingsStatus) {
+    sessionStorage.setItem("savingsStatus", savingsStatus);
+    this.setState({savingsStatus});
+  }
+  updateCheckingBalance (checkingBalance) {
+    sessionStorage.setItem("checkingBalance", checkingBalance);
+    this.setState({checkingBalance});
+  }
+  updateSavingsBalance (savingsBalance) {
+    sessionStorage.setItem("savingsBalance", savingsBalance);
+    this.setState({savingsBalance});
+  }
+  updateCheckingAccountNumber (checkingAccountNumber) {
+    sessionStorage.setItem("checkingAccountNumber", checkingAccountNumber);
+    this.setState({checkingAccountNumber});
+  }
+  updateSavingsAccountNumber (savingsAccountNumber) {
+    sessionStorage.setItem("savingsAccountNumber", savingsAccountNumber);
+    this.setState({savingsAccountNumber});
+  }
+
+
   updateAddress (address) {
     sessionStorage.setItem("address", address);
     this.setState({address});
