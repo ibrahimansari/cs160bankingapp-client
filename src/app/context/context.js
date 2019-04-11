@@ -28,6 +28,19 @@ class MyProvider extends Component {
     accounts: sessionStorage.getItem("accounts"),
     updateCards: cards=>this.updateCards(cards),
     cards: sessionStorage.getItem("cards"),
+    
+    updateCheckingStatus : checkingStatus =>this.updateCheckingStatus(checkingStatus),
+    checkingStatus: sessionStorage.getItem("checkingStatus"),
+    updateSavingsStatus : savingsStatus =>this.updateSavingsStatus(savingsStatus),
+    savingsStatus: sessionStorage.getItem("savingsStatus"),
+    updateCheckingBalance : checkingBalance =>this.updateCheckingBalance(checkingBalance),
+    checkingBalance: sessionStorage.getItem("checkingBalance"),
+    updateSavingsBalance : savingsBalance =>this.updateSavingsBalance(savingsBalance),
+    savingsBalance: sessionStorage.getItem("savingsBalance"),
+    updateCheckingAccountNumber : checkingAccountNumber =>this.updateCheckingAccountNumber(checkingAccountNumber),
+    checkingAccountNumber: sessionStorage.getItem("checkingAccountNumber"),
+    updateSavingsAccountNumber : savingsAccountNumber =>this.updateSavingsAccountNumber(savingsAccountNumber),
+    savingsAccountNumber: sessionStorage.getItem("savingsAccountNumber"),
 
     // global boolean checks
     updateIsSignedIn: isSignedIn => this.updateIsSignedIn(isSignedIn),
