@@ -66,6 +66,7 @@ validateLogin = async e => {
     console.log(email);
     console.log(address);
     console.log(zipcode);
+    console.log(transactions);
 
     if(this.state.response === 'Valid Login1')    //1 represents customer
     {
