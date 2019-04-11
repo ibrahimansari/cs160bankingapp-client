@@ -42,7 +42,7 @@ class MakeTransactions  extends Component {
        e.preventDefault();
       
       console.log('withdrawing');
-      if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0 ||) {
+      if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0) {
         this.setState({withdrawNum : 0})
         return;
       }
