@@ -23,14 +23,14 @@ class MakeTransactions  extends Component {
 
       this.togglePopup();
      
-       /*
+       
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: "sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
       });
-       */
+       
        
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
       this.props.context.updateBalance(result);
