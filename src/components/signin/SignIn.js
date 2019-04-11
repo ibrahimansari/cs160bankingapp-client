@@ -82,8 +82,41 @@ validateLogin = async e => {
       //console.log(transactions[0].balance);     //user current balance
       
       var accountInfo = body["accountInfo"];  //checkings/savings account info
-      console.log(accountInfo[0]);
-      console.log(accountInfo[1]);
+      var checkingStatus = 'Closed';
+      var savingsStatus = 'Closed';
+      var checkingBalance = 0;
+      var savingsBalance = 0;
+      var checkingAccountNumber = 0;
+      var savingsAccountNumber = 0;
+      
+      if(accountInfo[0].type === 'checking'){  
+           checkingStatus = accountInfo[0].status;
+           savingsStatus = accountInfo[1].status;
+           checkingBalance = accountInfo[0].balance;
+           savingsBalance = accountInfo[1].balance;
+           checkingAccountNumber = accountInfo[0].account_number;
+           savingsAccountNumber = accountInfo[1].account_number;
+        
+      }else{    //accountInfo[1] is checking
+           checkingStatus = accountInfo[1].status;
+           savingsStatus = accountInfo[0].status;
+           checkingBalance = accountInfo[1].balance;
+           savingsBalance = accountInfo[0].balance;
+           checkingAccountNumber = accountInfo[1].account_number;
+           savingsAccountNumber = accountInfo[0].account_number;
+      }
+      
+      //update context for checking and savings information
+       this.props.context.updateCheckingStatus(checkingStatus);
+       this.props.context.updateSavingsStatus(savingsStatus);
+       this.props.context.updateCheckingBalance(checkingBalance);
+       this.props.context.updateSavingsBalance(savingsBalance);
+       this.props.context.updateCheckingAccountNumber(checkingAccountNumber);
+       this.props.context.updateSavingsAccountNumber(savingsAccountNumber);
+
+
+//       console.log(accountInfo[0]);
+//       console.log(accountInfo[1]);
       
       window.location = '/accountdashboard'; // link using this or else context breaks
     }else{
