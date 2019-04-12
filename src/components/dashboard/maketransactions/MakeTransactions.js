@@ -98,7 +98,7 @@ class MakeTransactions  extends Component {
       body: JSON.stringify({emailTo: this.state.transferName}),
       });  
       
-      const body = await f.json();
+      const body = await r.json();
       var array = body["array"];
         
         //const {emailFrom, emailTo, amount, balance} = req.body
