@@ -15,10 +15,13 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
-import {NavDropdown} from 'react-bootstrap';
+import {Navbar, Modal, Button} from 'react-bootstrap';
 
 class ListItems extends Component {
 
+  state = {
+    show: false
+  }
   mainListItems() {
     return (
     <div>
@@ -117,7 +120,7 @@ class ListItems extends Component {
 
       <ListItem
         button
-        onClick = {() => this.handleSignOut()}
+        onClick = {() => this.handleShow()}
         href = "/"
         >
         <ListItemIcon>
@@ -126,13 +129,37 @@ class ListItems extends Component {
         <ListItemText primary="Sign Out" />
       </ListItem>
 
+      <Modal style={{textAlign: 'center', paddingTop: '100px'}}show={this.state.show} onHide={this.handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure you want to Sign out?</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => this.handleSignOut()}>
+            Yes
+          </Button>
+          <Button variant="primary" onClick={() => this.handleClose()}>
+            No
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </div>
   );
 }
 
+handleClose() {
+  this.setState({ show: false });
+}
+
+handleShow() {
+  this.setState({ show: true });
+}
+
 handleSignOut() {
   this.props.context.updateIsSignedIn("false");
+  this.handleClose();
   window.location = '/'
+
 }
 
 
