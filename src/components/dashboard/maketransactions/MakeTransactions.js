@@ -55,11 +55,7 @@ class MakeTransactions  extends Component {
         return;
       }
 
-
       this.toggleWithdrawalPopup();
-      //const {first_name, last_name, email, amount, balance} = req.body
-      //this.setState({request : JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: , balance: })});
-
 
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
       method: 'POST',
@@ -166,10 +162,37 @@ class MakeTransactions  extends Component {
      //     // backend stuff
      // }
      //
+        
+        var from = '';
+        var to = '';
+        
+        if(this.state.label === 'Checking to Savings'){
+            from = 'checking';
+            to = 'savings;
+        }else{
+            to = 'checking';
+            from = 'savings;  
+        }
+        
+        
+        
+     //{email, accountFrom, accountTo, amount} 
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferSelf', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({email : this.props.context.email, accountFrom:from , accountTo:to,amount: Number(this.state.transferNum)}),
+      });  
 
-     // let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-     // this.props.context.updateBalance(result);
-      this.toggleInternalTransferPopup();
+         let result =  0;
+        if(from === 'checking'){
+            result = Number(this.props.context.balance) - Number(this.state.transferNum)
+        }else{
+            Number(this.props.context.balance) + Number(this.state.transferNum)
+        }
+        
+        this.props.context.updateBalance(result);
+        this.toggleInternalTransferPopup();
     }
 
   toggleDepositPopup() {
