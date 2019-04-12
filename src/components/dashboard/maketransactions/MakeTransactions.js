@@ -92,7 +92,7 @@ class MakeTransactions  extends Component {
         body: JSON.stringify({emailTo: this.state.transferName}),
       }).then(function(response) {
             console.log(response);
-            cnosole.log("yuup");
+            console.log("yuup");
             return response.json(); // pass the data as promise to next then block
       }).then(function(data) {
         var fn = data[0].balance;
