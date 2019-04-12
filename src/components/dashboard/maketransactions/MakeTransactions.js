@@ -437,7 +437,7 @@ class MakeTransactions  extends Component {
     </FormGroup>
     <label>
 
-      <select className="internalTransfer"  defaultValue={this.state.value}  name={this.state.internalTransfer} onChange={this.handleInternalChange}>
+      <select className="internalTransfer"  value={this.state.value}  name={this.state.internalTransfer} onChange={this.handleInternalChange}>
        <option value="Checking to Savings">Checking to Savings</option>
        <option value="Savings to Checking">Savings to Checking</option>
      </select>
