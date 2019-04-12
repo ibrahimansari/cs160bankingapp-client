@@ -6,7 +6,7 @@ class MakeTransactions  extends Component {
     constructor(props, context) {
       super(props, context);
       this.state = {
-        selectValue:'checking',
+        value:"Checking to Savings",
         depositNum: 0,
         withdrawNum : 0,
         transferName : "",
@@ -169,7 +169,7 @@ class MakeTransactions  extends Component {
         var fromBalance = 0;
         var toBalance = 0;
         
-        if(this.state.selectValue === 'Checking to Savings'){
+        if(this.state.value === "Checking to Savings"){
             from = 'checking';
             to = 'savings';
             fromBalance = this.props.context.checkingBalance;
@@ -181,12 +181,10 @@ class MakeTransactions  extends Component {
             fromBalance = this.props.context.savingsBalance;
         }
         
-        console.log(toBalance);
         console.log("From " + from);
         console.log("To" + to);
-        console.log(fromBalance);
-        console.log(this.state.selectValue);
-        console.log(this.state.selectValue.toString());
+        console.log(this.state.value);
+        console.log(this.state.value.toString());
         
         
         
@@ -243,12 +241,10 @@ class MakeTransactions  extends Component {
     }
 
     handleInternalChange = event => {
-      let index = event.nativeEvent.target.selectedIndex;
-      let label = event.nativeEvent.target[index].text;
-      this.setState({
-        [event.target.id]: event.target.value,
-        label: label
-      });
+
+         
+        this.setState({value: event.target.value});
+
     }
 
     handleSubmit = event => {
@@ -441,7 +437,7 @@ class MakeTransactions  extends Component {
     </FormGroup>
     <label>
 
-      <select className="internalTransfer"  value={this.state.selectValue} name={this.state.internalTransfer} onChange={this.handleInternalChange}>
+      <select className="internalTransfer"  defaultValue={this.state.value}  name={this.state.internalTransfer} onChange={this.handleInternalChange}>
        <option value="Checking to Savings">Checking to Savings</option>
        <option value="Savings to Checking">Savings to Checking</option>
      </select>
