@@ -196,14 +196,13 @@ class MakeTransactions  extends Component {
       body: JSON.stringify({email : this.props.context.email, accountFrom:from , accountTo:to,amount: Number(this.state.transferNum), toBalance:toBalance, fromBalance:fromBalance}),
       });  
 
-         let result =  0;
-        if(from === 'checking'){
+        if(this.state.value === "Checking to Savings"){
             result = Number(this.props.context.balance) - Number(this.state.transferNum);
             this.props.context.checkingBalance = this.props.context.checkingBalance - this.state.transferNum;
             this.props.context.savingsBalance = this.props.context.savingsBalance + this.state.transferNum;
 
         }else{
-            result = Number(this.props.context.balance) + Number(this.state.transferNum);
+           result = Number(this.props.context.balance) + Number(this.state.transferNum);
             this.props.context.checkingBalance = this.props.context.checkingBalance + this.state.transferNum;
             this.props.context.savingsBalance = this.props.context.savingsBalance - this.state.transferNum;
         }
