@@ -76,7 +76,6 @@ validateLogin = async e => {
       this.props.context.updateFirstName(firstName);
       this.props.context.updateLastName(lastName);
       this.props.context.updateEmail(email);
-      this.props.context.updateBalance(transactions[0].balance);
       this.props.context.updateIsSignedIn(true);
       this.props.context.updateDashboardDisplay(this.props.context.DEFAULT_DISPLAY);
 
@@ -97,6 +96,8 @@ validateLogin = async e => {
            savingsBalance = accountInfo[1].balance;
            checkingAccountNumber = accountInfo[0].account_number;
            savingsAccountNumber = accountInfo[1].account_number;
+           this.props.context.updateBalance(checkingBalance);
+
         
       }else{    //accountInfo[1] is checking
            checkingStatus = accountInfo[1].status;
@@ -105,6 +106,8 @@ validateLogin = async e => {
            savingsBalance = accountInfo[0].balance;
            checkingAccountNumber = accountInfo[1].account_number;
            savingsAccountNumber = accountInfo[0].account_number;
+           this.props.context.updateBalance(checkingBalance);
+
       }
       
       //update context for checking and savings information
