@@ -87,36 +87,60 @@ class MakeTransactions  extends Component {
       //
       // backend stuff
         
-        fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance')
-        .then(function(response) { 
-          return response.json()
-        })
-        .then(function(data) {   
-          // do stuff with `data`, call second `fetch`
-            console.log(data);
-            console.log("getBalance Called");
-          return fetch('https://cs160bankingapp-api.herokuapp.com/api/getToName')
-        })
-        .then(function(response){
-            return response.json()
-         })
-        .then(function(data){
-               console.log(data);
-            console.log("getBalance Called");
-          return fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal')  
-        })
-        .then(function(response) { 
-          return response.json(); 
-        })
-        .then(function(data) {
-          // do stuff with `data`
-           console.log("transferred to another");
-           let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-           this.props.context.updateBalance(result);
-        })
-        .catch(function(error) { 
-          console.log('Requestfailed', error) 
-        });
+        var result = fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', {
+        method: 'post',
+        body: JSON.stringify({emailTo: this.state.transferName}),
+      }).then(function(response) {
+            console.log(response);
+            cnosole.log("yuup");
+            return response.json(); // pass the data as promise to next then block
+      }).then(function(data) {
+        var fn = data[0].balance;
+        console.log(fn);
+        return fetch('https://cs160bankingapp-api.herokuapp.com/api/getToName'); // make a 2nd request and return a promise
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .catch(function(error) {
+        console.log('Request failed', error)
+      })
+
+    // I'm using the result variable to show that you can continue to extend the chain from the returned promise
+    result.then(function(r) {
+      console.log(r); // 2nd request result
+    });
+        
+//         fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance')
+//         .then(function(response) { 
+//           return response.json()
+//         })
+//         .then(function(data) {   
+//           // do stuff with `data`, call second `fetch`
+//             console.log(data);
+//             console.log("getBalance Called");
+//           return fetch('https://cs160bankingapp-api.herokuapp.com/api/getToName')
+//         })
+//         .then(function(response){
+//             return response.json()
+//          })
+//         .then(function(data){
+//                console.log(data);
+//             console.log("getBalance Called");
+//           return fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal')  
+//         })
+//         .then(function(response) { 
+//           return response.json(); 
+//         })
+//         .then(function(data) {
+//           // do stuff with `data`
+//            console.log("transferred to another");
+//            let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+//            this.props.context.updateBalance(result);
+//         })
+//         .catch(function(error) { 
+//           console.log('Requestfailed', error) 
+//         });
 
         
 //       const r = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
