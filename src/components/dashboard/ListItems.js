@@ -19,9 +19,18 @@ import {Navbar, Modal, Button} from 'react-bootstrap';
 
 class ListItems extends Component {
 
-  state = {
-    show: false
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
+
+    this.state = {
+      show: false,
+    };
   }
+  
   mainListItems() {
     return (
     <div>
