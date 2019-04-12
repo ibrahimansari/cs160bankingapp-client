@@ -111,9 +111,16 @@ class MakeTransactions  extends Component {
       // subtract the amount from the user and send into the void
 
       // backend stuff
+        
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)}),
+      });  
 
-      // let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-      // this.props.context.updateBalance(result);
+      let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+      this.props.context.updateBalance(result);
     }
 
     handleTransferToInternalAccount = async e => {
