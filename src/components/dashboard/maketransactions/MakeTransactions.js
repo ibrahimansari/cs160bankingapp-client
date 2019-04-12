@@ -96,7 +96,13 @@ class MakeTransactions  extends Component {
       });  
       
       const body = await r.json();
-      var array = body["array"];
+              var array = body["array"];
+
+               console.log("array");
+        console.log(array);
+        console.log("array2");
+      console.log(statusTo);
+        console.log(array[0].balance);
       var statusTo = array[0].status;   //status of checking for toUser
         console.log("array");
         console.log(array);
