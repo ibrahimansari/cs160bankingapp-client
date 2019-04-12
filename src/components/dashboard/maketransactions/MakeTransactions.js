@@ -106,7 +106,7 @@ class MakeTransactions  extends Component {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), array[0].balance: Number(toBalance)}),
+      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: Number(array[0].balance)}),
       });  
 
       console.log('Transferred');
