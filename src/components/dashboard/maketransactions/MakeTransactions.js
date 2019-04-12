@@ -180,6 +180,8 @@ class MakeTransactions  extends Component {
             fromBalance = this.props.context.savingsBalance;
         }
         
+        console.log(toBalance);
+        console.log(fromBalance);
         
         
      //{email, accountFrom, accountTo, amount} 
