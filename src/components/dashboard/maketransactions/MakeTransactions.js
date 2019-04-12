@@ -80,6 +80,9 @@ class MakeTransactions  extends Component {
       e.preventDefault();
 
       this.toggleCustomerTransferPopup();
+        
+              console.log('transferring');
+
 
       // variables to use
       // this.state.transferName //email of person to Transferee
@@ -94,7 +97,8 @@ class MakeTransactions  extends Component {
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)}),
       });  
-
+           
+        console.log('Transferred');
 
       let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
       this.props.context.updateBalance(result);
@@ -112,7 +116,7 @@ class MakeTransactions  extends Component {
 
       // backend stuff
         
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToExternal', {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
