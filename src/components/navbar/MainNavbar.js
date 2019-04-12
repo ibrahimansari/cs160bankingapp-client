@@ -35,7 +35,7 @@ class MainNavbar extends Component {
   }
 
   loggedIn() {
-    if(this.props.context.isSignedIn === "false") {
+    if(this.props.context.isSignedIn === "false" || this.props.context.isSignedIn === null) {
       return <Nav.Link href="/signin">Sign In</Nav.Link>;
     }
     else {
