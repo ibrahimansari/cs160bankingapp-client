@@ -181,6 +181,8 @@ class MakeTransactions  extends Component {
         }
         
         console.log(toBalance);
+        console.log("From " + from);
+        console.log("To" + to);
         console.log(fromBalance);
         
         
