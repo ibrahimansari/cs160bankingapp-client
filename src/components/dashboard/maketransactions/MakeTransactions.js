@@ -90,15 +90,26 @@ class MakeTransactions  extends Component {
       //
       // backend stuff
         
+        
+      const r = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({emailTo: this.state.transferName}),
+      });  
+      
+      const body = await f.json();
+      var array = body["array"];
+        
         //const {emailFrom, emailTo, amount, balance} = req.body
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)}),
+      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), array[0].balance: Number(toBalance)}),
       });  
-           
-        console.log('Transferred');
+
+      console.log('Transferred');
 
       let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
       this.props.context.updateBalance(result);
