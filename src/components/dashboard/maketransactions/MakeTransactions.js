@@ -78,7 +78,7 @@ class MakeTransactions  extends Component {
 
       this.toggleCustomerTransferPopup();
         
-      console.log('transferring');
+      console.log('transferring to another customer');
 
 
       // variables to use
@@ -87,59 +87,90 @@ class MakeTransactions  extends Component {
       //
       // backend stuff
         
-        
-      const r = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
-      method: 'POST',
-      mode: "cors",
-      headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({emailTo: this.state.transferName}),
-      });  
-      console.log(this.state.transferName);
-      const body = await r.json();
-              var array = body["array"];
+        fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance')
+        .then(function(response) { 
+          return response.json()
+        })
+        .then(function(data) {   
+          // do stuff with `data`, call second `fetch`
+            console.log(data);
+            console.log("getBalance Called");
+          return fetch('https://cs160bankingapp-api.herokuapp.com/api/getToName')
+        })
+        .then(function(response){
+            return response.json()
+         })
+        .then(function(data){
+               console.log(data);
+            console.log("getBalance Called");
+          return fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal')  
+        })
+        .then(function(response) { 
+          return response.json(); 
+        })
+        .then(function(data) {
+          // do stuff with `data`
+           console.log("transferred to another");
+           let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+           this.props.context.updateBalance(result);
+        })
+        .catch(function(error) { 
+          console.log('Requestfailed', error) 
+        });
 
-               console.log("array");
-        console.log(array);
-        console.log("array2");
-      console.log(statusTo);
-        console.log(array[0].balance);
-      var statusTo = array[0].status;   //status of checking for toUser
-        console.log("array");
-        console.log(array);
-        console.log("array2");
-      console.log(statusTo);
-        console.log(array[0].balance);
-      if(array[0].balance > 0){
         
-          const r2 = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToName', {   //get first and lastname of toUser
-          method: 'POST',
-          mode: "cors",
-          headers: {'Content-type': 'application/json',},
-          body: JSON.stringify({emailTo: this.state.transferName}),
-          });  
+//       const r = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
+//       method: 'POST',
+//       mode: "cors",
+//       headers: {'Content-type': 'application/json',},
+//       body: JSON.stringify({emailTo: this.state.transferName}),
+//       });  
+//       console.log(this.state.transferName);
+//       const body = await r.json();
+//               var array = body["array"];
 
-          const body2 = await r2.json();
-          var arr = body2["array"];
-          var to_first_name = arr[0].first_name;
-          var to_last_name = arr[0].last_name;
+//                console.log("array");
+//         console.log(array);
+//         console.log("array2");
+//       console.log(statusTo);
+//         console.log(array[0].balance);
+//       var statusTo = array[0].status;   //status of checking for toUser
+//         console.log("array");
+//         console.log(array);
+//         console.log("array2");
+//       console.log(statusTo);
+//         console.log(array[0].balance);
+//       if(array[0].balance > 0){
+        
+//           const r2 = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToName', {   //get first and lastname of toUser
+//           method: 'POST',
+//           mode: "cors",
+//           headers: {'Content-type': 'application/json',},
+//           body: JSON.stringify({emailTo: this.state.transferName}),
+//           });  
+
+//           const body2 = await r2.json();
+//           var arr = body2["array"];
+//           var to_first_name = arr[0].first_name;
+//           var to_last_name = arr[0].last_name;
           
-          if(arr.length > 0){
+//           if(arr.length > 0){
         
         
-                //const {emailFrom, emailTo, amount, balance} = req.body
-              const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
-              method: 'POST',
-              mode: "cors",
-              headers: {'Content-type': 'application/json',},
-              body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: Number(array[0].balance), toFirstName:to_first_name, toLastName:to_last_name }),
-              });  
+//                 //const {emailFrom, emailTo, amount, balance} = req.body
+//               const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
+//               method: 'POST',
+//               mode: "cors",
+//               headers: {'Content-type': 'application/json',},
+//               body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: Number(array[0].balance), toFirstName:to_first_name, toLastName:to_last_name }),
+//               });  
 
-              console.log('Transferred');
+//               console.log('Transferred');
 
-              let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-              this.props.context.updateBalance(result);
-          }
-      }
+//               let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+//               this.props.context.updateBalance(result);
+//           }
+//       }
         
     }
 
