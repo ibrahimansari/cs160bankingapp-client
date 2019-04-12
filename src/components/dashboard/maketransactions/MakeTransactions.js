@@ -6,6 +6,7 @@ class MakeTransactions  extends Component {
     constructor(props, context) {
       super(props, context);
       this.state = {
+        selectValue:'checking',
         depositNum: 0,
         withdrawNum : 0,
         transferName : "",
@@ -168,7 +169,7 @@ class MakeTransactions  extends Component {
         var fromBalance = 0;
         var toBalance = 0;
         
-        if(this.state.label === 'Checking to Savings'){
+        if(this.state.selectValue === 'Checking to Savings'){
             from = 'checking';
             to = 'savings';
             fromBalance = this.props.context.checkingBalance;
@@ -184,8 +185,8 @@ class MakeTransactions  extends Component {
         console.log("From " + from);
         console.log("To" + to);
         console.log(fromBalance);
-        console.log(this.state.label);
-        console.log(this.state.label.toString());
+        console.log(this.state.selectValue);
+        console.log(this.state.selectValue.toString());
         
         
         
@@ -439,7 +440,8 @@ class MakeTransactions  extends Component {
      />
     </FormGroup>
     <label>
-      <select className="internalTransfer" name={this.state.internalTransfer} onChange={this.handleInternalChange}>
+
+      <select className="internalTransfer"  value={this.state.selectValue} name={this.state.internalTransfer} onChange={this.handleInternalChange}>
        <option value="Checking to Savings">Checking to Savings</option>
        <option value="Savings to Checking">Savings to Checking</option>
      </select>
