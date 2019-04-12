@@ -94,7 +94,7 @@ class MakeTransactions  extends Component {
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({emailTo: this.state.transferName}),
       });  
-      
+      console.log(this.state.transferName);
       const body = await r.json();
               var array = body["array"];
 
