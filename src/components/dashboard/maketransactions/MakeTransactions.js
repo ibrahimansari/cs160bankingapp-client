@@ -205,19 +205,22 @@ class MakeTransactions  extends Component {
       });  
 
         if(this.state.value === "Checking to Savings"){
-            result = Number(this.props.context.balance) - Number(this.state.transferNum);
+            let result = Number(this.props.context.balance) - Number(this.state.transferNum);
             this.props.context.checkingBalance = this.props.context.checkingBalance - this.state.transferNum;
             this.props.context.savingsBalance = this.props.context.savingsBalance + this.state.transferNum;
+                    this.props.context.updateBalance(result);
+
 
         }else{
-           result = Number(this.props.context.balance) + Number(this.state.transferNum);
+           let result = Number(this.props.context.balance) + Number(this.state.transferNum);
             this.props.context.checkingBalance = this.props.context.checkingBalance + this.state.transferNum;
             this.props.context.savingsBalance = this.props.context.savingsBalance - this.state.transferNum;
+                    this.props.context.updateBalance(result);
+
         }
         
         console.log("transferring internally");
         
-        this.props.context.updateBalance(result);
         this.toggleInternalTransferPopup();
     }
 
