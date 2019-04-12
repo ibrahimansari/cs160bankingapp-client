@@ -186,9 +186,9 @@ class MakeTransactions  extends Component {
 
          let result =  0;
         if(from === 'checking'){
-            result = Number(this.props.context.balance) - Number(this.state.transferNum)
+            result = Number(this.props.context.balance) - Number(this.state.transferNum);
         }else{
-            Number(this.props.context.balance) + Number(this.state.transferNum)
+            result = Number(this.props.context.balance) + Number(this.state.transferNum);
         }
         
         this.props.context.updateBalance(result);
