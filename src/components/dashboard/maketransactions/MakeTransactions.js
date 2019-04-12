@@ -184,6 +184,9 @@ class MakeTransactions  extends Component {
         console.log("From " + from);
         console.log("To" + to);
         console.log(fromBalance);
+        console.log(this.state.label);
+        console.log(this.state.label.toString());
+        
         
         
      //{email, accountFrom, accountTo, amount} 
