@@ -1,16 +1,24 @@
 import React, {Component} from 'react';
-import { Button, Card, FormGroup, FormControl, FormLabel} from "react-bootstrap";
+import { Button, Card, FormGroup, FormControl, FormLabel, Modal} from "react-bootstrap";
 import Popup from "reactjs-popup";
 
 class MakeTransactions  extends Component {
-
-    state = {
-      depositNum: 0,
-      withdrawNum : 0,
-      transferName : "",
-      transferNum : 0,
-      showPopup : false,
-      internalTransfer : "Checking To Savings"
+    constructor(props, context) {
+      super(props, context);
+      this.state = {
+        depositNum: 0,
+        withdrawNum : 0,
+        transferName : "",
+        transferNum : 0,
+        showPopup : false,
+        showDepositPopUp: false,
+        showWithdrawPopUp: false,
+        showTransferToAnotherCustomer: false,
+        showTransferToExternalAccount: false,
+        showTransferToInternalAccount: false,
+        internalTransfer : "Checking to Savings",
+        label: ''
+      };
     }
 
    handleDeposit = async e => {
@@ -21,80 +29,135 @@ class MakeTransactions  extends Component {
         return;
       }
 
-      this.togglePopup();
-     
-       
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
       });
-       
-       
+
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
       this.props.context.updateBalance(result);
-       console.log('finised deposit');
+      this.props.context.updateCheckingBalance(result);
+      this.toggleDepositPopup();
     }
 
 
 
     handleWithdraw = async e => {
        e.preventDefault();
-      
+
       console.log('withdrawing');
-      if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0) {
+      let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
+
+      if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0 || result < 0) {
         this.setState({withdrawNum : 0})
         return;
       }
-      
 
-      this.togglePopup();
 
+      this.toggleWithdrawalPopup();
       //const {first_name, last_name, email, amount, balance} = req.body
       //this.setState({request : JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: , balance: })});
 
-        
+
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
       });
-        
 
-      let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
+
+
       this.props.context.updateBalance(result);
+      this.props.context.updateCheckingBalance(result);
        console.log('finished withdrawing');
     }
 
 
-    handleTransferToAnotherCustomer = e => {
+    handleTransferToAnotherCustomer = async e => {
       e.preventDefault();
-      this.togglePopup();
+
+      this.toggleCustomerTransferPopup();
+
+      // variables to use
+      // this.state.transferName //email of person to Transferee
+      // this.state.transferNum //amount to be transfered
+      //
+      // backend stuff
+
+      // let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+      // this.props.context.updateBalance(result);
+    }
+
+    handleTransferToExternalAccount = async e => {
+      e.preventDefault();
+      this.toggleExternalTransferPopup();
+
+      // variables to use
+      // this.state.transferName //the name of external account
+      // this.state.transferNum //amount to be transfered
+      // subtract the amount from the user and send into the void
 
       // backend stuff
+
+      // let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+      // this.props.context.updateBalance(result);
     }
 
-    handleTransferToExternalAccount = e => {
+    handleTransferToInternalAccount = async e => {
       e.preventDefault();
-      this.togglePopup();
-      // backend stuff
+
+     // variables to use
+     // this.state.transferNum //amount to be transfered
+     // this.state.label //either Checking to Savings or Savings to depositChecking
+
+     // if (this.state.label === "Checking to Savings") {
+         // backend sutff
+     // }
+     // else {
+     //     // backend stuff
+     // }
+     //
+
+     // let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+     // this.props.context.updateBalance(result);
+      this.toggleInternalTransferPopup();
     }
 
-    handleTransferToInternalAccount = e => {
-      e.preventDefault();
-      this.togglePopup();
-        // backend stuff
+  toggleDepositPopup() {
+      this.setState({showDepositPopUp: !this.state.showDepositPopUp});
     }
 
-    togglePopup() {
-    this.setState({showPopup: !this.state.showPopup});
+  toggleWithdrawalPopup() {
+    this.setState({showWithdrawPopUp: !this.state.showWithdrawPopUp});
+  }
+
+  toggleCustomerTransferPopup() {
+  this.setState({showTransferToAnotherCustomer: !this.state.showTransferToAnotherCustomer});
+  }
+
+  toggleExternalTransferPopup() {
+  this.setState({showTransferToExternalAccount: !this.state.showTransferToExternalAccount});
+  }
+
+  toggleInternalTransferPopup() {
+  this.setState({showTransferToInternalAccount: !this.state.showTransferToInternalAccount});
   }
 
     handleChange = event => {
       this.setState({
-        [event.target.id]: event.target.value
+        [event.target.id]: event.target.value,
+      });
+    }
+
+    handleInternalChange = event => {
+      let index = event.nativeEvent.target.selectedIndex;
+      let label = event.nativeEvent.target[index].text;
+      this.setState({
+        [event.target.id]: event.target.value,
+        label: label
       });
     }
 
@@ -112,7 +175,7 @@ class MakeTransactions  extends Component {
             trigger={<Button block size = "large" type="submit">Make a Deposit</Button>}
             position="center right"
             modal
-            open= {this.state.showPopup}
+            open= {this.state.showDepositPopUp}
             >
             <Card style = {{height: '18rem', textAlign: 'center'}}>
               <Card.Body>
@@ -146,7 +209,7 @@ class MakeTransactions  extends Component {
              trigger={<Button block size = "large" type="submit">Make a Withdrawal</Button>}
              position="center right"
              modal
-             open= {this.state.showPopup}
+             open= {this.state.showWithdrawPopUp}
              style = {{ maxWidth: '500px'}}
              >
              <Card style = {{height: '18rem', textAlign: 'center'}}>
@@ -178,10 +241,10 @@ class MakeTransactions  extends Component {
       </Popup>
 
       <Popup
-        trigger={<Button block size = "large" type="submit">Transfer money to another customer</Button>}
+        trigger={<Button block size = "large" type="submit">Transfer money to another fellow customer</Button>}
         position="center right"
         modal
-        open= {this.state.showPopup}
+        open= {this.state.showTransferToAnotherCustomer}
         style = {{ maxWidth: '500px'}}
         >
         <Card style = {{height: '18rem', textAlign: 'center'}}>
@@ -193,7 +256,7 @@ class MakeTransactions  extends Component {
              <FormLabel>Name of Transferee</FormLabel>
              <FormControl
                autoFocus
-               placeholder="Enter email of person you want to tranfer to"
+               placeholder="Enter email of person you want to transfer to"
                type = "transferName"
                value ={this.state.transferName}
                onChange={this.handleChange}
@@ -225,12 +288,12 @@ class MakeTransactions  extends Component {
    trigger={<Button block size = "large" type="submit">Transfer money to an external account</Button>}
    position="center right"
    modal
-   open= {this.state.showPopup}
+   open= {this.state.showTransferToExternalAccount}
    style = {{ maxWidth: '500px'}}
    >
    <Card style = {{height: '18rem', textAlign: 'center'}}>
      <Card.Body>
-  <Card.Title>Making a transfer</Card.Title>
+  <Card.Title>Making an external account transfer</Card.Title>
 <div className="Transfer" style = {{ maxWidth: '500px', textAlign: 'center', margin: '0 auto'}} >
    <form onSubmit={this.handleTransferToExternalAccount}>
       <FormGroup controlId="transferName">
@@ -269,12 +332,12 @@ class MakeTransactions  extends Component {
   trigger={<Button block size = "large" type="submit">Transfer money to an internal account</Button>}
   position="center right"
   modal
-  open= {this.state.showPopup}
+  open= {this.state.showTransferToInternalAccount}
   style = {{ maxWidth: '500px'}}
   >
   <Card style = {{height: '18rem', textAlign: 'center'}}>
     <Card.Body>
- <Card.Title>Making an internal transfer</Card.Title>
+ <Card.Title>Making an internal account transfer</Card.Title>
 <div className="Transfer" style = {{ maxWidth: '500px', textAlign: 'center', margin: '0 auto'}} >
   <form onSubmit={this.handleTransferToInternalAccount}>
     <FormGroup controlId="transferNum">
@@ -287,7 +350,7 @@ class MakeTransactions  extends Component {
      />
     </FormGroup>
     <label>
-      <select className="internalTransfer" name={this.state.internalTransfer} onChange={this.handleChange}>
+      <select className="internalTransfer" name={this.state.internalTransfer} onChange={this.handleInternalChange}>
        <option value="Checking to Savings">Checking to Savings</option>
        <option value="Savings to Checking">Savings to Checking</option>
      </select>

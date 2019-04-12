@@ -15,6 +15,7 @@ import AssessmentIcon from '@material-ui/icons/Assessment';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
+import {NavDropdown} from 'react-bootstrap';
 
 class ListItems extends Component {
 
@@ -94,7 +95,7 @@ class ListItems extends Component {
   secondaryListItems() {
   return (
     <div>
-      <ListSubheader inset>Transaction reports</ListSubheader>
+      <ListSubheader inset>Assorted things</ListSubheader>
       <ListItem button>
         <ListItemIcon>
           <TodayIcon />
@@ -113,9 +114,27 @@ class ListItems extends Component {
         </ListItemIcon>
         <ListItemText primary="This Year" />
       </ListItem>
+
+      <ListItem
+        button
+        onClick = {() => this.handleSignOut()}
+        href = "/"
+        >
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Sign Out" />
+      </ListItem>
+
     </div>
   );
 }
+
+handleSignOut() {
+  this.props.context.updateIsSignedIn("false");
+  window.location = '/'
+}
+
 
   render() {
     return (
