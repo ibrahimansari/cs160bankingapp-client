@@ -168,10 +168,10 @@ class MakeTransactions  extends Component {
         
         if(this.state.label === 'Checking to Savings'){
             from = 'checking';
-            to = 'savings;
+            to = 'savings';
         }else{
             to = 'checking';
-            from = 'savings;  
+            from = 'savings';  
         }
         
         
