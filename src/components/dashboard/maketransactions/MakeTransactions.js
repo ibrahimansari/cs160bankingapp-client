@@ -165,13 +165,19 @@ class MakeTransactions  extends Component {
         
         var from = '';
         var to = '';
+        var fromBalance = 0;
+        var toBalance = 0;
         
         if(this.state.label === 'Checking to Savings'){
             from = 'checking';
             to = 'savings';
+            fromBalance = this.props.context.checkingBalance;
+            toBalance = this.props.context.savingsBalance;
         }else{
             to = 'checking';
             from = 'savings';  
+            toBalance = this.props.context.checkingBalance;
+            fromBalance = this.props.context.savingsBalance;
         }
         
         
@@ -181,7 +187,7 @@ class MakeTransactions  extends Component {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({email : this.props.context.email, accountFrom:from , accountTo:to,amount: Number(this.state.transferNum)}),
+      body: JSON.stringify({email : this.props.context.email, accountFrom:from , accountTo:to,amount: Number(this.state.transferNum), toBalance:toBalance, fromBalance:fromBalance}),
       });  
 
          let result =  0;
