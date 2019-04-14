@@ -30,7 +30,7 @@ class ListItems extends Component {
       show: false,
     };
   }
-  
+
   mainListItems() {
     return (
     <div>
@@ -77,17 +77,6 @@ class ListItems extends Component {
           <AttachMoneyIcon />
         </ListItemIcon>
         <ListItemText primary="Set up Bill Autopayments" />
-      </ListItem>
-      <ListItem
-      button
-      onClick = {() => this.props.context.updateDashboardDisplay(
-        this.props.context.CARDS_DISPLAY)
-      }
-      >
-        <ListItemIcon>
-          <CreditCardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Cards" />
       </ListItem>
       <ListItem
       button

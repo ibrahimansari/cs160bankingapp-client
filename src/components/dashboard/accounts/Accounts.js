@@ -113,9 +113,7 @@ class Accounts extends Component {
        return;
     }
 
-        console.log("Passed Open");
-
-    //------------------Backend stuff-------------------------------------------------//
+    //------------------Backend stuff here-------------------------------------------------//
 
 
 
@@ -124,7 +122,7 @@ class Accounts extends Component {
      // Uncomment when done with backend stuff
      // Otherwise the new account will NOT display
      //
-    //if(whichAccount === "Checking Accounts") {
+    //if(whichAccount === "Checking Account") {
         // this.props.context.updateCheckingStatus("Open");
       //}
      //else {
@@ -160,8 +158,6 @@ class Accounts extends Component {
        return;
     }
 
-    console.log("Passed Closed");
-
     //------------------Backend stuff-------------------------------------------------//
 
 
@@ -169,7 +165,7 @@ class Accounts extends Component {
      // Uncomment when done with backend stuff
      // Otherwise the account will stay visible
      //
-    //if(whichAccount === "Checking Accounts") {
+    //if(whichAccount === "Checking Account") {
         // this.props.context.updateCheckingStatus("Closed");
       //}
      //else {
