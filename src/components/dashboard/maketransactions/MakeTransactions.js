@@ -71,12 +71,14 @@ class MakeTransactions  extends Component {
       this.props.context.updateCheckingBalance(result);
        console.log('finished withdrawing');
     }
+  
+    // getBalance  {
+    //   const resp = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance');
+    //   console.log(resp.json);
+    //   return resp.json();
+    // }
+    
 
-    async function fetched(){ 
-        const res = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance'); 
-        const data = await res.json();
-        console.log(data);
-    }
 
     handleTransferToAnotherCustomer = async e => {
       e.preventDefault();
@@ -84,9 +86,16 @@ class MakeTransactions  extends Component {
       this.toggleCustomerTransferPopup();
         
       console.log('transferring to another customer');
-        
-      fetched();
 
+      const res = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({emailTo: this.state.transferName}),});  
+      const body = await res.json();
+
+
+        
 
       // variables to use
       // this.state.transferName //email of person to Transferee
@@ -99,11 +108,6 @@ class MakeTransactions  extends Component {
 //       var to_balance = 0;
 
 
-//       const r = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
-//       method: 'POST',
-//       mode: "cors",
-//       headers: {'Content-type': 'application/json',},
-//       body: JSON.stringify({emailTo: this.state.transferName}),});  
 
 //       const body = await r.json();
 //       var array = body["array"];
@@ -111,20 +115,19 @@ class MakeTransactions  extends Component {
 //       to_first_name = array[0].first_name;
 //       to_last_name = array[0].last_name;
 
-//       //const {emailFrom, emailTo, amount, balance} = req.body
-//       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
-//       method: 'POST',
-//       mode: "cors",
-//       headers: {'Content-type': 'application/json',},
-//       //body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: Number(to_balance), toFirstName:to_first_name, toLastName:to_last_name }),
-//       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)),
+      //const {emailFrom, emailTo, amount, balance} = req.body
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: body["array"][0].balance, toFirstName:body["array"][0].first_name, toLastName:body["array"][0].last_name}),
 
-//       });  
+      });  
 
       console.log('Transferred to another account');
 
-//       let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-//       this.props.context.updateBalance(result);
+      let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+      this.props.context.updateBalance(result);
 
     }
 
