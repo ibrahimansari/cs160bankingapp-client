@@ -72,7 +72,7 @@ class MakeTransactions  extends Component {
        console.log('finished withdrawing');
     }
 
-    async function fetch(){ 
+    async function fetched(){ 
         const res = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance'); 
         const data = await res.json();
         console.log(data);
@@ -85,7 +85,7 @@ class MakeTransactions  extends Component {
         
       console.log('transferring to another customer');
         
-      console.log(fetch());
+      fetched();
 
 
       // variables to use
