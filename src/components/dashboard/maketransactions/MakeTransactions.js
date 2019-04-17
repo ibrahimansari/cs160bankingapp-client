@@ -87,80 +87,38 @@ class MakeTransactions  extends Component {
       //
       // backend stuff
         
-          var to_first_name = "";
-          var to_last_name = "";
-          var to_balance = 0;
-        
-        var firstMethod = function() {
-           var promise = new Promise(function(resolve, reject){
-                  
-              const r = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
-              method: 'POST',
-              mode: "cors",
-              headers: {'Content-type': 'application/json',},
-              body: JSON.stringify({emailTo: this.state.transferName}),});  
-
-              const body = await r.json();
-              var array = body["array"];
-              to_balance = array[0].balance;
-
-           });
-           return promise;
-        };
+//       var to_first_name = "";
+//       var to_last_name = "";
+//       var to_balance = 0;
 
 
-        var secondMethod = function(someStuff) {
-           var promise = new Promise(function(resolve, reject){
-              const r2 = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToName', {   //get first and lastname of toUser
-              method: 'POST',
-              mode: "cors",
-              headers: {'Content-type': 'application/json',},
-              body: JSON.stringify({emailTo: this.state.transferName}),
-              });  
+//       const r = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
+//       method: 'POST',
+//       mode: "cors",
+//       headers: {'Content-type': 'application/json',},
+//       body: JSON.stringify({emailTo: this.state.transferName}),});  
 
-              const body2 = await r2.json();
-              var arr = body2["array"];
-              to_first_name = arr[0].first_name;
-              to_last_name = arr[0].last_name;
-               
-           });
-           return promise;
-        };
+//       const body = await r.json();
+//       var array = body["array"];
+//       to_balance = array[0].balance;
+//       to_first_name = array[0].first_name;
+//       to_last_name = array[0].last_name;
 
-        var thirdMethod = function(someStuff) {
-           var promise = new Promise(function(resolve, reject){
+      //const {emailFrom, emailTo, amount, balance} = req.body
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      //body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: Number(to_balance), toFirstName:to_first_name, toLastName:to_last_name }),
+      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)),
 
-              //const {emailFrom, emailTo, amount, balance} = req.body
-              const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
-              method: 'POST',
-              mode: "cors",
-              headers: {'Content-type': 'application/json',},
-              body: JSON.stringify({first_name: "Sam", last_name: "e",emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: Number(to_balance), toFirstName:to_first_name, toLastName:to_last_name }),
-              });  
+      });  
 
-              console.log('Transferred to another account');
+      console.log('Transferred to another account');
 
-              let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-              this.props.context.updateBalance(result);
- 
-           });
-           return promise;
-        };
+      let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+      this.props.context.updateBalance(result);
 
-        firstMethod()
-           .then(secondMethod)
-           .then(thirdMethod);
-
- 
-
-        
-//       .then(
-
-//      )
-//       .then(
-
-//       );
-        
     }
 
     handleTransferToExternalAccount = async e => {
