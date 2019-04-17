@@ -73,7 +73,7 @@ class MakeTransactions  extends Component {
     }
 
     async function fetch(){ 
-        const res = await fetch(''); 
+        const res = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance'); 
         const data = await res.json();
         console.log(data);
     }
@@ -81,7 +81,7 @@ class MakeTransactions  extends Component {
     handleTransferToAnotherCustomer = async e => {
       e.preventDefault();
 
-      this.toggleCustomerTransferPopup('https://cs160bankingapp-api.herokuapp.com/api/getToBalance');
+      this.toggleCustomerTransferPopup();
         
       console.log('transferring to another customer');
         
