@@ -72,13 +72,20 @@ class MakeTransactions  extends Component {
        console.log('finished withdrawing');
     }
 
+    async function fetch(){ 
+        const res = await fetch(''); 
+        const data = await res.json();
+        console.log(data);
+    }
 
     handleTransferToAnotherCustomer = async e => {
       e.preventDefault();
 
-      this.toggleCustomerTransferPopup();
+      this.toggleCustomerTransferPopup('https://cs160bankingapp-api.herokuapp.com/api/getToBalance');
         
       console.log('transferring to another customer');
+        
+      console.log(fetch());
 
 
       // variables to use
@@ -104,20 +111,20 @@ class MakeTransactions  extends Component {
 //       to_first_name = array[0].first_name;
 //       to_last_name = array[0].last_name;
 
-      //const {emailFrom, emailTo, amount, balance} = req.body
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
-      method: 'POST',
-      mode: "cors",
-      headers: {'Content-type': 'application/json',},
-      //body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: Number(to_balance), toFirstName:to_first_name, toLastName:to_last_name }),
-      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)),
+//       //const {emailFrom, emailTo, amount, balance} = req.body
+//       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
+//       method: 'POST',
+//       mode: "cors",
+//       headers: {'Content-type': 'application/json',},
+//       //body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: Number(to_balance), toFirstName:to_first_name, toLastName:to_last_name }),
+//       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)),
 
-      });  
+//       });  
 
       console.log('Transferred to another account');
 
-      let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-      this.props.context.updateBalance(result);
+//       let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+//       this.props.context.updateBalance(result);
 
     }
 
