@@ -93,18 +93,21 @@ class MakeTransactions  extends Component {
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({emailTo: this.state.transferName}),});  
       const body = await res.json();
+        
+      if(body["array"].length > 0 && body["array"][0].status == 'Open'){    //check statusTo customer is Open and lenght of array > 0 meaning customer is valid
 
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
-      method: 'POST',
-      mode: "cors",
-      headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: body["array"][0].balance, toFirstName:body["array"][0].first_name, toLastName:body["array"][0].last_name}),
-      });  
+          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
+          method: 'POST',
+          mode: "cors",
+          headers: {'Content-type': 'application/json',},
+          body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: body["array"][0].balance, toFirstName:body["array"][0].first_name, toLastName:body["array"][0].last_name}),
+          });  
 
-      
-        let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-        this.props.context.updateBalance(result);
-        console.log('Transferred to another account');
+
+            let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
+            this.props.context.updateBalance(result);
+            console.log('Transferred to another account');
+      }
 
     }
 
