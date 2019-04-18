@@ -190,7 +190,7 @@ class MakeTransactions  extends Component {
             //this.props.context.checkingBalance = this.props.context.checkingBalance + this.state.transferNum;
             //this.props.context.savingsBalance = this.props.context.savingsBalance - this.state.transferNum;
             
-            this.props.context.updateSavingsBalance(this.props.context.savingsBalance - this.state.transferNum;);
+            this.props.context.updateSavingsBalance(this.props.context.savingsBalance - this.state.transferNum);
             this.props.context.updateCheckingBalance(this.props.context.checkingBalance + this.state.transferNum);
             this.props.context.updateBalance(result);
 
