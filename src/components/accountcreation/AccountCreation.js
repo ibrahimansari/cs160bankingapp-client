@@ -47,6 +47,13 @@ class AccountCreation extends Component {
   this.setState({response : body});
 
   if(this.state.response ==='Ok'){    //If registration sucessful, go to login page
+    
+    const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/updateAccountNumber', {
+    method: 'POST',
+    headers: {'Content-type': 'application/json',},
+    body: JSON.stringify({ email: this.state.email}),
+    });
+
       window.location = 'https://cs160bankingapp.herokuapp.com/signin';      //navigate to customer page
   }
 }
