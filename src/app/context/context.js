@@ -41,6 +41,8 @@ class MyProvider extends Component {
     checkingAccountNumber: sessionStorage.getItem("checkingAccountNumber"),
     updateSavingsAccountNumber : savingsAccountNumber =>this.updateSavingsAccountNumber(savingsAccountNumber),
     savingsAccountNumber: sessionStorage.getItem("savingsAccountNumber"),
+    updateTransaction : userTransaction =>this.updateTransaction(userTransaction),
+    userTransaction: sessionStorage.getItem("userTransaction"),
 
     // global boolean checks
     updateIsSignedIn: isSignedIn => this.updateIsSignedIn(isSignedIn),
