@@ -94,7 +94,7 @@ class MakeTransactions  extends Component {
       body: JSON.stringify({emailTo: this.state.transferName}),});  
       const body = await res.json();
         
-      if(body["array"].length > 0 && body["array"][0].status == 'Open'){    //check statusTo customer is Open and lenght of array > 0 meaning customer is valid
+      if(body["array"].length > 0 && body["array"][0].status === 'Open'){    //check statusTo customer is Open and lenght of array > 0 meaning customer is valid
 
           const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
           method: 'POST',
