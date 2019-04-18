@@ -34,7 +34,7 @@ class MakeTransactions  extends Component {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: "Sam", last_name: "Samm", email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
+      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
       });
 
       let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
