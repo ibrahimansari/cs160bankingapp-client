@@ -104,6 +104,8 @@ class MakeTransactions  extends Component {
 
             let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
             this.props.context.updateBalance(result);
+            this.props.context.updateCheckingBalance(result);
+
             console.log('Transferred to another account');
       }
 
@@ -129,6 +131,8 @@ class MakeTransactions  extends Component {
 
       let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
       this.props.context.updateBalance(result);
+      this.props.context.updateCheckingBalance(result);
+
     }
 
     handleTransferToInternalAccount = async e => {
@@ -154,21 +158,15 @@ class MakeTransactions  extends Component {
         if(this.state.value === "Checking to Savings"){
             from = 'checking';
             to = 'savings';
-            fromBalance = this.props.context.checkingBalance;
+            fromBalance = this.props.context.balance;
             toBalance = this.props.context.savingsBalance;
         }else{
             to = 'checking';
             from = 'savings';  
-            toBalance = this.props.context.checkingBalance;
+            toBalance = this.props.context.balance;
             fromBalance = this.props.context.savingsBalance;
         }
-        
-        console.log("From " + from);
-        console.log("To" + to);
-        console.log(this.state.value);
-        console.log(this.state.value.toString());
-        
-        
+
         
      //{email, accountFrom, accountTo, amount} 
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferSelf', {
@@ -180,16 +178,21 @@ class MakeTransactions  extends Component {
 
         if(this.state.value === "Checking to Savings"){
             let result = Number(this.props.context.balance) - Number(this.state.transferNum);
-            this.props.context.checkingBalance = this.props.context.checkingBalance - this.state.transferNum;
-            this.props.context.savingsBalance = this.props.context.savingsBalance + this.state.transferNum;
-                    this.props.context.updateBalance(result);
+            //this.props.context.checkingBalance = this.props.context.checkingBalance - this.state.transferNum;
+            //this.props.context.savingsBalance = this.props.context.savingsBalance + this.state.transferNum;
+            this.props.context.updateSavingsBalance(this.props.context.savingsBalance + this.state.transferNum;);
+            this.props.context.updateCheckingBalance(this.props.context.checkingBalance - this.state.transferNum);
+            this.props.context.updateBalance(result);
 
 
         }else{
            let result = Number(this.props.context.balance) + Number(this.state.transferNum);
-            this.props.context.checkingBalance = this.props.context.checkingBalance + this.state.transferNum;
-            this.props.context.savingsBalance = this.props.context.savingsBalance - this.state.transferNum;
-                    this.props.context.updateBalance(result);
+            //this.props.context.checkingBalance = this.props.context.checkingBalance + this.state.transferNum;
+            //this.props.context.savingsBalance = this.props.context.savingsBalance - this.state.transferNum;
+            
+            this.props.context.updateSavingsBalance(this.props.context.savingsBalance - this.state.transferNum;);
+            this.props.context.updateCheckingBalance(this.props.context.checkingBalance + this.state.transferNum);
+            this.props.context.updateBalance(result);
 
         }
         
