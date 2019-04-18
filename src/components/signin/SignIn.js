@@ -74,7 +74,7 @@ validateLogin = async e => {
 
       const bodyTransaction = await responseTransaction.json();
       userTransaction = bodyTransaction["array"];
-      console.log(userTransaction);
+      //console.log(userTransaction);
       this.props.context.updateTransaction(userTransaction);
 
  
