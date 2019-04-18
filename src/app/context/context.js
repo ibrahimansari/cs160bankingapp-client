@@ -59,6 +59,11 @@ class MyProvider extends Component {
     dashboardDisplay : sessionStorage.getItem("dashboardDisplay")
   };
 
+  updateTransaction (userTransaction) {
+    sessionStorage.setItem("userTransaction", userTransaction);
+    this.setState({userTransaction});
+  }
+
   updateCheckingStatus (checkingStatus) {
     sessionStorage.setItem("checkingStatus", checkingStatus);
     this.setState({checkingStatus});
