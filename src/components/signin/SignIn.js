@@ -59,12 +59,12 @@ validateLogin = async e => {
     let email  = body["email"];
     let address = body["address"];
     let zipcode = body["zipcode"];
-    
+
     let userTransaction = []; //transactions for the customer
 
     if(this.state.response === 'Valid Login1')    //1 represents customer
     {
-      
+
       const responseTransaction = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getUserTransactions', {
       method: 'POST',
       mode: "cors",
@@ -74,10 +74,10 @@ validateLogin = async e => {
 
       const bodyTransaction = await responseTransaction.json();
       userTransaction = bodyTransaction["array"];
-      //console.log(userTransaction);
+      console.log(userTransaction);
       this.props.context.updateTransaction(userTransaction);
 
- 
+
       // setting context variables
       this.props.context.updateAddress(address);
       this.props.context.updateZipcode(zipcode);
@@ -88,7 +88,7 @@ validateLogin = async e => {
       this.props.context.updateDashboardDisplay(this.props.context.DEFAULT_DISPLAY);
 
       //console.log(transactions[0].balance);     //user current balance
-      
+
       var accountInfo = body["accountInfo"];  //checkings/savings account info
       var checkingStatus = 'Closed';
       var savingsStatus = 'Closed';
@@ -96,8 +96,8 @@ validateLogin = async e => {
       var savingsBalance = 0;
       var checkingAccountNumber = 0;
       var savingsAccountNumber = 0;
-      
-      if(accountInfo[0].type === 'checking'){  
+
+      if(accountInfo[0].type === 'checking'){
            checkingStatus = accountInfo[0].status;
            savingsStatus = accountInfo[1].status;
            checkingBalance = accountInfo[0].balance;
@@ -106,7 +106,7 @@ validateLogin = async e => {
            savingsAccountNumber = accountInfo[1].account_number;
            this.props.context.updateBalance(checkingBalance);
 
-        
+
       }else{    //accountInfo[1] is checking
            checkingStatus = accountInfo[1].status;
            savingsStatus = accountInfo[0].status;
@@ -117,7 +117,7 @@ validateLogin = async e => {
            this.props.context.updateBalance(checkingBalance);
 
       }
-      
+
       //update context for checking and savings information
        this.props.context.updateCheckingStatus(checkingStatus);
        this.props.context.updateSavingsStatus(savingsStatus);
@@ -129,7 +129,7 @@ validateLogin = async e => {
 
 //       console.log(accountInfo[0]);
 //       console.log(accountInfo[1]);
-      
+
       window.location = '/accountdashboard'; // link using this or else context breaks
     }else{
       if(this.state.response ==='Valid Login0'){    //0 represents manager
