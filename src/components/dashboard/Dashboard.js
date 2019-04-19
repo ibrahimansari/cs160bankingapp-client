@@ -22,7 +22,9 @@ import Button from '@material-ui/core/Button';
 import {Navbar} from 'react-bootstrap';
 import Accounts from './accounts/Accounts';
 import MakeTransactions from './maketransactions/MakeTransactions';
-import Cards from './cards/Cards';
+import SetUpBillAutoPayments from './setupbillautopayments/SetUpBillAutoPayments';
+
+import Cards from './cards/Cards'; // should delete
 
 const drawerWidth = 240;
 
@@ -147,13 +149,13 @@ class Dashboard extends React.Component {
       case this.props.context.DEFAULT_DISPLAY:
         return this.defaultDisplayer();
       case this.props.context.ACCOUNTS_DISPLAY:
-        return <div> <Accounts context = {context}/> </div>;
+        return <Accounts context = {context}/>;
       case this.props.context.CARDS_DISPLAY:
         return <Cards context = {context} />;
       case this.props.context.MAKE_TRANSACTIONS_DISPLAY:
         return <MakeTransactions context = {context}/>;
       case this.props.context.SETUP_BILL_AUTO_PAYMENTS_DISPLAY:
-        return <div> SETUP_BILL_AUTO_PAYMENTS_DISPLAY </div>;
+        return <SetUpBillAutoPayments context = {context}/>;
       case this.props.context.USER_SUMMARY_DISPLAY:
         return <div> User Summary </div>
       default :
