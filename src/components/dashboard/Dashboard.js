@@ -129,16 +129,16 @@ class Dashboard extends React.Component {
         <BalanceDisplay />
       </Typography>
       <Typography variant="h4" gutterBottom component="h2">
-        Weekly Account Transactions
+        Dates of Account Transactions
       </Typography>
       <Typography component="div" className={classes.chartContainer}>
-        <SimpleLineChart />
+        <SimpleLineChart context = {context}/>
       </Typography>
       <Typography variant="h4" gutterBottom component="h2">
-        Transactions
+        Transactions Table
       </Typography>
       <div className={classes.tableContainer}>
-        <SimpleTable />
+        <SimpleTable context = {context} />
       </div>
     </div>);
   }

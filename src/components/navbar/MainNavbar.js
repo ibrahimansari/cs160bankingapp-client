@@ -35,7 +35,7 @@ class MainNavbar extends Component {
   }
 
   loggedIn() {
-    if(this.props.context.isSignedIn === "false" || this.props.context.isSignedIn === null) {
+    if(this.props.context.isSignedIn === "false" || this.props.context.isSignedIn === null || this.props.context.isSignedIn === undefined) {
       return <Nav.Link href="/signin">Sign In</Nav.Link>;
     }
     else {
@@ -66,7 +66,6 @@ class MainNavbar extends Component {
           <Nav>
             {this.loggedIn()}
             <Nav.Link href="/atmlocator">Atm Locator</Nav.Link>
-            <Nav.Link href="/transaction">Transaction</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
