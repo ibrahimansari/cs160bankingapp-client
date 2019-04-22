@@ -28,7 +28,8 @@ class MyProvider extends Component {
     accounts: sessionStorage.getItem("accounts"),
     updateCards: cards=>this.updateCards(cards),
     cards: sessionStorage.getItem("cards"),
-    
+
+    // various customer account information
     updateCheckingStatus : checkingStatus =>this.updateCheckingStatus(checkingStatus),
     checkingStatus: sessionStorage.getItem("checkingStatus"),
     updateSavingsStatus : savingsStatus =>this.updateSavingsStatus(savingsStatus),
@@ -42,7 +43,9 @@ class MyProvider extends Component {
     updateSavingsAccountNumber : savingsAccountNumber =>this.updateSavingsAccountNumber(savingsAccountNumber),
     savingsAccountNumber: sessionStorage.getItem("savingsAccountNumber"),
     updateTransaction : userTransaction =>this.updateTransaction(userTransaction),
-    userTransaction: sessionStorage.getItem("userTransaction"),
+    userTransaction: JSON.parse(sessionStorage.getItem("userTransaction")),
+    updateAutoBills : autoBills =>this.updateAutoBills(autoBills),
+    autoBills: JSON.parse(sessionStorage.getItem("autoBills")),
 
     // global boolean checks
     updateIsSignedIn: isSignedIn => this.updateIsSignedIn(isSignedIn),
@@ -59,8 +62,13 @@ class MyProvider extends Component {
     dashboardDisplay : sessionStorage.getItem("dashboardDisplay")
   };
 
+  updateAutoBills (autoBills) {
+    sessionStorage.setItem("autoBills", JSON.stringify(autoBills));
+    this.setState({autoBills});
+  }
+
   updateTransaction (userTransaction) {
-    sessionStorage.setItem("userTransaction", userTransaction);
+    sessionStorage.setItem("userTransaction", JSON.stringify(userTransaction));
     this.setState({userTransaction});
   }
 

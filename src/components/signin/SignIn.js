@@ -74,8 +74,11 @@ validateLogin = async e => {
 
       const bodyTransaction = await responseTransaction.json();
       userTransaction = bodyTransaction["array"];
-      console.table(userTransaction);
+      //console.table(userTransaction);
       this.props.context.updateTransaction(userTransaction);
+
+      // add another backend call for bills here if possible
+      //this.props.context.updateAutoBills();
 
 
       // setting context variables

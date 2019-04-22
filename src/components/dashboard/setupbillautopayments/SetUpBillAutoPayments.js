@@ -33,26 +33,7 @@ class SetUpBillAutoPayments extends Component {
       billDate : "",
       billDateLabel : "",
 
-      bills : [
-      {
-        email : this.props.context.email,
-        amount : 100,
-        name : "Water",
-        date: "Every 2 Months"
-      },
-      {
-        email : this.props.context.email,
-        amount : 300,
-        name : "Electric",
-        date: "Every Month"
-      },
-      {
-        email : this.props.context.email,
-        amount : 300,
-        name : "Account upkeep",
-        date: "Every Month"
-      }
-    ]
+      bills : this.props.context.autoBills
 
     };
   }
@@ -90,6 +71,11 @@ class SetUpBillAutoPayments extends Component {
   }
 
   _renderObject(){
+
+    if(this.state.bills === null) {
+      return null;
+    }
+
     return Object.entries(this.state.bills).map(([key, value], i) => {
       return (
         <div key={key} style = {{ backgroundColor: '#007bff',  color: 'white'}}>
@@ -126,30 +112,69 @@ class SetUpBillAutoPayments extends Component {
       });
     }
 
+
+
+// --------------Connect Here-----------------------------------------------//
   handleSetBill = async e => {
+
     e.preventDefault();
 
-    const billObj = {
+
+    // check for no auto bills
+    var updateBillArray = this.state.bills;
+    if(updateBillArray === null) {
+      updateBillArray = [];
+    }
+
+    // set label to default every month
+    // due to a label bug
+    let localBillDate = this.state.billDateLabel;
+    if(localBillDate === "") {
+      localBillDate = "Every Month";
+    }
+
+    var billObj = {
       email : this.props.context.email,
       amount : this.state.billAmount,
       name : this.state.billName,
-      date: this.state.dateLabel
+      date: localBillDate,
     };
 
-    this.setState({bills: [...this.state.bills, billObj ]});
+    // Backend Call here
+    // Either insert just the object
+    // or after update the entire bills array after it is updated from this.setState below
+
+    updateBillArray = [...updateBillArray, billObj ];
+
+    // update above using billObj or here using updateBillArray
+    //  whichever one is easier
+
+    this.setState({bills: updateBillArray});
+    this.props.context.updateAutoBills(updateBillArray);
 
     this.handleSetBillClose();
-    console.log("works");
   }
 
+// --------------Connect Here-----------------------------------------------//
   handleCloseBill = async e => {
     e.preventDefault();
-    var array = [...this.state.bills];
-    console.log(this.state.billName);
-    var index = array.map(function(e) { return e.name; }).indexOf(this.state.billName);
+
+    if(this.state.bills === null) {
+      return;
+    }
+
+    var updateBillArray = [...this.state.bills];
+    var index = updateBillArray.map(function(e) { return e.name; }).indexOf(this.state.billName);
+
     if (index !== -1) {
-      array.splice(index, 1);
-      this.setState({bills: array});
+      updateBillArray.splice(index, 1);
+      this.setState({bills: updateBillArray});
+
+     // Backend call here
+     // easiest way would just to update using the updateBillArray
+     // or using the index from above remove bill object directly
+
+      this.props.context.updateAutoBills(updateBillArray);
     }
 
     this.handleCloseBillClose();
