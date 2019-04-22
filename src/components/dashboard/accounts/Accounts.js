@@ -127,15 +127,7 @@ class Accounts extends Component {
 	    
 	 const responseText = response.text();
 	    
-	 if(responseText === "Ok")
-		 this.props.context.updateCheckingStatus("Open");
-	 else
-	 {
-		 this.setState({errorPopUp: 'error from server'})
-      		 this.handleOpenAcctClose();
-       		 this.handleErrorShow();
-       		 return;
-	 }
+	 this.props.context.updateCheckingStatus("Open");
     }
     else if(whichAccount === "Savings Account")
     {
@@ -149,15 +141,7 @@ class Accounts extends Component {
 	    
 	 const responseText = response.text();
 	    
-	 if(responseText === "Ok")
-		 this.props.context.updateSavingsStatus("Open");
-	 else
-	 {
-		 this.setState({errorPopUp: 'error from server'})
-      		 this.handleOpenAcctClose();
-       		 this.handleErrorShow();
-       		 return;
-	 }
+	 this.props.context.updateSavingsStatus("Open");
     }
 
     this.handleOpenAcctClose();
@@ -205,15 +189,7 @@ class Accounts extends Component {
 	    
 	 const responseText = response.text();
 	    
-	 if(responseText === "Ok")
-		 this.props.context.updateCheckingStatus("Closed");
-	 else
-	 {
-		 this.setState({errorPopUp: 'error from server'})
-      		 this.handleCloseAcctClose();
-       		 this.handleErrorShow();
-       		 return;
-	 }
+	 this.props.context.updateCheckingStatus("Closed");
     }
     else if(whichAccount === "Savings Account")
     {
@@ -227,15 +203,7 @@ class Accounts extends Component {
 	    
 	 const responseText = response.text();
 	    
-	 if(responseText === "Ok")
-		 this.props.context.updateSavingsStatus("Closed");
-	 else
-	 {
-		 this.setState({errorPopUp: 'error from server'})
-      		 this.handleCloseAcctClose();
-       		 this.handleErrorShow();
-       		 return;
-	 }
+	 this.props.context.updateSavingsStatus("Closed");
     }
     
     this.handleCloseAcctClose();
