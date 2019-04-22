@@ -26,7 +26,6 @@ class MainNavbar extends Component {
 
   handleSignOut() {
     this.props.context.updateIsSignedIn("false");
-    console.log(this.props.context.isSignedIn);
     this.handleClose()
   }
 

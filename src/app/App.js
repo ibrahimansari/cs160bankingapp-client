@@ -22,7 +22,7 @@ class App extends Component {
                   <React.Fragment>
                     <Route exact path="/" render={ props => <FrontPage {...props} {...context} />} />
                     <Route exact path="/signin" render={ props => <SignInPage {...props} {...context} />} />
-                    <Route exact path="/atmlocator" render={ props => <AtmLocatorPage {...props} />} />
+                    <Route exact path="/atmlocator" render={ props => <AtmLocatorPage {...props} {...context}/>} />
                     <Route exact path="/customercreation" render={ props => <CustomerCreationPage {...props} {...context} />} />
                     <Route exact path="/accountrecovery" render={ props => <AccountRecoveryPage {...props} {...context} />} />
                     <Route exact path="/accountdashboard" render={ props => <AccountDashboardPage {...props} {...context} />} />
