@@ -117,7 +117,7 @@ class Accounts extends Component {
 
     if(whichAccount === "Checking Account")
     {
-	 console.log('opening Checking account for: ' + this.props.context.email.toLowerCase');
+	 console.log('opening Checking account for: ' + this.props.context.email.toLowerCase);
 	 const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/openAccount', {
 	 method: 'POST',
  	 mode: "cors",
@@ -139,7 +139,7 @@ class Accounts extends Component {
     }
     else if(whichAccount === "Savings Account")
     {
-	 console.log('opening Savings account for: ' + this.props.context.email.toLowerCase');
+	 console.log('opening Savings account for: ' + this.props.context.email.toLowerCase);
 	 const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/openAccount', {
 	 method: 'POST',
  	 mode: "cors",
@@ -195,7 +195,7 @@ class Accounts extends Component {
 
     if(whichAccount === "Checking Account")
     {
-	 console.log('closing Checking account for: ' + this.props.context.email.toLowerCase');
+	 console.log('closing Checking account for: ' + this.props.context.email.toLowerCase);
 	 const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/closeAccount', {
 	 method: 'POST',
  	 mode: "cors",
@@ -217,7 +217,7 @@ class Accounts extends Component {
     }
     else if(whichAccount === "Savings Account")
     {
-	 console.log('closing Savings account for: ' + this.props.context.email.toLowerCase');
+	 console.log('closing Savings account for: ' + this.props.context.email.toLowerCase);
 	 const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/closeAccount', {
 	 method: 'POST',
  	 mode: "cors",
