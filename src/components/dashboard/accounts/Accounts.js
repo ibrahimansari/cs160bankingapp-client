@@ -115,19 +115,51 @@ class Accounts extends Component {
 
     //------------------Backend stuff here-------------------------------------------------//
 
+    if(whichAccount === "Checking Account")
+    {
+	 console.log('opening Checking account for: ' + this.props.context.email.toLowerCase');
+	 const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/openAccount', {
+	 method: 'POST',
+ 	 mode: "cors",
+ 	 headers: {'Content-type': 'application/json',},
+ 	 body: JSON.stringify({ email: this.props.context.email.toLowerCase(), type : 'checking' }),
+  	 });
+	    
+	 const responseText = response.text();
+	    
+	 if(responseText === "Ok")
+		 this.props.context.updateCheckingStatus("Open");
+	 else
+	 {
+		 this.setState({errorPopUp: 'error from server'})
+      		 this.handleOpenAcctClose();
+       		 this.handleErrorShow();
+       		 return;
+	 }
+    }
+    else if(whichAccount === "Savings Account")
+    {
+	 console.log('opening Savings account for: ' + this.props.context.email.toLowerCase');
+	 const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/openAccount', {
+	 method: 'POST',
+ 	 mode: "cors",
+ 	 headers: {'Content-type': 'application/json',},
+ 	 body: JSON.stringify({ email: this.props.context.email.toLowerCase(), type : 'savings' }),
+  	 });
+	    
+	 const responseText = response.text();
+	    
+	 if(responseText === "Ok")
+		 this.props.context.updateSavingsStatus("Open");
+	 else
+	 {
+		 this.setState({errorPopUp: 'error from server'})
+      		 this.handleOpenAcctClose();
+       		 this.handleErrorShow();
+       		 return;
+	 }
+    }
 
-
-
-     //
-     // Uncomment when done with backend stuff
-     // Otherwise the new account will NOT display
-     //
-    //if(whichAccount === "Checking Account") {
-        // this.props.context.updateCheckingStatus("Open");
-      //}
-     //else {
-         // this.props.context.updateSavingsStatus("Open");
-     //}
     this.handleOpenAcctClose();
   }
 
@@ -161,16 +193,51 @@ class Accounts extends Component {
     //------------------Backend stuff-------------------------------------------------//
 
 
-     //
-     // Uncomment when done with backend stuff
-     // Otherwise the account will stay visible
-     //
-    //if(whichAccount === "Checking Account") {
-        // this.props.context.updateCheckingStatus("Closed");
-      //}
-     //else {
-         // this.props.context.updateSavingsStatus("Closed");
-     //}
+    if(whichAccount === "Checking Account")
+    {
+	 console.log('closing Checking account for: ' + this.props.context.email.toLowerCase');
+	 const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/closeAccount', {
+	 method: 'POST',
+ 	 mode: "cors",
+ 	 headers: {'Content-type': 'application/json',},
+ 	 body: JSON.stringify({ email: this.props.context.email.toLowerCase(), type : 'checking' }),
+  	 });
+	    
+	 const responseText = response.text();
+	    
+	 if(responseText === "Ok")
+		 this.props.context.updateCheckingStatus("Closed");
+	 else
+	 {
+		 this.setState({errorPopUp: 'error from server'})
+      		 this.handleCloseAcctClose();
+       		 this.handleErrorShow();
+       		 return;
+	 }
+    }
+    else if(whichAccount === "Savings Account")
+    {
+	 console.log('closing Savings account for: ' + this.props.context.email.toLowerCase');
+	 const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/closeAccount', {
+	 method: 'POST',
+ 	 mode: "cors",
+ 	 headers: {'Content-type': 'application/json',},
+ 	 body: JSON.stringify({ email: this.props.context.email.toLowerCase(), type : 'savings' }),
+  	 });
+	    
+	 const responseText = response.text();
+	    
+	 if(responseText === "Ok")
+		 this.props.context.updateSavingsStatus("Closed");
+	 else
+	 {
+		 this.setState({errorPopUp: 'error from server'})
+      		 this.handleCloseAcctClose();
+       		 this.handleErrorShow();
+       		 return;
+	 }
+    }
+    
     this.handleCloseAcctClose();
   }
 
