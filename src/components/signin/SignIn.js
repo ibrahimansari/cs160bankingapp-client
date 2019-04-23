@@ -136,7 +136,18 @@ validateLogin = async e => {
       window.location = '/accountdashboard'; // link using this or else context breaks
     }else{
       if(this.state.response ==='Valid Login0'){    //0 represents manager
-        window.location = '/managerdashboard';
+        
+        const responseAccounts = await fetch('https://cs160bankingapp-api.herokuapp.com/api/balanceAllUsers', {
+        method: 'POST',
+        mode: "cors",
+        headers: {'Content-type': 'application/json',},
+        body: JSON.stringify({ email: this.state.email.toLowerCase()}),
+        });
+        
+        const bodyAccounts = await responseAccounts.json();
+        let accountArray = bodyAccounts["balanceUser"];
+        console.log(accountArray);
+       // window.location = '/managerdashboard';
       }
     }
   }
