@@ -36,10 +36,15 @@ class MakeTransactions  extends Component {
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
       });
-
-      let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
-      this.props.context.updateBalance(result);
-      this.props.context.updateCheckingBalance(result);
+       
+      const body = await response.json();
+       
+      if(body === 'Ok'){
+          console.log("ok");
+          let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
+          this.props.context.updateBalance(result);
+          this.props.context.updateCheckingBalance(result);
+      }
       this.toggleDepositPopup();
     }
 
@@ -64,10 +69,12 @@ class MakeTransactions  extends Component {
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
       });
+        
+      const body = await response.json();
 
       this.props.context.updateBalance(result);
       this.props.context.updateCheckingBalance(result);
-       console.log('finished withdrawing');
+      console.log('finished withdrawing');
     }
   
     // getBalance  {
@@ -150,10 +157,10 @@ class MakeTransactions  extends Component {
      // }
      //
         
-        var from = '';
-        var to = '';
-        var fromBalance = 0;
-        var toBalance = 0;
+        let from = '';
+        let to = '';
+        let fromBalance = 0;
+        let toBalance = 0;
         
         if(this.state.value === "Checking to Savings"){
             from = 'checking';
@@ -178,8 +185,6 @@ class MakeTransactions  extends Component {
 
         if(this.state.value === "Checking to Savings"){
             let result = Number(this.props.context.balance) - Number(this.state.transferNum);
-            //this.props.context.checkingBalance = this.props.context.checkingBalance - this.state.transferNum;
-            //this.props.context.savingsBalance = this.props.context.savingsBalance + this.state.transferNum;
             this.props.context.updateSavingsBalance(this.props.context.savingsBalance + this.state.transferNum);
             this.props.context.updateCheckingBalance(this.props.context.checkingBalance - this.state.transferNum);
             this.props.context.updateBalance(result);
@@ -187,8 +192,6 @@ class MakeTransactions  extends Component {
 
         }else{
            let result = Number(this.props.context.balance) + Number(this.state.transferNum);
-            //this.props.context.checkingBalance = this.props.context.checkingBalance + this.state.transferNum;
-            //this.props.context.savingsBalance = this.props.context.savingsBalance - this.state.transferNum;
             
             this.props.context.updateSavingsBalance(this.props.context.savingsBalance - this.state.transferNum);
             this.props.context.updateCheckingBalance(this.props.context.checkingBalance + this.state.transferNum);
