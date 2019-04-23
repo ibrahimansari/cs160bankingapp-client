@@ -158,9 +158,9 @@ validateLogin = async e => {
         
         
         let holdT =  body["transactions"]; //transactions of all users
-        console.log(holdT);
+        //console.log(holdT);
       
-       // window.location = '/managerdashboard';
+        window.location = '/managerdashboard';
       }
     }
   }
