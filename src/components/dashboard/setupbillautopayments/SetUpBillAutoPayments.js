@@ -84,7 +84,7 @@ class SetUpBillAutoPayments extends Component {
           >
             <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
               <Typography  style = {{ backgroundColor: '#007bff',  color: 'white'}}>
-              {value.name} Bill
+              {value.bill_name} Bill
                </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -93,7 +93,7 @@ class SetUpBillAutoPayments extends Component {
                Bill amount: {value.amount}
              </li>
               <li>
-                Charged Every: {value.date}
+                Charged: {value.bill_date}
               </li>
              </Typography>
            </ExpansionPanelDetails>
@@ -112,9 +112,6 @@ class SetUpBillAutoPayments extends Component {
       });
     }
 
-
-
-// --------------Connect Here-----------------------------------------------//
   handleSetBill = async e => {
 
     e.preventDefault();
@@ -136,8 +133,8 @@ class SetUpBillAutoPayments extends Component {
     var billObj = {
       email : this.props.context.email,
       amount : this.state.billAmount,
-      name : this.state.billName,
-      date: localBillDate,
+      bill_name : this.state.billName,
+      bill_date: localBillDate,
     };
 
     // Backend Call here
@@ -155,7 +152,6 @@ class SetUpBillAutoPayments extends Component {
     this.handleSetBillClose();
   }
 
-// --------------Connect Here-----------------------------------------------//
   handleCloseBill = async e => {
     e.preventDefault();
 
@@ -164,7 +160,7 @@ class SetUpBillAutoPayments extends Component {
     }
 
     var updateBillArray = [...this.state.bills];
-    var index = updateBillArray.map(function(e) { return e.name; }).indexOf(this.state.billName);
+    var index = updateBillArray.map(function(e) { return e.bill_name; }).indexOf(this.state.billName);
 
     if (index !== -1) {
       updateBillArray.splice(index, 1);

@@ -6,10 +6,7 @@ class AtmLocatorPage extends Component {
   render()  {
     const { context } = this.props;
     return (
-      <div class = "FrontPage">
-        <MainNavbar
-          context = {context}
-        />
+      <div>
         <AtmLocator
           context = {context}
         />
