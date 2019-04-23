@@ -110,8 +110,8 @@ class MakeTransactions  extends Component {
           body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: body["array"][0].balance, toFirstName:body["array"][0].first_name, toLastName:body["array"][0].last_name}),
           });  
 
-            const body = await response.json();
-            if(body === 'Ok'){
+            const b = await response.json();
+            if(b === 'Ok'){
                 let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
                 this.props.context.updateBalance(result);
                 this.props.context.updateCheckingBalance(result);
