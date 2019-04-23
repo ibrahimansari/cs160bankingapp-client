@@ -137,6 +137,7 @@ validateLogin = async e => {
     }else{
       if(this.state.response ==='Valid Login0'){    //0 represents manager
         
+        //get bank account information of all customers
         const responseAccounts = await fetch('https://cs160bankingapp-api.herokuapp.com/api/balanceAllUsers', {
         method: 'POST',
         mode: "cors",
@@ -145,8 +146,20 @@ validateLogin = async e => {
         });
         
         const bodyAccounts = await responseAccounts.json();
-        let accountArray = bodyAccounts["balanceUser"];
-        console.log(accountArray);
+        let accountArray = bodyAccounts["balanceUser"];     //array holds account information of users such as balance of checking/savings account and more
+        //console.log(accountArray);
+        //accountArray[0].first_name;
+        //accountArray[0].last_name;
+        //accountArray[0].email;
+        //accountArray[0].account_number;
+        //accountArray[0].status;
+        //accountArray[0].balance;
+        //accountArray[0].type;
+        
+        
+        let holdT =  body["transactions"]; //transactions of all users
+        console.log(holdT);
+      
        // window.location = '/managerdashboard';
       }
     }
