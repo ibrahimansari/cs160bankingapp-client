@@ -54,6 +54,8 @@ class MakeTransactions  extends Component {
        e.preventDefault();
 
       console.log('withdrawing');
+      
+      let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
 
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0 || result < 0) {
         this.setState({withdrawNum : 0})
@@ -72,7 +74,6 @@ class MakeTransactions  extends Component {
       const body = await response.json();
         
       if(body==='Ok'){
-          let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
           this.props.context.updateBalance(result);
           this.props.context.updateCheckingBalance(result);
       }
