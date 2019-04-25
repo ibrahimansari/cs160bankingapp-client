@@ -132,8 +132,8 @@ validateLogin = async e => {
 
 //       console.log(accountInfo[0]);
 //       console.log(accountInfo[1]);
-      
-      
+
+
         //get autobill information
         const responseBill = await fetch('https://cs160bankingapp-api.herokuapp.com/api/autobill', {
         method: 'POST',
@@ -141,14 +141,15 @@ validateLogin = async e => {
         headers: {'Content-type': 'application/json',},
         body: JSON.stringify({ email: this.state.email.toLowerCase()}),
         });
-        
+
         const bodyAutoBill = await responseBill.json();
         let autoBillArray = bodyAutoBill["array"];     //array holds auto bill information of a user
+        this.props.context.updateAutoBills(autoBillArray);
 
       window.location = '/accountdashboard'; // link using this or else context breaks
     }else{
       if(this.state.response ==='Valid Login0'){    //0 represents manager
-        
+
         //get bank account information of all customers
         const responseAccounts = await fetch('https://cs160bankingapp-api.herokuapp.com/api/balanceAllUsers', {
         method: 'POST',
@@ -156,7 +157,7 @@ validateLogin = async e => {
         headers: {'Content-type': 'application/json',},
         body: JSON.stringify({ email: this.state.email.toLowerCase()}),
         });
-        
+
         const bodyAccounts = await responseAccounts.json();
         let accountArray = bodyAccounts["balanceUser"];     //array holds account information of users such as balance of checking/savings account and more
         //console.log(accountArray);
@@ -167,12 +168,12 @@ validateLogin = async e => {
         //accountArray[0].status;
         //accountArray[0].balance;
         //accountArray[0].type;
-        
-        
+
+
         let holdT =  body["transactions"]; //transactions of all users
         //console.log(holdT);
-        
-      
+
+
         window.location = '/managerdashboard';
       }
     }
