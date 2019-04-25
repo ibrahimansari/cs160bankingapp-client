@@ -92,13 +92,13 @@ validateLogin = async e => {
 
       //console.log(transactions[0].balance);     //user current balance
 
-      var accountInfo = body["accountInfo"];  //checkings/savings account info
-      var checkingStatus = 'Closed';
-      var savingsStatus = 'Closed';
-      var checkingBalance = 0;
-      var savingsBalance = 0;
-      var checkingAccountNumber = 0;
-      var savingsAccountNumber = 0;
+      let accountInfo = body["accountInfo"];  //checkings/savings account info
+      let checkingStatus = 'Closed';
+      let savingsStatus = 'Closed';
+      let checkingBalance = 0;
+      let savingsBalance = 0;
+      let checkingAccountNumber = 0;
+      let savingsAccountNumber = 0;
 
       if(accountInfo[0].type === 'checking'){
            checkingStatus = accountInfo[0].status;
@@ -132,6 +132,18 @@ validateLogin = async e => {
 
 //       console.log(accountInfo[0]);
 //       console.log(accountInfo[1]);
+      
+      
+        //get autobill information
+        const responseBill = await fetch('https://cs160bankingapp-api.herokuapp.com/api/autobill', {
+        method: 'POST',
+        mode: "cors",
+        headers: {'Content-type': 'application/json',},
+        body: JSON.stringify({ email: this.state.email.toLowerCase()}),
+        });
+        
+        const bodyAutoBill = await responseBill.json();
+        let autoBillArray = bodyAutoBill["array"];     //array holds auto bill information of a user
 
       window.location = '/accountdashboard'; // link using this or else context breaks
     }else{
@@ -159,6 +171,7 @@ validateLogin = async e => {
         
         let holdT =  body["transactions"]; //transactions of all users
         //console.log(holdT);
+        
       
         window.location = '/managerdashboard';
       }
