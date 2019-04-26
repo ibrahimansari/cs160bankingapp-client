@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import { Button, Card, FormGroup, FormControl, FormLabel, Modal} from "react-bootstrap";
 import Popup from "reactjs-popup";
+import ImageDropzone from './ImageDropzone';
 
 class MakeTransactions  extends Component {
     constructor(props, context) {
       super(props, context);
+
+      this.handleConfirmShow = this.handleConfirmShow.bind(this);
+      this.handleConfirmClose = this.handleConfirmClose.bind(this);
+
       this.state = {
         value:"Checking to Savings",
         depositNum: 0,
@@ -18,7 +23,11 @@ class MakeTransactions  extends Component {
         showTransferToExternalAccount: false,
         showTransferToInternalAccount: false,
         internalTransfer : "Checking to Savings",
-        label: ''
+        label: '',
+
+        showConfirm : false,
+        confirmPopup : " The Transaction has been performed",
+        showDepositByCheckPopUp: false,
       };
     }
 
@@ -36,17 +45,44 @@ class MakeTransactions  extends Component {
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
       });
-       
+
       const body = await response.json();
-       
+
       if(body === 'Ok'){
           console.log("ok");
           let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
           this.props.context.updateBalance(result);
           this.props.context.updateCheckingBalance(result);
+          this.handleConfirmShow();
       }
       this.toggleDepositPopup();
     }
+
+    handleDepositByCheck = async e => {
+        e.preventDefault();
+        console.log('depositing');
+
+      let checkNumber = 100; // default $100 for any image
+
+       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
+       method: 'POST',
+       mode: "cors",
+       headers: {'Content-type': 'application/json',},
+       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: checkNumber, balance: Number(this.props.context.balance)}),
+       });
+
+       const body = await response.json();
+
+       if(body === 'Ok'){
+           console.log("ok");
+           let result =  Number(this.props.context.balance) + checkNumber;
+           this.props.context.updateBalance(result);
+           this.props.context.updateCheckingBalance(result);
+           this.handleConfirmShow();
+       }
+
+       this.toggleDepositPopup();
+     }
 
 
 
@@ -54,7 +90,7 @@ class MakeTransactions  extends Component {
        e.preventDefault();
 
       console.log('withdrawing');
-      
+
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
 
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0 || result < 0) {
@@ -70,38 +106,40 @@ class MakeTransactions  extends Component {
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
       });
-        
+
       const body = await response.json();
-        
+
       if(body==='Ok'){
           this.props.context.updateBalance(result);
           this.props.context.updateCheckingBalance(result);
+          this.handleConfirmShow();
       }
       console.log('finished withdrawing');
+
     }
-  
+
     // getBalance  {
     //   const resp = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance');
     //   console.log(resp.json);
     //   return resp.json();
     // }
-    
+
 
 
     handleTransferToAnotherCustomer = async e => {
       e.preventDefault();
 
       this.toggleCustomerTransferPopup();
-        
+
       console.log('transferring to another customer');
 
       const res = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({emailTo: this.state.transferName}),});  
+      body: JSON.stringify({emailTo: this.state.transferName}),});
       const body = await res.json();
-        
+
       if(body["array"].length > 0 && body["array"][0].status === 'Open'){    //check statusTo customer is Open and lenght of array > 0 meaning customer is valid
 
           const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToInternal', {
@@ -109,15 +147,15 @@ class MakeTransactions  extends Component {
           mode: "cors",
           headers: {'Content-type': 'application/json',},
           body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: body["array"][0].balance, toFirstName:body["array"][0].first_name, toLastName:body["array"][0].last_name}),
-          });  
+          });
 
             const b = await response.json();
             if(b === 'Ok'){
                 let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
                 this.props.context.updateBalance(result);
                 this.props.context.updateCheckingBalance(result);
+                this.handleConfirmShow();
             }
-
             console.log('Transferred to another account');
       }
 
@@ -133,20 +171,21 @@ class MakeTransactions  extends Component {
       // subtract the amount from the user and send into the void
 
       // backend stuff
-        
+
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToExternal', {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)}),
-      });  
-        
+      });
+
       const body = await response.json();
 
       if(body === 'Ok'){
           let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
           this.props.context.updateBalance(result);
           this.props.context.updateCheckingBalance(result);
+          this.handleConfirmShow();
       }
 
     }
@@ -165,12 +204,12 @@ class MakeTransactions  extends Component {
      //     // backend stuff
      // }
      //
-        
+
         let from = '';
         let to = '';
         let fromBalance = 0;
         let toBalance = 0;
-        
+
         if(this.state.value === "Checking to Savings"){
             from = 'checking';
             to = 'savings';
@@ -178,20 +217,20 @@ class MakeTransactions  extends Component {
             toBalance = this.props.context.savingsBalance;
         }else{
             to = 'checking';
-            from = 'savings';  
+            from = 'savings';
             toBalance = this.props.context.balance;
             fromBalance = this.props.context.savingsBalance;
         }
 
-        
-     //{email, accountFrom, accountTo, amount} 
+
+     //{email, accountFrom, accountTo, amount}
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferSelf', {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
       body: JSON.stringify({email : this.props.context.email, accountFrom:from , accountTo:to,amount: Number(this.state.transferNum), toBalance:toBalance, fromBalance:fromBalance}),
-      });  
-        
+      });
+
       const body = await response.json();
        if(body === 'Ok'){
             if(this.state.value === "Checking to Savings"){
@@ -199,7 +238,7 @@ class MakeTransactions  extends Component {
                 this.props.context.updateSavingsBalance(this.props.context.savingsBalance + this.state.transferNum);
                 this.props.context.updateCheckingBalance(this.props.context.checkingBalance - this.state.transferNum);
                 this.props.context.updateBalance(result);
-
+                this.handleConfirmShow();
 
             }else{
                let result = Number(this.props.context.balance) + Number(this.state.transferNum);
@@ -207,18 +246,23 @@ class MakeTransactions  extends Component {
                 this.props.context.updateSavingsBalance(this.props.context.savingsBalance - this.state.transferNum);
                 this.props.context.updateCheckingBalance(this.props.context.checkingBalance + this.state.transferNum);
                 this.props.context.updateBalance(result);
+                this.handleConfirmShow();
 
             }
-        
+
             console.log("transferring internally");
        }
-        
+
         this.toggleInternalTransferPopup();
     }
 
   toggleDepositPopup() {
       this.setState({showDepositPopUp: !this.state.showDepositPopUp});
     }
+
+  toggleDepositByCheckPopup() {
+    this.setState({showDepositByCheckPopUp: !this.state.showDepositByCheckPopUp});
+  }
 
   toggleWithdrawalPopup() {
     this.setState({showWithdrawPopUp: !this.state.showWithdrawPopUp});
@@ -243,15 +287,21 @@ class MakeTransactions  extends Component {
     }
 
     handleInternalChange = event => {
-
-         
         this.setState({value: event.target.value});
-
     }
 
     handleSubmit = event => {
       event.preventDefault();
     }
+
+    handleConfirmShow() {
+      this.setState({showConfirm: true});
+    }
+
+    handleConfirmClose() {
+        this.setState({showConfirm: false});
+    }
+
 
     render() {
       let {balance} = this.props.context;
@@ -292,6 +342,35 @@ class MakeTransactions  extends Component {
         </Card.Body>
        </Card>
            </Popup>
+
+           <Popup
+             trigger={<Button block size = "large" type="submit">Make a Deposit by Check image</Button>}
+             position="center right"
+             modal
+             open= {this.state.showDepositByCheckPopUp}
+             >
+             <Card style = {{height: '18rem', textAlign: 'center'}}>
+               <Card.Body>
+            <Card.Title>Making a deposit by check image</Card.Title>
+           <div className="Deposit" style = {{ maxWidth: '500px', margin: '0 auto'}}>
+              <form onSubmit={this.handleDepositByCheck}>
+                <div style = {{backgroundColor: 'blue', color: 'white'}}>
+                  <ImageDropzone/>
+                </div>
+
+                <div style = {{backgroundColor: 'white', color: 'white'}}>For spacing xD</div>
+                 <Button
+                   block
+                   size="large"
+                   type="submit"
+                 >
+                   Submit
+                 </Button>
+               </form>
+           </div>
+         </Card.Body>
+        </Card>
+            </Popup>
 
            <Popup
              trigger={<Button block size = "large" type="submit">Make a Withdrawal</Button>}
@@ -458,8 +537,30 @@ class MakeTransactions  extends Component {
 </Card.Body>
 </Card>
 </Popup>
+    <h1> Balance: ${balance} </h1>
 
-        <h1> Balance: ${balance} </h1>
+      <Modal style={{textAlign: 'center', paddingTop: '210px'}}show={this.state.showConfirm} onHide={this.handleConfirmClose}>
+        <Modal.Header closeButton>
+        <Card style = {{height: '10rem', width: '50rem', textAlign: 'center'}}>
+          <Card.Body>
+       <Card.Title>Transaction successful!</Card.Title>
+      <div className="Transfer" style = {{ maxWidth: '500px', textAlign: 'center', margin: '0 auto'}} >
+        <form onSubmit={this.handleConfirmClose}>
+          {this.state.confirmPopup}
+           <Button
+             block
+             size="large"
+             type="submit"
+             style= {{paddingTop: '10px'}}
+           >
+             Click to continue
+           </Button>
+         </form>
+      </div>
+      </Card.Body>
+      </Card>
+      </Modal.Header>
+      </Modal>
         </div>
       );
     }
