@@ -34,7 +34,7 @@ class MakeTransactions  extends Component {
    handleDeposit = async e => {
        e.preventDefault();
        console.log('depositing');
-      if(isNaN(this.state.depositNum) || this.state.depositNum < 0) {
+      if(isNaN(this.state.depositNum) || this.state.depositNum <= 0) {
         this.setState({depositNum : 0})
         return;
       }
@@ -61,7 +61,7 @@ class MakeTransactions  extends Component {
     handleDepositByCheck = async e => {
       e.preventDefault();
       console.log('depositing');
-     if(isNaN(this.state.depositNum) || this.state.depositNum < 0) {
+     if(isNaN(this.state.depositNum) || this.state.depositNum <= 0) {
        this.setState({depositNum : 0})
        return;
      }
@@ -161,7 +161,14 @@ class MakeTransactions  extends Component {
     handleTransferToExternalAccount = async e => {
       e.preventDefault();
       this.toggleExternalTransferPopup();
+        
+      let result = Number(this.props.context.balance) - Number(this.state.transferNum);
 
+      if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || result < 0) {
+        this.setState({transferNum : 0})
+        return;
+      }
+        
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToExternal', {
       method: 'POST',
       mode: "cors",
@@ -201,6 +208,11 @@ class MakeTransactions  extends Component {
                 fromBalance = this.props.context.savingsBalance;
             }
 
+            let result = fromBalance - Number(this.state.transferNum);
+            if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || result < 0) {
+                this.setState({transferNum : 0})
+                return;
+            }
 
          //{email, accountFrom, accountTo, amount}
           const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferSelf', {
