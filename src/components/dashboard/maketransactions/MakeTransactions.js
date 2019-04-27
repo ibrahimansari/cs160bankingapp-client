@@ -287,6 +287,10 @@ class MakeTransactions  extends Component {
 
     render() {
       let {balance} = this.props.context;
+
+      if(this.props.context.checkingStatus === "Closed" || this.props.context.checkingStatus === null) {
+        return <h4>To start performing transactions open a Checking Account under 'Accounts'</h4>
+      }
       return (
 
           <div style = {{ textAlign: 'center', paddingTop: '30px'}}>
