@@ -47,6 +47,12 @@ class MyProvider extends Component {
     updateAutoBills : autoBills =>this.updateAutoBills(autoBills),
     autoBills: JSON.parse(sessionStorage.getItem("autoBills")),
 
+    // Manager Dashboard All user information arrays
+    updateAllUserAccounts : allUserAccounts =>this.updateAllUsers(allUserAccounts),
+    allUserAccounts: JSON.parse(sessionStorage.getItem("allUserAccounts")),
+    updateAllUserTransactions : allUserTransactions =>this.updateAllUserTransactions(allUserTransactions),
+    allUserTransactions: JSON.parse(sessionStorage.getItem("allUserTransactions")),
+
     // global boolean checks
     updateIsSignedIn: isSignedIn => this.updateIsSignedIn(isSignedIn),
     isSignedIn : sessionStorage.getItem("isSignedIn"),
@@ -61,6 +67,16 @@ class MyProvider extends Component {
     updateDashboardDisplay : dashboardDisplay => this.updateDashboardDisplay(dashboardDisplay),
     dashboardDisplay : sessionStorage.getItem("dashboardDisplay")
   };
+
+  updateAllUserAccounts (allUserAccounts) {
+    sessionStorage.setItem("allUserAccounts", JSON.stringify(allUserAccounts));
+    this.setState({allUserAccounts});
+  }
+
+  updateAllUserTransactions (allUserTransactions) {
+    sessionStorage.setItem("allUserTransactions", JSON.stringify(allUserTransactions));
+    this.setState({allUserTransactions});
+  }
 
   updateAutoBills (autoBills) {
     sessionStorage.setItem("autoBills", JSON.stringify(autoBills));

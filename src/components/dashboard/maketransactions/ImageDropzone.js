@@ -8,7 +8,6 @@ class ImageDropzone extends Component {
   };
 
   onDrop = (acceptedFiles) => {
-      console.log(acceptedFiles[0].name);
       this.setState({text: acceptedFiles[0].name});
     }
 

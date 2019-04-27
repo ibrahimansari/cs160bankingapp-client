@@ -160,6 +160,9 @@ validateLogin = async e => {
 
         const bodyAccounts = await responseAccounts.json();
         let accountArray = bodyAccounts["balanceUser"];     //array holds account information of users such as balance of checking/savings account and more
+        console.log("All user accounts");
+        console.table(accountArray);
+        this.props.context.updateAllUserAccounts(accountArray);
         //console.log(accountArray);
         //accountArray[0].first_name;
         //accountArray[0].last_name;
@@ -169,8 +172,10 @@ validateLogin = async e => {
         //accountArray[0].balance;
         //accountArray[0].type;
 
-
         let holdT =  body["transactions"]; //transactions of all users
+        console.log("All user transactions");
+        console.table(holdT);
+        this.props.context.updateAllUserTransactions(holdT);
         //console.log(holdT);
 
 

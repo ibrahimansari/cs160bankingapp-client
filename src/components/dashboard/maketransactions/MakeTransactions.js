@@ -59,29 +59,30 @@ class MakeTransactions  extends Component {
     }
 
     handleDepositByCheck = async e => {
-        e.preventDefault();
-        console.log('depositing');
+      e.preventDefault();
+      console.log('depositing');
+     if(isNaN(this.state.depositNum) || this.state.depositNum < 0) {
+       this.setState({depositNum : 0})
+       return;
+     }
 
-      let checkNumber = 100; // default $100 for any image
+     const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
+     method: 'POST',
+     mode: "cors",
+     headers: {'Content-type': 'application/json',},
+     body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
+     });
 
-       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
-       method: 'POST',
-       mode: "cors",
-       headers: {'Content-type': 'application/json',},
-       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: checkNumber, balance: Number(this.props.context.balance)}),
-       });
+     const body = await response.json();
 
-       const body = await response.json();
-
-       if(body === 'Ok'){
-           console.log("ok");
-           let result =  Number(this.props.context.balance) + checkNumber;
-           this.props.context.updateBalance(result);
-           this.props.context.updateCheckingBalance(result);
-           this.handleConfirmShow();
-       }
-
-       this.toggleDepositPopup();
+     if(body === 'Ok'){
+         console.log("ok");
+         let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
+         this.props.context.updateBalance(result);
+         this.props.context.updateCheckingBalance(result);
+         this.handleConfirmShow();
+     }
+     this.toggleDepositPopup();
      }
 
 
@@ -165,13 +166,6 @@ class MakeTransactions  extends Component {
       e.preventDefault();
       this.toggleExternalTransferPopup();
 
-      // variables to use
-      // this.state.transferName //the name of external account
-      // this.state.transferNum //amount to be transfered
-      // subtract the amount from the user and send into the void
-
-      // backend stuff
-
       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToExternal', {
       method: 'POST',
       mode: "cors",
@@ -192,18 +186,6 @@ class MakeTransactions  extends Component {
 
     handleTransferToInternalAccount = async e => {
       e.preventDefault();
-
-     // variables to use
-     // this.state.transferNum //amount to be transfered
-     // this.state.label //either Checking to Savings or Savings to depositChecking
-
-     // if (this.state.label === "Checking to Savings") {
-         // backend sutff
-     // }
-     // else {
-     //     // backend stuff
-     // }
-     //
 
         let from = '';
         let to = '';
@@ -357,8 +339,17 @@ class MakeTransactions  extends Component {
                 <div style = {{backgroundColor: 'blue', color: 'white'}}>
                   <ImageDropzone/>
                 </div>
-
                 <div style = {{backgroundColor: 'white', color: 'white'}}>For spacing xD</div>
+                  <FormGroup controlId="depositNum">
+                    <FormLabel>What is the amount on the image?</FormLabel>
+                    <FormControl
+                      autoFocus
+                      placeholder="Enter amount to deposit"
+                      type = "depositNum"
+                      value ={this.state.depositNum}
+                      onChange={this.handleChange}
+                    />
+                </FormGroup>
                  <Button
                    block
                    size="large"
