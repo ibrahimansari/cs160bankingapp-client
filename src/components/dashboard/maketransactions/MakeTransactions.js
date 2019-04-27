@@ -92,7 +92,6 @@ class MakeTransactions  extends Component {
 
       console.log('withdrawing');
 
-      let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
 
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0 || result < 0) {
         this.setState({withdrawNum : 0})
@@ -108,9 +107,10 @@ class MakeTransactions  extends Component {
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
       });
 
-      const body = await response.json();
+      const body = await response.text();
 
-      if(body==='Ok'){
+      if(body==="Ok"){
+           let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
           this.props.context.updateBalance(result);
           this.props.context.updateCheckingBalance(result);
           this.handleConfirmShow();
@@ -118,13 +118,6 @@ class MakeTransactions  extends Component {
       console.log('finished withdrawing');
 
     }
-
-    // getBalance  {
-    //   const resp = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance');
-    //   console.log(resp.json);
-    //   return resp.json();
-    // }
-
 
 
     handleTransferToAnotherCustomer = async e => {
