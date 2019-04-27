@@ -97,25 +97,25 @@ class MakeTransactions  extends Component {
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0 || result < 0) {
         this.setState({withdrawNum : 0})
         return;
-      }
+      }else{
+          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
+          method: 'POST',
+          mode: "cors",
+          headers: {'Content-type': 'application/json',},
+          body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
+          });
 
+          const body = await response.text();
+
+          if(body==="Ok"){
+              this.props.context.updateBalance(result);
+              this.props.context.updateCheckingBalance(result);
+              this.handleConfirmShow();
+          }
+          console.log('finished withdrawing');
+      }
       this.toggleWithdrawalPopup();
 
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
-      method: 'POST',
-      mode: "cors",
-      headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
-      });
-
-      const body = await response.text();
-
-      if(body==="Ok"){
-          this.props.context.updateBalance(result);
-          this.props.context.updateCheckingBalance(result);
-          this.handleConfirmShow();
-      }
-      console.log('finished withdrawing');
 
     }
 
@@ -160,57 +160,30 @@ class MakeTransactions  extends Component {
 
     handleTransferToExternalAccount = async e => {
       e.preventDefault();
-      this.toggleExternalTransferPopup();
-        
-//       let result = Number(this.props.context.balance) - Number(this.state.transferNum);
 
-//       if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || result < 0) {
-//         this.setState({transferNum : 0})
-//         return;
-//       }
-        
-//       const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferToExternal', {
-//       method: 'POST',
-//       mode: "cors",
-//       headers: {'Content-type': 'application/json',},
-//       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)}),
-//       });
-
-//       const body = await response.text();
-
-//       if(body === 'Ok'){
-//           let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-//           this.props.context.updateBalance(result);
-//           this.props.context.updateCheckingBalance(result);
-//           this.handleConfirmShow();
-//       }
-        
-        
       let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
-
 
       if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || result < 0) {
         this.setState({transferNum : 0})
         return;
-      }
+      }else{
+          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
+          method: 'POST',
+          mode: "cors",
+          headers: {'Content-type': 'application/json',},
+          body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.transferNum) , balance: Number(this.props.context.balance)}),
+          });
 
-      this.toggleWithdrawalPopup();
+          const body = await response.text();
 
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
-      method: 'POST',
-      mode: "cors",
-      headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.transferNum) , balance: Number(this.props.context.balance)}),
-      });
-
-      const body = await response.text();
-
-      if(body==="Ok"){
-          this.props.context.updateBalance(result);
-          this.props.context.updateCheckingBalance(result);
-          this.handleConfirmShow();
+          if(body==="Ok"){
+              this.props.context.updateBalance(result);
+              this.props.context.updateCheckingBalance(result);
+              this.handleConfirmShow();
+          }
       }
       console.log('finished external transfer');
+      this.toggleExternalTransferPopup();
 
     }
 
