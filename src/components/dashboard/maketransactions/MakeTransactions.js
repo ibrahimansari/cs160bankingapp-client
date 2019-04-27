@@ -180,53 +180,55 @@ class MakeTransactions  extends Component {
     handleTransferToInternalAccount = async e => {
       e.preventDefault();
 
-        let from = '';
-        let to = '';
-        let fromBalance = 0;
-        let toBalance = 0;
+        if(this.props.context.checkingStatus === 'Open' && this.props.context.savingsStatus === 'Open'){
+            let from = '';
+            let to = '';
+            let fromBalance = 0;
+            let toBalance = 0;
 
-        if(this.state.value === "Checking to Savings"){
-            from = 'checking';
-            to = 'savings';
-            fromBalance = this.props.context.balance;
-            toBalance = this.props.context.savingsBalance;
-        }else{
-            to = 'checking';
-            from = 'savings';
-            toBalance = this.props.context.balance;
-            fromBalance = this.props.context.savingsBalance;
-        }
-
-
-     //{email, accountFrom, accountTo, amount}
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferSelf', {
-      method: 'POST',
-      mode: "cors",
-      headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({email : this.props.context.email, accountFrom:from , accountTo:to,amount: Number(this.state.transferNum), toBalance:toBalance, fromBalance:fromBalance}),
-      });
-
-      const body = await response.text();
-       if(body === 'Ok'){
             if(this.state.value === "Checking to Savings"){
-                let result = Number(this.props.context.balance) - Number(this.state.transferNum);
-                this.props.context.updateSavingsBalance(this.props.context.savingsBalance + this.state.transferNum);
-                this.props.context.updateCheckingBalance(this.props.context.checkingBalance - this.state.transferNum);
-                this.props.context.updateBalance(result);
-                this.handleConfirmShow();
-
+                from = 'checking';
+                to = 'savings';
+                fromBalance = this.props.context.balance;
+                toBalance = this.props.context.savingsBalance;
             }else{
-               let result = Number(this.props.context.balance) + Number(this.state.transferNum);
-
-                this.props.context.updateSavingsBalance(this.props.context.savingsBalance - this.state.transferNum);
-                this.props.context.updateCheckingBalance(this.props.context.checkingBalance + this.state.transferNum);
-                this.props.context.updateBalance(result);
-                this.handleConfirmShow();
-
+                to = 'checking';
+                from = 'savings';
+                toBalance = this.props.context.balance;
+                fromBalance = this.props.context.savingsBalance;
             }
 
-            console.log("transferring internally");
-       }
+
+         //{email, accountFrom, accountTo, amount}
+          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/transferSelf', {
+          method: 'POST',
+          mode: "cors",
+          headers: {'Content-type': 'application/json',},
+          body: JSON.stringify({email : this.props.context.email, accountFrom:from , accountTo:to,amount: Number(this.state.transferNum), toBalance:toBalance, fromBalance:fromBalance}),
+          });
+
+          const body = await response.text();
+           if(body === 'Ok'){
+                if(this.state.value === "Checking to Savings"){
+                    let result = Number(this.props.context.balance) - Number(this.state.transferNum);
+                    this.props.context.updateSavingsBalance(this.props.context.savingsBalance + this.state.transferNum);
+                    this.props.context.updateCheckingBalance(this.props.context.checkingBalance - this.state.transferNum);
+                    this.props.context.updateBalance(result);
+                    this.handleConfirmShow();
+
+                }else{
+                   let result = Number(this.props.context.balance) + Number(this.state.transferNum);
+
+                    this.props.context.updateSavingsBalance(this.props.context.savingsBalance - this.state.transferNum);
+                    this.props.context.updateCheckingBalance(this.props.context.checkingBalance + this.state.transferNum);
+                    this.props.context.updateBalance(result);
+                    this.handleConfirmShow();
+
+                }
+
+                console.log("transferring internally");
+           }
+        }
 
         this.toggleInternalTransferPopup();
     }
