@@ -46,7 +46,7 @@ class MakeTransactions  extends Component {
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
       });
 
-      const body = await response.json();
+      const body = await response.text();
 
       if(body === 'Ok'){
           console.log("ok");
@@ -73,7 +73,7 @@ class MakeTransactions  extends Component {
      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
      });
 
-     const body = await response.json();
+     const body = await response.text();
 
      if(body === 'Ok'){
          console.log("ok");
@@ -143,7 +143,7 @@ class MakeTransactions  extends Component {
           body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, emailTo: this.state.transferName, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance), toBalance: body["array"][0].balance, toFirstName:body["array"][0].first_name, toLastName:body["array"][0].last_name}),
           });
 
-            const b = await response.json();
+            const b = await response.text();
             if(b === 'Ok'){
                 let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
                 this.props.context.updateBalance(result);
@@ -166,7 +166,7 @@ class MakeTransactions  extends Component {
       body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name,emailFrom : this.props.context.email, amount: Number(this.state.transferNum), balance: Number(this.props.context.balance)}),
       });
 
-      const body = await response.json();
+      const body = await response.text();
 
       if(body === 'Ok'){
           let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
@@ -206,7 +206,7 @@ class MakeTransactions  extends Component {
       body: JSON.stringify({email : this.props.context.email, accountFrom:from , accountTo:to,amount: Number(this.state.transferNum), toBalance:toBalance, fromBalance:fromBalance}),
       });
 
-      const body = await response.json();
+      const body = await response.text();
        if(body === 'Ok'){
             if(this.state.value === "Checking to Savings"){
                 let result = Number(this.props.context.balance) - Number(this.state.transferNum);
