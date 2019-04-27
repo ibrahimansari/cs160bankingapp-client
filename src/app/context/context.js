@@ -48,7 +48,7 @@ class MyProvider extends Component {
     autoBills: JSON.parse(sessionStorage.getItem("autoBills")),
 
     // Manager Dashboard All user information arrays
-    updateAllUserAccounts : allUserAccounts =>this.updateAllUsers(allUserAccounts),
+    updateAllUserAccounts : allUserAccounts =>this.updateAllUsersAccounts(allUserAccounts),
     allUserAccounts: JSON.parse(sessionStorage.getItem("allUserAccounts")),
     updateAllUserTransactions : allUserTransactions =>this.updateAllUserTransactions(allUserTransactions),
     allUserTransactions: JSON.parse(sessionStorage.getItem("allUserTransactions")),
