@@ -10,6 +10,9 @@ class MakeTransactions  extends Component {
       this.handleConfirmShow = this.handleConfirmShow.bind(this);
       this.handleConfirmClose = this.handleConfirmClose.bind(this);
 
+      this.handleErrorShow = this.handleErrorShow.bind(this);
+      this.handleErrorClose = this.handleErrorClose.bind(this);
+
       this.state = {
         value:"Checking to Savings",
         depositNum: 0,
@@ -28,6 +31,9 @@ class MakeTransactions  extends Component {
         showConfirm : false,
         confirmPopup : " The Transaction has been performed",
         showDepositByCheckPopUp: false,
+
+        showError : false,
+        errorPopUp : "",
       };
     }
 
@@ -36,6 +42,8 @@ class MakeTransactions  extends Component {
        console.log('depositing');
       if(isNaN(this.state.depositNum) || this.state.depositNum <= 0) {
         this.setState({depositNum : 0})
+        this.setState({errorPopUp: "ERROR invalid amount entry"});
+        this.handleErrorShow();
         return;
       }
 
@@ -63,9 +71,11 @@ class MakeTransactions  extends Component {
       console.log('depositing');
      if(isNaN(this.state.depositNum) || this.state.depositNum <= 0) {
        this.setState({depositNum : 0})
+       this.setState({errorPopUp: "ERROR invalid amount entry"});
+       this.handleErrorShow();
        return;
-     }
 
+     }
      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
      method: 'POST',
      mode: "cors",
@@ -94,8 +104,10 @@ class MakeTransactions  extends Component {
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
 
 
-      if(isNaN(this.state.withdrawNum) || this.state.withdrawNum < 0 || result < 0) {
+      if(isNaN(this.state.withdrawNum) || this.state.withdrawNum <= 0 || result < 0) {
         this.setState({withdrawNum : 0})
+        this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to withdraw"});
+        this.handleErrorShow();
         return;
       }else{
           const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
@@ -126,7 +138,17 @@ class MakeTransactions  extends Component {
       this.toggleCustomerTransferPopup();
 
       console.log('transferring to another customer');
-        
+
+      let resultTest =  Number(this.props.context.balance) - Number(this.state.transferNum);
+
+
+      if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || resultTest < 0) {
+        this.setState({transferNum : 0})
+        this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to transfer"});
+        this.handleErrorShow();
+        return;
+      }
+
       if(Number(this.state.transferNum) <= Number(this.props.context.balance)){
 
           const res = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
@@ -155,6 +177,11 @@ class MakeTransactions  extends Component {
                 console.log('Transferred to another account');
           }
       }
+      else {
+        this.setState({errorPopUp: "ERROR Either other customer does not exist or there is a typo"});
+        this.handleErrorShow();
+        return;
+      }
 
     }
 
@@ -165,6 +192,8 @@ class MakeTransactions  extends Component {
 
       if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || result < 0) {
         this.setState({transferNum : 0})
+        this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to transfer"});
+        this.handleErrorShow();
         return;
       }else{
           const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
@@ -190,6 +219,13 @@ class MakeTransactions  extends Component {
     handleTransferToInternalAccount = async e => {
       e.preventDefault();
 
+
+      if(this.props.context.checkingStatus === 'Closed' || this.props.context.savingsStatus === 'Closed') {
+        this.setState({errorPopUp: "ERROR either your checking or savings account is closed"});
+        this.handleErrorShow();
+        return;
+      }
+
         if(this.props.context.checkingStatus === 'Open' && this.props.context.savingsStatus === 'Open'){
             let from = '';
             let to = '';
@@ -209,8 +245,10 @@ class MakeTransactions  extends Component {
             }
 
             let result = fromBalance - Number(this.state.transferNum);
-            if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || result < 0) {
+            if(isNaN(this.state.transferNum) || this.state.transferNum <= 0 || result < 0) {
                 this.setState({transferNum : 0})
+                this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to transfer"});
+                this.handleErrorShow();
                 return;
             }
 
@@ -293,6 +331,15 @@ class MakeTransactions  extends Component {
     handleConfirmClose() {
         this.setState({showConfirm: false});
     }
+
+    handleErrorShow() {
+      this.setState({showError: true});
+    }
+
+    handleErrorClose() {
+        this.setState({showError: false});
+    }
+
 
 
     render() {
@@ -566,6 +613,30 @@ class MakeTransactions  extends Component {
       </Card>
       </Modal.Header>
       </Modal>
+
+      <Modal style={{textAlign: 'center', paddingTop: '210px'}}show={this.state.showError} onHide={this.handleErrorClose}>
+        <Modal.Header closeButton>
+        <Card style = {{height: '10rem', width: '50rem', textAlign: 'center'}}>
+          <Card.Body>
+       <Card.Title>ERROR</Card.Title>
+      <div className="Transfer" style = {{ maxWidth: '500px', textAlign: 'center', margin: '0 auto'}} >
+        <form onSubmit={this.handleErrorClose}>
+          {this.state.errorPopUp}
+           <Button
+             block
+             size="large"
+             type="submit"
+             style= {{paddingTop: '10px'}}
+           >
+             Ok
+           </Button>
+         </form>
+      </div>
+      </Card.Body>
+      </Card>
+      </Modal.Header>
+      </Modal>
+
         </div>
       );
     }
