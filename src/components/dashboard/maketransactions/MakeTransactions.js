@@ -47,7 +47,7 @@ class MakeTransactions  extends Component {
       });
 
       const body = await response.text();
-
+       console.log(body);
       if(body === 'Ok'){
           console.log("ok");
           let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
