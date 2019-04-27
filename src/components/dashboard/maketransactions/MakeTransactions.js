@@ -127,7 +127,7 @@ class MakeTransactions  extends Component {
 
       console.log('transferring to another customer');
         
-      if(Number(this.state.transferNum) <= balance: Number(this.props.context.balance)){
+      if(Number(this.state.transferNum) <= Number(this.props.context.balance)){
 
           const res = await fetch('https://cs160bankingapp-api.herokuapp.com/api/getToBalance', { //get balance from toUser
           method: 'POST',
