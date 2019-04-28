@@ -41,7 +41,7 @@ class MakeTransactions  extends Component {
        e.preventDefault();
        console.log('depositing');
       if(isNaN(this.state.depositNum) || this.state.depositNum <= 0) {
-        this.setState({depositNum : 0})
+        this.setState({depositNum : 0});
         this.setState({errorPopUp: "ERROR invalid amount entry"});
         this.handleErrorShow();
         return;
@@ -70,7 +70,7 @@ class MakeTransactions  extends Component {
       e.preventDefault();
       console.log('depositing');
      if(isNaN(this.state.depositNum) || this.state.depositNum <= 0) {
-       this.setState({depositNum : 0})
+       this.setState({depositNum : 0});
        this.setState({errorPopUp: "ERROR invalid amount entry"});
        this.handleErrorShow();
        return;
@@ -105,7 +105,7 @@ class MakeTransactions  extends Component {
 
 
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum <= 0 || result < 0) {
-        this.setState({withdrawNum : 0})
+        this.setState({withdrawNum : 0});
         this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to withdraw"});
         this.handleErrorShow();
         return;
@@ -143,8 +143,17 @@ class MakeTransactions  extends Component {
 
 
       if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || resultTest < 0) {
-        this.setState({transferNum : 0})
+        this.setState({transferNum : 0});
+        this.setState({transferName: ""});
         this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to transfer"});
+        this.handleErrorShow();
+        return;
+      }
+      // BadCoding.jpeg
+      if(this.state.transferName === this.props.context.email) {
+        this.setState({errorPopUp: "ERROR Can not transfer to yourself"});
+        this.setState({transferNum : 0});
+        this.setState({transferName: ""});
         this.handleErrorShow();
         return;
       }
@@ -176,6 +185,12 @@ class MakeTransactions  extends Component {
                 }
                 console.log('Transferred to another account');
           }
+          else {
+            this.setState({errorPopUp: "ERROR Insufficient funds to transfer"});
+            this.handleErrorShow();
+            return;
+          }
+
       }
       else {
         this.setState({errorPopUp: "ERROR Either other customer does not exist or there is a typo"});
@@ -191,7 +206,7 @@ class MakeTransactions  extends Component {
       let result =  Number(this.props.context.balance) - Number(this.state.transferNum);
 
       if(isNaN(this.state.transferNum) || this.state.transferNum < 0 || result < 0) {
-        this.setState({transferNum : 0})
+        this.setState({transferNum : 0});
         this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to transfer"});
         this.handleErrorShow();
         return;
@@ -246,7 +261,7 @@ class MakeTransactions  extends Component {
 
             let result = fromBalance - Number(this.state.transferNum);
             if(isNaN(this.state.transferNum) || this.state.transferNum <= 0 || result < 0) {
-                this.setState({transferNum : 0})
+                this.setState({transferNum : 0});
                 this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to transfer"});
                 this.handleErrorShow();
                 return;
