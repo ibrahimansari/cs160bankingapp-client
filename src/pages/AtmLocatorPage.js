@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import AtmLocator from "../components/atmlocator/AtmLocator";
+import { Navbar } from "react-bootstrap";
 
 const divStyle = {
   backgroundColor: "#4e74a6",
@@ -14,9 +15,16 @@ const divStyle = {
  
 export class MapContainer extends React.Component {
   render() {
+    const {context} = this.props;
+
     return (
-      <AtmLocator>
-      </AtmLocator>
+      <div>
+        <MainNavbar>
+        context = {context}
+        </MainNavbar>
+
+        <AtmLocator></AtmLocator>
+      </div>
     );
   }
 }
