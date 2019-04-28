@@ -3,6 +3,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import AtmLocator from "../components/atmlocator/AtmLocator";
 
 const divStyle = {
   backgroundColor: "#4e74a6",
@@ -14,15 +15,8 @@ const divStyle = {
 export class MapContainer extends React.Component {
   render() {
     return (
-        <Map google={this.props.google} zoom={14}>
- 
-        <Marker onClick={this.onMarkerClick}
-                name={'Current location'} />
- 
-        <InfoWindow onClose={this.onInfoWindowClose}>
-            
-        </InfoWindow>
-      </Map>
+      <AtmLocator>
+      </AtmLocator>
     );
   }
 }
