@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import AtmLocator from "../components/atmlocator/AtmLocator";
-import MainNavbar from "../components/navbar/MainNavbar";
 import { Navbar } from "react-bootstrap";
 
 const divStyle = {
@@ -20,10 +19,6 @@ export class MapContainer extends React.Component {
 
     return (
       <div>
-        <MainNavbar>
-        
-        </MainNavbar>
-
         <AtmLocator></AtmLocator>
       </div>
     );
