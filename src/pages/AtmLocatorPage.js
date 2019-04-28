@@ -21,7 +21,7 @@ export class MapContainer extends React.Component {
     return (
       <div>
         <MainNavbar>
-        context = {context}
+        
         </MainNavbar>
 
         <AtmLocator></AtmLocator>
