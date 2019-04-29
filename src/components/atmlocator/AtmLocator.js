@@ -150,7 +150,7 @@ export class MapContainer extends React.Component {
   render() {
     return (
       <div style={divStyle}>
-        <h1 style={{ color: "#000000" }}>Chase ATM Search</h1>
+        <h1 style={{ color: "#ffffff" }}>Chase ATM Search</h1>
         <Form.Group>
           <Form.Group>
             <Form.Label>Address 1</Form.Label>
@@ -189,7 +189,7 @@ export class MapContainer extends React.Component {
               <Form.Label>Zip</Form.Label>
               <Form.Control
                 type="text"
-                placeholder={"Zip Code"}
+                placeholder={"Zip"}
                 onChange={this.handleChangeZip}
               />
             </Form.Group>
