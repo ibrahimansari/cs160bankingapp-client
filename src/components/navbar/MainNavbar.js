@@ -26,7 +26,8 @@ class MainNavbar extends Component {
 
   handleSignOut() {
     this.props.context.updateIsSignedIn("false");
-    this.handleClose()
+    this.handleClose();
+    window.location = '/';
   }
 
   helloCustomer () {
@@ -58,8 +59,6 @@ class MainNavbar extends Component {
           <Nav className="mr-auto">
             <NavDropdown title="Open an Account" id="collasible-nav-dropdown">
               <NavDropdown.Item href="/customercreation">Customer Account</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/managercreation">Manager Account</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
