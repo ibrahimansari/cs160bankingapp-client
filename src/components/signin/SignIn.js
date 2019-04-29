@@ -178,6 +178,9 @@ validateLogin = async e => {
         this.props.context.updateAllUserTransactions(holdT);
         //console.log(holdT);
 
+        this.props.context.updateFirstName("Manager");
+        this.props.context.updateIsSignedIn(true);
+
 
         window.location = '/managerdashboard';
       }

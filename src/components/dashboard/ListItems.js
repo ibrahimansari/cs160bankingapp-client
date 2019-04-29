@@ -78,17 +78,6 @@ class ListItems extends Component {
         </ListItemIcon>
         <ListItemText primary="Set up Bill Autopayments" />
       </ListItem>
-      <ListItem
-      button
-      onClick = {() => this.props.context.updateDashboardDisplay(
-        this.props.context.USER_SUMMARY_DISPLAY)
-      }
-      >
-        <ListItemIcon>
-          <AccountCircleIcon />
-        </ListItemIcon>
-        <ListItemText primary="User Summary" />
-      </ListItem>
     </div>
   );
   }
@@ -97,24 +86,6 @@ class ListItems extends Component {
   return (
     <div>
       <ListSubheader inset>Assorted things</ListSubheader>
-      <ListItem button>
-        <ListItemIcon>
-          <TodayIcon />
-        </ListItemIcon>
-        <ListItemText primary="This Week" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <AssignmentIcon />
-        </ListItemIcon>
-        <ListItemText primary="This Month" />
-      </ListItem>
-      <ListItem button>
-        <ListItemIcon>
-          <AssessmentIcon />
-        </ListItemIcon>
-        <ListItemText primary="This Year" />
-      </ListItem>
 
       <ListItem
         button

@@ -118,10 +118,9 @@ class Dashboard extends React.Component {
     const { balance, first_name, last_name, email, address, zipcode } = this.props.context;
     return ( <div>
       <Typography variant="h4" gutterBottom component="h2">
+        <h1>Hi {first_name} {last_name}</h1>
         <h1>Email: {email}</h1>
-        <h1>Balance: {balance}</h1>
-        <h1>First Name: {first_name}</h1>
-        <h1>Last Name: {last_name}</h1>
+        <h1>Checking Balance: {balance}</h1>
         <h1>Address: {address}</h1>
         <h1>Zip Code: {zipcode}</h1>
       </Typography>
