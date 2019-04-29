@@ -140,6 +140,17 @@ class SetUpBillAutoPayments extends Component {
     // Backend Call here
     // Either insert just the object
     // or after update the entire bills array after it is updated from this.setState below
+    
+    const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/storeautobill', {
+    method: 'POST',
+    mode: "cors",
+    headers: {'Content-type': 'application/json',},
+    body: JSON.stringify({ email: this.props.context.email.toLowerCase(), amount:Number(this.state.billAmount), name:this.state.billName,  date:this.state.billDateLabel }),
+    });
+    
+    //email, amount, name, date
+    const body = await response.json();
+    
 
     updateBillArray = [...updateBillArray, billObj ];
 
@@ -169,6 +180,16 @@ class SetUpBillAutoPayments extends Component {
      // Backend call here
      // easiest way would just to update using the updateBillArray
      // or using the index from above remove bill object directly
+      
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/removeautobill', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({ email: this.props.context.email.toLowerCase(), name:this.state.billName }),
+      });
+
+      //email, name
+      const body = await response.json();
 
       this.props.context.updateAutoBills(updateBillArray);
     }
