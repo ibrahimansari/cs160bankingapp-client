@@ -145,7 +145,7 @@ class SetUpBillAutoPayments extends Component {
     method: 'POST',
     mode: "cors",
     headers: {'Content-type': 'application/json',},
-    body: JSON.stringify({ email: this.state.email.toLowerCase(), amount:this.state.billAmount, name:this.state.billName,  date:localBillDate }),
+    body: JSON.stringify({ email: this.props.context.email.toLowerCase(), amount:this.state.billAmount, name:this.state.billName,  date:localBillDate }),
     });
     
     //email, amount, name, date
@@ -185,7 +185,7 @@ class SetUpBillAutoPayments extends Component {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({ email: this.state.email.toLowerCase(), name:this.state.billName }),
+      body: JSON.stringify({ email: this.props.context.email.toLowerCase(), name:this.state.billName }),
       });
 
       //email, name
