@@ -149,7 +149,7 @@ class SetUpBillAutoPayments extends Component {
     });
     
     //email, amount, name, date
-    const body = await response.json();
+    const body = await response.text();
     
 
     updateBillArray = [...updateBillArray, billObj ];
@@ -189,8 +189,8 @@ class SetUpBillAutoPayments extends Component {
       });
 
       //email, name
-      const body = await response.json();
-
+      const body = await response.text();
+      
       this.props.context.updateAutoBills(updateBillArray);
     }
 
