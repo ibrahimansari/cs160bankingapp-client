@@ -15,8 +15,6 @@ const divStyle = {
  
 export class MapContainer extends React.Component {
   render() {
-    const {context} = this.props;
-
     return (
       <div>
         <AtmLocator></AtmLocator>
