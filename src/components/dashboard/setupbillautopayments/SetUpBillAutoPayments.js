@@ -133,7 +133,7 @@ class SetUpBillAutoPayments extends Component {
     var billObj = {
       email : this.props.context.email,
       amount : this.state.billAmount,
-      bill_name : this.state.billName,
+      bill_name : this.state.billName.toLowerCase(),
       bill_date: localBillDate,
     };
 
@@ -206,8 +206,9 @@ class SetUpBillAutoPayments extends Component {
 
       //email, name
       const body = await response.text();
-      
-      this.props.context.updateAutoBills(updateBillArray);
+      if(body === "Ok"){
+        this.props.context.updateAutoBills(updateBillArray);
+      }
     }
 
     this.handleCloseBillClose();
