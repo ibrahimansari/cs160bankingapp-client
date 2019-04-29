@@ -142,24 +142,37 @@ class SetUpBillAutoPayments extends Component {
     // or after update the entire bills array after it is updated from this.setState below
     
     if(Number(this.state.billAmount) > 0){
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/storeautobill', {
+           
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/findBill', {
       method: 'POST',
       mode: "cors",
       headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({ email: this.props.context.email.toLowerCase(), amount:Number(this.state.billAmount), name:this.state.billName,  date:localBillDate }),
+      body: JSON.stringify({ email: this.props.context.email.toLowerCase(), name:this.state.billName}),
       });
 
       //email, amount, name, date
       const body = await response.text();
-
+      
       if(body === "Ok"){
-        updateBillArray = [...updateBillArray, billObj ];
+        const response1 = await fetch('https://cs160bankingapp-api.herokuapp.com/api/storeautobill', {
+        method: 'POST',
+        mode: "cors",
+        headers: {'Content-type': 'application/json',},
+        body: JSON.stringify({ email: this.props.context.email.toLowerCase(), amount:Number(this.state.billAmount), name:this.state.billName,  date:localBillDate }),
+        });
 
-        // update above using billObj or here using updateBillArray
-        //  whichever one is easier
+        //email, amount, name, date
+        const body1 = await response1.text();
 
-        this.setState({bills: updateBillArray});
-        this.props.context.updateAutoBills(updateBillArray);
+        if(body1 === "Ok"){
+          updateBillArray = [...updateBillArray, billObj ];
+
+          // update above using billObj or here using updateBillArray
+          //  whichever one is easier
+
+          this.setState({bills: updateBillArray});
+          this.props.context.updateAutoBills(updateBillArray);
+        }
       }
     }
 
