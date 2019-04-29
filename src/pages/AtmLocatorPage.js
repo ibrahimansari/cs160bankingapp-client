@@ -7,7 +7,7 @@ import AtmLocator from "../components/atmlocator/AtmLocator";
 import { Navbar } from "react-bootstrap";
 
 const divStyle = {
-  backgroundColor: "#4e74a6",
+  backgroundColor: "#007bff",
   padding: "50px",
   margin: "50px",
   marginTop: "0px"
