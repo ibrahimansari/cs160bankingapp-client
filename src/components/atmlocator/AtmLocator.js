@@ -6,10 +6,8 @@ import { GoogleApiWrapper } from "google-maps-react";
 
 const divStyle = {
   position: "relative",
-  height: "2200px",
-  backgroundColor: "#c1ced9",
-  padding: "50px",
-  margin: "50px",
+  height: "2000px",
+  backgroundColor: "#007bff",
   marginTop: "0px"
 };
 
@@ -152,21 +150,13 @@ export class MapContainer extends React.Component {
   render() {
     return (
       <div style={divStyle}>
-        <h1 style={{ color: "#000000" }}>Search for Chase ATMs</h1>
-        <hr
-          style={{
-            backgroundColor: "#72736e",
-            border: "none",
-            height: "4px",
-            color: "#72736e"
-          }}
-        />
+        <h1 style={{ color: "#000000" }}>Chase ATM Search</h1>
         <Form.Group>
           <Form.Group>
             <Form.Label>Address 1</Form.Label>
             <Form.Control
               type="text"
-              placeholder={"1 Washington Square"}
+              placeholder={"Adress Line 1"}
               onChange={this.handleChangeAddr}
             />
           </Form.Group>
@@ -174,7 +164,7 @@ export class MapContainer extends React.Component {
             <Form.Label>Address 2</Form.Label>
             <Form.Control
               type="text"
-              placeholder={"Apartment, studio, or floor"}
+              placeholder={"Address Line 2"}
               onChange={this.handleChangeAddr2}
             />
           </Form.Group>
@@ -183,7 +173,7 @@ export class MapContainer extends React.Component {
               <Form.Label>City</Form.Label>
               <Form.Control
                 type="text"
-                placeholder={"San Jose"}
+                placeholder={"City"}
                 onChange={this.handleChangeCity}
               />
             </Form.Group>
@@ -191,7 +181,7 @@ export class MapContainer extends React.Component {
               <Form.Label>State</Form.Label>
               <Form.Control
                 type="text"
-                placeholder={"CA"}
+                placeholder={"State"}
                 onChange={this.handleChangeState}
               />
             </Form.Group>
@@ -199,7 +189,7 @@ export class MapContainer extends React.Component {
               <Form.Label>Zip</Form.Label>
               <Form.Control
                 type="text"
-                placeholder={"95192"}
+                placeholder={"Zip Code"}
                 onChange={this.handleChangeZip}
               />
             </Form.Group>

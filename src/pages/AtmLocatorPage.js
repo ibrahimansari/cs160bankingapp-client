@@ -7,10 +7,7 @@ import AtmLocator from "../components/atmlocator/AtmLocator";
 import { Navbar } from "react-bootstrap";
 
 const divStyle = {
-  backgroundColor: "#007bff",
-  padding: "50px",
-  margin: "50px",
-  marginTop: "0px"
+  backgroundColor: "#007bff"
 };
  
 export class MapContainer extends React.Component {
