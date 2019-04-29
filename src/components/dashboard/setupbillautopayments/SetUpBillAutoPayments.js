@@ -187,7 +187,7 @@ class SetUpBillAutoPayments extends Component {
     }
 
     var updateBillArray = [...this.state.bills];
-    var index = updateBillArray.map(function(e) { return e.bill_name; }).indexOf(this.state.billName);
+    var index = updateBillArray.map(function(e) { return e.bill_name; }).indexOf(this.state.billName.toLowerCase());
 
     if (index !== -1) {
       updateBillArray.splice(index, 1);
