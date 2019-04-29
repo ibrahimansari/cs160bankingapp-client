@@ -141,24 +141,27 @@ class SetUpBillAutoPayments extends Component {
     // Either insert just the object
     // or after update the entire bills array after it is updated from this.setState below
     
-    const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/storeautobill', {
-    method: 'POST',
-    mode: "cors",
-    headers: {'Content-type': 'application/json',},
-    body: JSON.stringify({ email: this.props.context.email.toLowerCase(), amount:Number(this.state.billAmount), name:this.state.billName,  date:localBillDate }),
-    });
-    
-    //email, amount, name, date
-    const body = await response.text();
-    
+    if(Number(this.state.billAmount) > 0){
+      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/storeautobill', {
+      method: 'POST',
+      mode: "cors",
+      headers: {'Content-type': 'application/json',},
+      body: JSON.stringify({ email: this.props.context.email.toLowerCase(), amount:Number(this.state.billAmount), name:this.state.billName,  date:localBillDate }),
+      });
 
-    updateBillArray = [...updateBillArray, billObj ];
+      //email, amount, name, date
+      const body = await response.text();
 
-    // update above using billObj or here using updateBillArray
-    //  whichever one is easier
+      if(body === "Ok"){
+        updateBillArray = [...updateBillArray, billObj ];
 
-    this.setState({bills: updateBillArray});
-    this.props.context.updateAutoBills(updateBillArray);
+        // update above using billObj or here using updateBillArray
+        //  whichever one is easier
+
+        this.setState({bills: updateBillArray});
+        this.props.context.updateAutoBills(updateBillArray);
+      }
+    }
 
     this.handleSetBillClose();
   }
