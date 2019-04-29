@@ -151,9 +151,9 @@ class SetUpBillAutoPayments extends Component {
       });
 
       //email, amount, name, date
-      const body = await response.text();
+      const body = await response.json();
       
-      if(body === "Ok"){
+      if(body["array"].length === 0){
         const response1 = await fetch('https://cs160bankingapp-api.herokuapp.com/api/storeautobill', {
         method: 'POST',
         mode: "cors",
