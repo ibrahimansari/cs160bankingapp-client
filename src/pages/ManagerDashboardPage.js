@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import MainNavbar from '../components/navbar/MainNavbar';
+import ManagerDashboard from '../components/managerdashboard/ManagerDashboard';
 
 class ManagerDashboardPage extends Component {
   render() {
@@ -9,9 +10,9 @@ class ManagerDashboardPage extends Component {
         <MainNavbar
           context = {context}
         />
-        <div style = {{textAlign: 'center'}} >
-          <h1>Manager Dashboard to be implemented</h1>
-        </div>
+      <ManagerDashboard
+        context = {context}
+        />
       </div>
     );
   }
