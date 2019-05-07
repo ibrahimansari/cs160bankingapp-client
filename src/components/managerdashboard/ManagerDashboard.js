@@ -341,8 +341,8 @@ reportDisplay() {
                 {n.first_name}
               </TableCell>
               <TableCell align="right">{n.last_name}</TableCell>
-              <TableCell align="right">{n.account_number}</TableCell>
               <TableCell align="right">{n.email}</TableCell>
+              <TableCell align="right">{n.account_number}</TableCell>
               <TableCell align="right">{n.status}</TableCell>
               <TableCell align="right">{n.balance}</TableCell>
               <TableCell align="right">{n.type}</TableCell>

@@ -207,11 +207,6 @@ class Dashboard extends React.Component {
               BigBank
             </Navbar.Brand>
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer

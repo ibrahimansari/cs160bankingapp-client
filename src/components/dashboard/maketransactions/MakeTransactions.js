@@ -358,7 +358,7 @@ class MakeTransactions  extends Component {
 
 
     render() {
-      let {balance} = this.props.context;
+      let {balance, savingsBalance} = this.props.context;
 
       if(this.props.context.checkingStatus === "Closed" || this.props.context.checkingStatus === null) {
         return <h4>To start performing transactions open a Checking Account under 'Accounts'</h4>
@@ -604,7 +604,8 @@ class MakeTransactions  extends Component {
 </Card.Body>
 </Card>
 </Popup>
-    <h1> Balance: ${balance} </h1>
+    <h1> Checking Balance: ${balance} </h1>
+    <h1> Savings Balance: ${savingsBalance}</h1>
 
       <Modal style={{textAlign: 'center', paddingTop: '210px'}}show={this.state.showConfirm} onHide={this.handleConfirmClose}>
         <Modal.Header closeButton>
