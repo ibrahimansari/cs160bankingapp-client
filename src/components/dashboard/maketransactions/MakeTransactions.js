@@ -174,6 +174,9 @@ class MakeTransactions  extends Component {
      if(localWithdrawLabel === "") {
        localWithdrawLabel = "Checking";
      }
+     if(localWithdrawLabel != 'Checking'){
+          result =  Number(this.props.context.savingsBalance) - Number(this.state.withdrawNum);
+     }
      console.log(localWithdrawLabel);
 
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum <= 0 || result < 0) {
