@@ -34,12 +34,25 @@ class MakeTransactions  extends Component {
 
         showError : false,
         errorPopUp : "",
+
+        depositText : "",
+        depositLabel : "",
+        withdrawText : "",
+        withdrawLabel : "",
       };
     }
 
    handleDeposit = async e => {
        e.preventDefault();
        console.log('depositing');
+
+       // use localDepositLabel in api call
+       let localDepositLabel = this.state.depositLabel;
+       if(localDepositLabel === "") {
+         localDepositLabel = "Checking";
+       }
+
+
       if(isNaN(this.state.depositNum) || this.state.depositNum <= 0) {
         this.setState({depositNum : 0});
         this.setState({errorPopUp: "ERROR invalid amount entry"});
@@ -69,6 +82,13 @@ class MakeTransactions  extends Component {
     handleDepositByCheck = async e => {
       e.preventDefault();
       console.log('depositing');
+
+       // use localDepositLabel in api call
+      let localDepositLabel = this.state.depositLabel;
+      if(localDepositLabel === "") {
+        localDepositLabel = "Checking";
+      }
+
      if(isNaN(this.state.depositNum) || this.state.depositNum <= 0) {
        this.setState({depositNum : 0});
        this.setState({errorPopUp: "ERROR invalid amount entry"});
@@ -104,6 +124,13 @@ class MakeTransactions  extends Component {
       let result =  Number(this.props.context.balance) - Number(this.state.withdrawNum);
 
 
+      // use localWithdrawLabel in api call
+     let localWithdrawLabel = this.state.withdrawLabel;
+     if(localWithdrawLabel === "") {
+       localWithdrawLabel = "Checking";
+     }
+     console.log(localWithdrawLabel);
+
       if(isNaN(this.state.withdrawNum) || this.state.withdrawNum <= 0 || result < 0) {
         this.setState({withdrawNum : 0});
         this.setState({errorPopUp: "ERROR invalid amount entry or Insufficient funds to withdraw"});
@@ -127,7 +154,6 @@ class MakeTransactions  extends Component {
           console.log('finished withdrawing');
       }
       this.toggleWithdrawalPopup();
-
 
     }
 
@@ -356,6 +382,24 @@ class MakeTransactions  extends Component {
     }
 
 
+      handleDepositLabelChange = event => {
+          let index = event.nativeEvent.target.selectedIndex;
+          let label = event.nativeEvent.target[index].text;
+          this.setState({
+            [event.target.id]: event.target.value,
+            depositLabel: label
+          });
+        }
+
+        handleWithdrawLabelChange = event => {
+            let index = event.nativeEvent.target.selectedIndex;
+            let label = event.nativeEvent.target[index].text;
+            this.setState({
+              [event.target.id]: event.target.value,
+              withdrawLabel: label
+            });
+          }
+
 
     render() {
       let {balance, savingsBalance} = this.props.context;
@@ -388,6 +432,14 @@ class MakeTransactions  extends Component {
                     onChange={this.handleChange}
                   />
               </FormGroup>
+              Which account to Deposit To
+              <br/>
+              <label>
+                <select className="depositLabel"  value={this.state.depositLabel}  name={this.state.depositText} onChange={this.handleDepositLabelChange}>
+                 <option value="Checking">Checking</option>
+                 <option value="Savings">Savings</option>
+               </select>
+             </label>
                 <Button
                   block
                   size="large"
@@ -426,6 +478,14 @@ class MakeTransactions  extends Component {
                       onChange={this.handleChange}
                     />
                 </FormGroup>
+                Which account to Deposit To
+                <br/>
+                <label>
+                  <select className="depositLabel"  value={this.state.depositLabel}  name={this.state.depositText} onChange={this.handleDepositLabelChange}>
+                   <option value="Checking">Checking</option>
+                   <option value="Savings">Savings</option>
+                 </select>
+               </label>
                  <Button
                    block
                    size="large"
@@ -461,6 +521,14 @@ class MakeTransactions  extends Component {
                     onChange={this.handleChange}
                   />
               </FormGroup>
+              Which account to Withdraw from:
+              <br/>
+              <label>
+                <select className="withdrawLabel"  value={this.state.withdrawLabel}  name={this.state.withdrawText} onChange={this.handleWithdrawLabelChange}>
+                 <option value="Checking">Checking</option>
+                 <option value="Savings">Savings</option>
+               </select>
+             </label>
                 <Button
                   block
                   size="large"
