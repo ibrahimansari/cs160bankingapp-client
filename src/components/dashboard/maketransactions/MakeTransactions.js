@@ -59,23 +59,45 @@ class MakeTransactions  extends Component {
         this.handleErrorShow();
         return;
       }
-
-      const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
-      method: 'POST',
-      mode: "cors",
-      headers: {'Content-type': 'application/json',},
-      body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
-      });
-
-      const body = await response.text();
-       console.log(body);
-      if(body === 'Ok'){
-          console.log("ok");
-          let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
-          this.props.context.updateBalance(result);
-          this.props.context.updateCheckingBalance(result);
-          this.handleConfirmShow();
+       
+      if(localDepositLabel === "Checking"){
+          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
+          method: 'POST',
+          mode: "cors",
+          headers: {'Content-type': 'application/json',},
+          body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
+          });
+          
+          const body = await response.text();
+           console.log(body);
+          if(body === 'Ok'){
+              console.log("ok");
+              let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
+              this.props.context.updateBalance(result);
+              this.props.context.updateCheckingBalance(result);
+              this.handleConfirmShow();
+          }
+      }else{
+        
+          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositSavings', {
+          method: 'POST',
+          mode: "cors",
+          headers: {'Content-type': 'application/json',},
+          body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.depositNum) , balance: Number(this.props.context.savingsBalance)}),
+          });
+          
+          const body = await response.text();
+           console.log(body);
+          if(body === 'Ok'){
+              console.log("ok");
+              let result =  Number(this.props.context.savingsBalance) + Number(this.state.depositNum);
+              this.props.context.updateSavingsBalance(result);
+              this.handleConfirmShow();
+          }
+              
       }
+
+ 
       this.toggleDepositPopup();
     }
 
@@ -96,22 +118,45 @@ class MakeTransactions  extends Component {
        return;
 
      }
-     const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
-     method: 'POST',
-     mode: "cors",
-     headers: {'Content-type': 'application/json',},
-     body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : "testing@gmail.com", amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
-     });
-
-     const body = await response.text();
-
-     if(body === 'Ok'){
-         console.log("ok");
-         let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
-         this.props.context.updateBalance(result);
-         this.props.context.updateCheckingBalance(result);
-         this.handleConfirmShow();
-     }
+      if(localDepositLabel === "Checking"){
+          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositChecking', {
+          method: 'POST',
+          mode: "cors",
+          headers: {'Content-type': 'application/json',},
+          body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.depositNum) , balance: Number(this.props.context.balance)}),
+          });
+          
+          const body = await response.text();
+           console.log(body);
+          if(body === 'Ok'){
+              console.log("ok");
+              let result =  Number(this.props.context.balance) + Number(this.state.depositNum);
+              this.props.context.updateBalance(result);
+              this.props.context.updateCheckingBalance(result);
+              this.handleConfirmShow();
+          }
+      }else{
+        
+          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/depositSavings', {
+          method: 'POST',
+          mode: "cors",
+          headers: {'Content-type': 'application/json',},
+          body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.depositNum) , balance: Number(this.props.context.savingsBalance)}),
+          });
+          
+          const body = await response.text();
+           console.log(body);
+          if(body === 'Ok'){
+              console.log("ok");
+              let result =  Number(this.props.context.savingsBalance) + Number(this.state.depositNum);
+              this.props.context.updateSavingsBalance(result);
+              this.handleConfirmShow();
+          }
+              
+      }
+        
+        
+        
      this.toggleDepositPopup();
      }
 
@@ -137,19 +182,38 @@ class MakeTransactions  extends Component {
         this.handleErrorShow();
         return;
       }else{
-          const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
-          method: 'POST',
-          mode: "cors",
-          headers: {'Content-type': 'application/json',},
-          body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
-          });
+          
+          if(localWithdrawLabel === 'Checking'){
+              const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawChecking', {
+              method: 'POST',
+              mode: "cors",
+              headers: {'Content-type': 'application/json',},
+              body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.balance)}),
+              });
 
-          const body = await response.text();
+              const body = await response.text();
 
-          if(body==="Ok"){
-              this.props.context.updateBalance(result);
-              this.props.context.updateCheckingBalance(result);
-              this.handleConfirmShow();
+              if(body==="Ok"){
+                  this.props.context.updateBalance(result);
+                  this.props.context.updateCheckingBalance(result);
+                  this.handleConfirmShow();
+              }
+          }else{
+               const response = await fetch('https://cs160bankingapp-api.herokuapp.com/api/withdrawSavings', {
+              method: 'POST',
+              mode: "cors",
+              headers: {'Content-type': 'application/json',},
+              body: JSON.stringify({first_name: this.props.context.first_name, last_name: this.props.context.last_name, email : this.props.context.email, amount: Number(this.state.withdrawNum) , balance: Number(this.props.context.savingsBalance)}),
+              });
+
+              const body = await response.text();
+
+              if(body==="Ok"){
+                  result =  Number(this.props.context.savingsBalance) - Number(this.state.withdrawNum);
+                  this.props.context.updateSavingsBalance(result);
+                  this.handleConfirmShow();
+              }
+               
           }
           console.log('finished withdrawing');
       }
