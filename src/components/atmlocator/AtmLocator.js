@@ -156,7 +156,7 @@ export class MapContainer extends React.Component {
             <Form.Label>Address 1</Form.Label>
             <Form.Control
               type="text"
-              placeholder={"Adress Line 1"}
+              placeholder={"Address Line 1"}
               onChange={this.handleChangeAddr}
             />
           </Form.Group>
